@@ -44,8 +44,9 @@
 </head>
 
 <body>
-    
-    <div class="menu-bg">
+        <div id="menu"></div>
+
+    <!-- <div class="menu-bg">
         <div class="top-menu">
             <nav >
                 <ul>
@@ -59,7 +60,7 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 
 <body>
     <div class="machines-container">
@@ -100,7 +101,11 @@
         
         <div class="full-description">
             <h1 style="text-align: left;">Plioir en corne de buffle</h1>
-            <p style="font-size: x-large;" class="price">27.00€ <small><br>Frais de port inclus</small></p>
+            <p class="price" id="product-price">27.00€</p>
+            
+            <p class="port">
+                Frais de port inclus
+            </p>
             
                 <p>Un outil de maroquinerie aussi beau qu'efficace, entièrement façonné à la main en <strong>corne de buffle</strong> de haute qualité.</p>
 
@@ -139,7 +144,7 @@
             <hr>
         </div>
     </div>
-
+<script src="/assets/menu-loader.js"></script>
 <script src="../../assets/carousel-script.js"></script>
 </body>
 </html>

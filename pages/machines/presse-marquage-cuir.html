@@ -46,7 +46,8 @@
 
 <body>
     
-    <div class="menu-bg">
+            <div id="menu"></div>
+    <!-- <div class="menu-bg">
         <div class="top-menu">
             <nav >
                 <ul>
@@ -60,7 +61,7 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> -->
 
 <body>
     <div class="machines-container">
@@ -96,21 +97,25 @@
         
         <div class="full-description">
             <h1>Presse à marquer</h1>
-            <p style="font-size: x-large;" class="price" id="product-price">279.00€ <small><br>Frais de port inclus</small></p>
+            <p class="price" id="product-price">279.00€</p>
             
+            <p class="port">
+                Frais de port inclus
+            </p>
+
             <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const select = document.getElementById('product-options');
-                const price = document.getElementById('product-price');
-                function updatePrice() {
-                    if (select.value === 'seule') {
-                        price.innerHTML = '279.00€ <small><br>Frais de port inclus</small>';
-                    } else {
-                        price.innerHTML = '299.00€ <small><br>Frais de port inclus</small>';
-                    }
+            const select = document.getElementById('product-options');
+            const price = document.getElementById('product-price');
+            function updatePrice() {
+                if (select.value === 'seule') {
+                price.innerHTML = '279.00€';
+                } else {
+                price.innerHTML = '299.00€';
                 }
-                select.addEventListener('change', updatePrice);
-                updatePrice();
+            }
+            select.addEventListener('change', updatePrice);
+            updatePrice();
             });
             </script>
             
@@ -209,7 +214,7 @@
             <hr>
         </div>
     </div>
-
+<script src="/assets/menu-loader.js"></script>
 <script src="../../assets/carousel-script.js"></script>
 </body>
 </html>
