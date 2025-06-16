@@ -100,7 +100,7 @@ summary::-webkit-details-marker {
 }
 
 .category:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
   color: var(--vert-grisé); 
 }
 
