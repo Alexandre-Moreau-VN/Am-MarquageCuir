@@ -34,6 +34,8 @@
 
 .shop-name a h1 {
   max-width: 1000px;
+  font-size: 1.5em;
+  font-weight: bold;
   width: 100%;
   margin: 0 0 0.5em 0;
   transition: transform 0.3s ease, color 0.3s ease;

@@ -1,26 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
+const MENU_KEY = 'cachedMenu';
+
+function loadMenuFromCacheOrFetch() {
+  const container = document.getElementById('menu');
+  const cached = localStorage.getItem(MENU_KEY);
+
+  if (cached) {
+    container.innerHTML = cached;
+    initMenuBehavior();
+  }
+
   fetch('/partials/menu.html')
     .then(response => {
       if (!response.ok) throw new Error('Menu not found');
       return response.text();
     })
     .then(html => {
-      document.getElementById('menu').innerHTML = html;
+      localStorage.setItem(MENU_KEY, html);
 
-      // Initialiser le comportement du menu après l'injection
-      initMenuBehavior();
+      if (!cached) {
+        container.innerHTML = html;
+        initMenuBehavior();
+      }
     })
     .catch(error => {
-      console.error('Erreur lors du chargement du menu:', error);
+      console.error('Erreur lors du chargement du menu :', error);
     });
-});
+}
 
 function initMenuBehavior() {
   document.querySelectorAll('#menu details').forEach((detail) => {
     const summary = detail.querySelector('summary');
     const content = detail.querySelector('ul');
 
-    // Initial setup for animation styles
+    // Style initial
     content.style.opacity = '0';
     content.style.maxHeight = '0';
     content.style.pointerEvents = 'none';
@@ -31,7 +43,7 @@ function initMenuBehavior() {
 
       const isOpen = detail.classList.contains('open');
 
-      // Close all other open details with animation
+      // Fermer tous les autres
       document.querySelectorAll('#menu details.open').forEach((otherDetail) => {
         if (otherDetail !== detail) {
           const otherContent = otherDetail.querySelector('ul');
@@ -69,20 +81,5 @@ function initMenuBehavior() {
   });
 }
 
-
-// menu vanishing logic
-const menuBg = document.querySelector('.menu-bg');
-
-// window.addEventListener('scroll', () => {
-//   if (!menuBg) return;
-
-//   const halfPage = document.body.scrollHeight / 2;
-
-//   if (window.scrollY > halfPage) {
-//     menuBg.classList.add('hide');
-//     menuBg.classList.remove('show');
-//   } else {
-//     menuBg.classList.remove('hide');
-//     menuBg.classList.add('show');
-//   }
-// });
+// Lancement immédiat si le script est chargé avec "defer"
+loadMenuFromCacheOrFetch();
