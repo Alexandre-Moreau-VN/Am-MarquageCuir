@@ -127,12 +127,22 @@ Par défaut, le bloc mesure <strong>10 mm</strong> d’épaisseur et la gravure 
                             <input type="email" name="email" required placeholder="Email" >
                             <textarea name="message" required rows="12" placeholder="Message"></textarea>
                             
-                            <input type="file" id="file1" name="attachment1" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                            <input type="file" id="file2" name="attachment2" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                            <input type="file" id="file3" name="attachment3" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                           
-                        
-                            <div class="file-info">Jusqu'à 3 fichiers, taille max 20MB.
+                            
+                               
+                                <span>
+                                    <label for="file1"><small>Fichier 1 :</small></label>
+                                    <input type="file" id="file1" name="attachment1" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
+                                </span>
+                                <span>
+                                    <label for="file2"><small>Fichier 2 :</small></label>
+                                    <input type="file" id="file2" name="attachment2" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
+                                </span>
+                                <span>
+                                    <small><label for="file3">Fichier 3 :</label></small>
+                                    <input type="file" id="file3" name="attachment3" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
+                                </span>
+
+                                <div class="file-info">Jusqu'à 3 fichiers, taille max 20MB.
                                 Formats acceptés: PNG, JPG, PDF, AI, PSD, SVG, CDR</div>
                         
                             <button type="submit" class="submit-btn">Envoyer</button>

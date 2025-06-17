@@ -334,6 +334,13 @@ form {
     
 }
 
+.file-load {
+  display: inline-block;
+  width: 100px; /* fixed width for the label */
+  text-align: right; /* align text to right side */
+  margin-right: 0.5em;
+}
+
 .form-container {
     display: flex;
     flex-direction: column;
@@ -349,6 +356,8 @@ form {
     margin: 2em auto;
     
 }
+
+
 
 
 input[type="text"],
