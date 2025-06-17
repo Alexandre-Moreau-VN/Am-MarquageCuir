@@ -3,7 +3,7 @@
     --am-orange2: #F89C66;
     --text: #2F2F2F; 
     --bg-sections : #f5f5f5ee;
-    --vert-grisé : #5c7e73;
+    --vert-grisé : #405a52;
 }
 
 @font-face {
@@ -320,16 +320,6 @@ div.menu details[open] > ul {
 }
 
 /* CONTACT  */
-
-:root {
-    --am-orange: #EE672F;
-    --am-orange2: #F89C66;
-    --text: #2F2F2F; 
-    --bg-sections : #f5f5f5af;
-    --vert-grisé : #6C9A8B;
-}
-
-
 
 h1, p {
     color: var(--text);
