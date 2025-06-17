@@ -178,3 +178,143 @@ h1, h2, h3, h4, h5, h6 {
 .legal a:hover {
     color: var(--vert-grisé)    
 }
+
+/* MENU */
+.menu-bg {
+  position: relative;
+  max-width: 1000px;
+  background-color: var(--bg-sections);
+  padding: 1em;
+  margin: auto;
+  
+}
+
+.menu {
+ 
+  padding: 0em 0 1em 0;
+}
+
+.shop-name {
+  font-size: 25px;
+}
+
+.shop-name a {
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.shop-name a h1 {
+  max-width: 1000px;
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 100%;
+  margin: 0 0 0.5em 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.shop-name a:hover h1 {
+  color: var(--vert-grisé); /* or any color you prefer */
+}
+
+.shop-name span {
+  font-size: smaller;
+  font-weight: 100;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  
+  max-width: 1000px; 
+}
+
+
+.menu-item a{
+  text-decoration: none;
+  color: var(--vert-grisé);
+}
+
+.menu-item a:hover{
+  color: var(--am-orange2);
+}
+
+.menu-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+summary {
+  list-style: none;
+  margin-top: 0;        /* removes the default bullet/triangle in some browsers */
+}
+
+.menu li a{
+  font-size: 24px;
+  font-weight:300;
+
+}
+
+ul{
+  margin: 0.5em 0;
+}
+
+summary::-webkit-details-marker {
+  display: none;           /* specifically hides it in WebKit browsers (Chrome, Safari, etc.) */
+}
+
+.category {
+    font-size: 1.6em;
+    color: var(--text);
+    transition: transform 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.category:hover {
+  /* transform: translateY(-5px); */
+  color: var(--vert-grisé); 
+}
+
+div.menu details {
+  margin: 0; /* remove any margin around details */
+  padding: 0; /* remove padding if any */
+}
+
+div.menu details summary {
+  margin-bottom: 0; /* remove bottom margin */
+  padding-bottom: 0; /* remove bottom padding */
+  cursor: pointer; /* keep pointer on summary */
+  transition: color 0.3s ease, opacity 0.3s ease;
+  transition: font-size 0.2s ease;
+}
+
+div.menu details > ul {
+  margin-top: 0.3em; /* remove top margin */
+  padding-bottom: 0; /* remove top padding */
+  padding-top: 0; /* remove top padding */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  pointer-events: none;
+}
+
+div.menu details[open] > ul {
+  opacity: 1;
+  max-height: 500px;
+  margin-bottom: 0;
+  /* margin-left: 0.5em; */
+  padding-bottom: 0;
+  pointer-events: auto; /* adjust as needed based on expected content height */
+}
+
+.menu details > summary {
+  font-size: 1em;
+  transition: font-size 0.2s ease;
+}
+
+.menu details[open] > summary {
+  font-size: 1.3em;
+}
