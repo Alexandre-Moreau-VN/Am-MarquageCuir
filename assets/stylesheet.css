@@ -450,7 +450,7 @@ body.bg-ep {
   background-position: center;
 }
 
-.product-container, .intro {
+.product-container, .intro, footer {
     text-align: justify;
     background-color:var(--bg-sections);
     max-width: 1000px;
