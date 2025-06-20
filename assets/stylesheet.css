@@ -194,15 +194,22 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0em 0 1em 0;
 }
 
-.shop-name {
+.shop-name{
+
   font-size: 25px;
 }
 
 .shop-name a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   width: 100%;
-  display: flex;
-  justify-content: center;
+}
+
+.shop-name img {
+  display: block;
+  margin: 0.1em auto ;
 }
 
 .shop-name a h1 {
@@ -210,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.5em;
   font-weight: bold;
   width: 100%;
-  margin: 0 0 0.5em 0;
+  margin: 0;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -265,11 +272,11 @@ summary::-webkit-details-marker {
 }
 
 .category {
-    font-size: 1.6em;
-    color: var(--text);
-    transition: transform 0.3s ease, color 0.3s ease;
-    font-weight: bold;
-    text-decoration: none;
+  font-size: 1.6em;
+  color: var(--text);
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .category:hover {
