@@ -1,0 +1,148 @@
+.machines-container,
+.machines-container *,
+.intro,
+.intro * {
+    cursor: default;
+}
+
+:root {
+    --am-orange: #EE672F;
+    --am-orange2: #F89C66;
+    --text: #2F2F2F; 
+    --bg-sections : #f5f5f5af;
+    --vert-grisé : #5c7e73;
+}
+
+.machines-container, .intro {
+    text-align: justify;
+    background-color:var(--bg-sections);
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    padding: 1em;
+    border-radius: 10px;
+    margin: 0 auto 2em auto;
+}
+
+.machines-container {
+    display: flex;
+    margin-top: 3em;
+    gap: 1em;
+}
+
+.machines-container a {
+   color: var(--vert-grisé);
+}
+
+
+.machines-container h1 {
+    margin: 0;
+}
+
+
+.machines-img img{
+    display: flex;
+    align-content: center;
+    border: solid var(--vert-grisé) 1px;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+    width: 500px;
+}
+
+.mySlides img:hover{
+    /* Add a hover effect to scale the image */
+    transform: scale(1.12);
+    box-shadow: 0 10px 25px rgba(112, 112, 112, 0.3);
+    opacity: 0.85;
+    z-index: 1;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+  .machines-container {
+    flex-direction: column;
+    align-items: center; /* Optional: center items on smaller screens */
+  }
+
+  .machines-img img {
+    width: 100%;
+    /* max-width:  */
+  }
+
+  .full-description {
+    width: 100%;
+  }
+
+  button {
+    display: block;
+    margin: auto;
+  }
+
+  .variant select{
+    display: block;
+    margin: auto;
+  }
+
+}
+
+
+.price {
+    color: var(--vert-grisé);
+    margin-top: 0em;
+    margin-bottom: 0em;
+    font-size: 1.8em;
+    font-weight: bolder;
+}
+
+.port {
+    color: var(--vert-grisé);
+    margin-top: 0;
+    /* font-weight:lighter; */
+}
+
+.variant {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.variant select {
+  display: block;
+  margin-right: auto;
+  padding: 0.5em ;
+  border: solid var(--vert-grisé) 1px;
+  border-radius: 5px;
+}
+
+select:focus {
+  border-color: var(--am-orange);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--am-orange2);
+}
+
+button {
+    width: 50%;
+    padding: 0.875rem 1.5rem;
+    margin-bottom: 0.5em;
+    background-color: var(--vert-grisé);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(112, 112, 112, 0.3);
+}
+
+.alma-payment {
+  display: none;
+}
