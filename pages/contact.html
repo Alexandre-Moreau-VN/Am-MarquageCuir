@@ -31,7 +31,7 @@
     <main>
            <div class="form-container" id="contact">
                     
-                    <h1>Formulaire de contact</h1>
+                    <!-- <h1>Formulaire de contact</h1>
                         <form action="https://formsubmit.co/a60d46e0667b3edba561db6bfedd2831" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="_next" value="https://am-outilscuir.com/pages/thanks.html">
                             <input type="hidden" name="_subject" value="Info | formulaire contact">
@@ -65,7 +65,48 @@
                             </p>                                         
                             </form>
                             
-                    </div>
+                    </div> -->
+                    <div class="form-container" id="contact">
+                    <h1>Formulaire de contact</h1>
+
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data">
+                        <input type="hidden" name="form-name" value="contact" />
+                        
+                        <!-- Champ anti-spam -->
+                        <p hidden>
+                        <label>Ne pas remplir : <input name="bot-field" /></label>
+                        </p>
+
+                        <input type="text" name="name" required placeholder="Nom" id="input-name" />
+                        <input type="email" name="email" required placeholder="Email" />
+                        <textarea name="message" required rows="12" placeholder="Message"></textarea>
+
+                        <span>
+                        <label for="file1"><small>Fichier 1 :</small></label>
+                        <input type="file" id="file1" name="file1" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr" />
+                        </span>
+                        <span>
+                        <label for="file2"><small>Fichier 2 :</small></label>
+                        <input type="file" id="file2" name="file2" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr" />
+                        </span>
+                        <span>
+                        <small><label for="file3">Fichier 3 :</label></small>
+                        <input type="file" id="file3" name="file3" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr" />
+                        </span>
+
+                        <div class="file-info">
+                        Jusqu'à 3 fichiers, taille max 20MB. <br />
+                        Formats acceptés : PNG, JPG, PDF, AI, PSD, SVG, CDR
+                        </div>
+
+                        <button type="submit" class="submit-btn">Envoyer</button>
+
+                        <p class="form-fallback-message">
+                        Si le formulaire ne fonctionne pas, vous pouvez nous contacter directement par email en cliquant&nbsp;
+                        <a href="mailto:contact@am-leathercraft.com" target="_blank" rel="noopener noreferrer">ici</a>.
+                        </p>
+                    </form>
+</div>
     </main>
 <footer>  
         <div class="bottom-menu">
