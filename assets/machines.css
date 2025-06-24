@@ -9,13 +9,13 @@
     --am-orange: #EE672F;
     --am-orange2: #F89C66;
     --text: #2F2F2F; 
-    --bg-sections : #f5f5f5af;
+    --bg : #f5f5f5f2;
     --vert-grisé : #5c7e73;
 }
 
 .machines-container, .intro {
     text-align: justify;
-    background-color:var(--bg-sections);
+    background-color:var(--bg);
     max-width: 1000px;
     position: relative;
     margin: auto;
