@@ -2,7 +2,7 @@
     --am-orange: #EE672F;
     --am-orange2: #F89C66;
     --text: #2F2F2F; 
-    --bg-sections : #f5f5f5ee;
+    --bg-sections : #f5f5f5f5;
     --vert-grisé : #405a52;
 }
 
@@ -497,10 +497,18 @@ body.bg-ep {
   margin: 1em 0;
   border-radius: 10px;
   padding: 0 1em;
-  border: 2.5px dashed var(--vert-grisé);
+  border: 2.5px dashed var(--am-orange);
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.tip-box a {
+  color:  var(--am-orange);
+}
+
+.tip-box svg {
+  fill: var(--am-orange);
 }
 
 .product-container a:hover {
@@ -535,7 +543,7 @@ div.product-container summary {
     align-content: center;
     transition: transform 0.3s ease, color 0.3s ease;
     padding: 0.5em;
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 div.product-container .summary-content {
