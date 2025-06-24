@@ -535,6 +535,7 @@ div.product-container summary {
     align-content: center;
     transition: transform 0.3s ease, color 0.3s ease;
     padding: 0.5em;
+    font-size: 1.2em;
 }
 
 div.product-container .summary-content {
