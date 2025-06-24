@@ -2,7 +2,7 @@
     --am-orange: #EE672F;
     --am-orange2: #F89C66;
     --text: #2F2F2F; 
-    --bg-sections : #f5f5f5f5;
+    --bg : #f5f5f5f2;
     --vert-grisé : #405a52;
 }
 
@@ -183,7 +183,6 @@ h1, h2, h3, h4, h5, h6 {
 .menu-bg {
   position: relative;
   max-width: 1000px;
-  background-color: var(--bg-sections);
   padding: 1em;
   margin: auto;
   
@@ -457,9 +456,9 @@ body.bg-ep {
   background-position: center;
 }
 
-.product-container, .intro, footer {
+.product-container, .intro, footer, .menu-bg {
     text-align: justify;
-    background-color:var(--bg-sections);
+    background-color:var(--bg);
     max-width: 1000px;
     position: relative;
     margin: auto;
