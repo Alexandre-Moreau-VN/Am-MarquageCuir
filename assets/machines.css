@@ -143,13 +143,10 @@ button:hover {
     box-shadow: 0 10px 25px rgba(112, 112, 112, 0.3);
 }
 
-.alma-payment {
- 
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f5f7ff;
-  border-left: 4px solid #8a9cf0;
-  font-size: 0.95rem;
-  color: #333;
-  border-radius: 4px;
+.klarna-payment {
+  padding: 1em;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: ;
 }
+
