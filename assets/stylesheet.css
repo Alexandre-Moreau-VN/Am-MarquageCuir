@@ -456,6 +456,10 @@ body.bg-ep {
   background-position: center;
 }
 
+body.bg-moules {
+  background-color: white;
+}
+
 .product-container, .intro, footer, .menu-bg {
     text-align: justify;
     background-color:var(--bg);
