@@ -432,6 +432,13 @@ h1, p, details {
   color:  var(--text);
 }
 
+body.bg-tampons-acrylique {
+  background-image: url(img-tamponsacrylique/tamponsAcrylique_8.JPG);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
 body.bg-marquage {
   background-image: url(img-stamps/outil-de-marquage_cuir_00009.webp);
   background-repeat: no-repeat;
@@ -523,6 +530,7 @@ body.bg-moules {
     flex-wrap: wrap;               /* Les images passent à la ligne si besoin */
     gap: 0.5em;                      /* Espace entre les images */
     justify-content: center;       /* Centre les images */
+    
 }
 
 .img-group img,video {
