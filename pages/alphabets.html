@@ -51,6 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- style sheets -->
     <link rel="stylesheet" href="/assets/stylesheet.css">
     <link rel="stylesheet" href="../assets/carousel.css">
+    <link rel="stylesheet" href="../../assets/machines.css">
     
     <link rel="icon" href="../assets/logos/favicon.png" type="image-png">
     <script src="/assets/menu-loader.js" defer></script>
@@ -87,10 +88,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </p>
 
             <div class="tip-box">
-                <p>Besoin d'une petite presse à chaud ou bien à froid ? <br> Découvrez les modèles que nous proposons :</p>
+                <p>Besoin d'une petite presse à chaud ? <br> Découvrez le modèle que nous proposons : </p>
                     <ul>
                     <li><a href="/pages/machines/presse-marquage-cuir.html">Presse à chaud</a></li>
-                    <li><a href="/pages/machines/presse-coupe.html">Presse à froid (embossage et découpe)</a> </li>
                     </ul>
                     <br>
             </div>
@@ -252,7 +252,110 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <span class="dot" onclick="currentSlide(4)"></span>
                 
             </div>
-            <hr>                         
+            
+            <!-- purchase section -->
+            <br>
+            <h1>Kit alphabet de marquage</h1>
+            <p class="price" id="product-price">169 €</p>
+
+            <p class="port">
+                Frais de port inclus
+            </p>
+
+            <p class="note-reminder">
+                Avant de finaliser votre paiement, merci de préciser dans le champ “note” les spécifications suivantes : 
+                la police souhaitée ainsi que les caractères supplémentaires que vous souhaitez inclure dans votre kit.  
+                <br>
+            </p>
+
+            <div class="variant">
+                <label for="product-options"><strong>Options : </strong></label>
+                <select id="product-options" name="product-options">
+                    <option value="3-4-simple">3 / 4 mm - Kit simple (169 €)</option>
+                    <option value="3-4-double">3 / 4 mm - Kit double (226 €)</option>
+                    <option value="5-6-simple">5 / 6 mm - Kit simple (199 €)</option>
+                    <option value="5-6-double">5 / 6 mm - Kit double (258 €)</option>
+                </select>
+            </div>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const select = document.getElementById('product-options');
+                const price = document.getElementById('product-price');
+
+                function updatePrice() {
+                    switch(select.value) {
+                        case '3-4-simple':
+                            price.innerHTML = '169 €';
+                            break;
+                        case '3-4-double':
+                            price.innerHTML = '226 €';
+                            break;
+                        case '5-6-simple':
+                            price.innerHTML = '199 €';
+                            break;
+                        case '5-6-double':
+                            price.innerHTML = '258 €';
+                            break;
+                        default:
+                            price.innerHTML = 'Prix indisponible';
+                    }
+                }
+
+                select.addEventListener('change', updatePrice);
+                updatePrice(); // initialise le prix au chargement
+            });
+            </script>
+
+            <a id="purchase-link" href="https://buy.stripe.com/6oU14n00G8jL8Nd1XXgbm1p?locale=fr" target="_blank" class="no-decoration">
+                    <button class="purchase-btn">Acheter</button>
+                </a>
+                
+                <p>
+                    Pour toute question ou pour nous transmettre vos fichiers, vous pouvez nous contacter directement par email
+                    <a href="mailto:contact@am-leathercraft.com" target="_blank"><strong>ici</strong></a> (contact@am-leathercraft.com)
+                    ou par téléphone au <strong><a href="tel:+33780008855">07 80 00 88 55</a></strong>.
+                </p>
+
+                <div class="klarna-payment">
+                    <p><strong>Envie de payer en plusieurs fois ?</strong><br>
+                    Sélectionnez <strong>Klarna</strong> comme moyen de paiement.</p>
+                    <p>Klarna vous permet de régler votre achat en plusieurs versements ou en paiement différé...</p>
+                </div>
+            
+            <br>
+            <hr>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const select = document.getElementById('product-options');
+                    const purchaseLink = document.getElementById('purchase-link');
+
+                    function updatePurchaseLink() {
+                        let url = '';
+                        switch(select.value) {
+                            case '3-4-simple':
+                                url = 'https://buy.stripe.com/6oU14n00G8jL8Nd1XXgbm1p?locale=fr';
+                                break;
+                            case '3-4-double':
+                                url = 'https://buy.stripe.com/aFa5kD5l09nPgfFcCBgbm1r?locale=fr';
+                                break;
+                            case '5-6-simple':
+                                url = 'https://buy.stripe.com/4gMeVd4gWarT2oP0TTgbm1t?locale=fr';
+                                break;
+                            case '5-6-double':
+                                url = 'https://buy.stripe.com/28E5kD00G2Zr7J90TTgbm1s?locale=fr';
+                                break;
+                            default:
+                                url = '#';
+                        }
+                        purchaseLink.href = url;
+                    }
+
+                    select.addEventListener('change', updatePurchaseLink);
+                    updatePurchaseLink(); // initialise the link on page load
+                });
+            </script>        
+            
             <!-- Livraison -->
             <details open> 
                 <summary>
