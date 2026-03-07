@@ -14,9 +14,23 @@
   margin: auto;
 }
 
+.carousel{
+    max-width:1000px;
+    margin:auto;
+}
+
+.mySlides img,
+.mySlides img:hover {
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    transition: none !important;
+}
+
 /* Hide the images by default */
 .mySlides {
   display: none;
+  
 }
 
 /* On hover, add a black background color with a little bit see-through */
