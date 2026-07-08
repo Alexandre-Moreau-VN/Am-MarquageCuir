@@ -533,6 +533,13 @@ body.bg-moules {
     
 }
 
+.img-group img:hover {
+    transition: transform 0.4s ease;
+    opacity: 0.95;
+
+    z-index: 10;
+}
+
 .img-group img,video {
     height: 260px;                 /* Hauteur fixe pour toutes les images */
     width: auto;                   /* Largeur proportionnelle */
