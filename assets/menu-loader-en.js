@@ -83,3 +83,11 @@ function initMenuBehavior() {
 
 // Lancement immédiat si le script est chargé avec "defer"
 loadMenuFromCacheOrFetch();
+
+// Charger l'assistant FAQ interactif
+(function() {
+  const botScript = document.createElement('script');
+  botScript.src = '/assets/faq-bot.js';
+  botScript.defer = true;
+  document.head.appendChild(botScript);
+})();
