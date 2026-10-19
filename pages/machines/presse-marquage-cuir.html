@@ -79,7 +79,7 @@
         
             <div class="full-description">
                 <h1>Presse à marquer</h1>
-                <p class="price" id="product-price">279.00€</p>
+                <p class="price" id="product-price">299.00€</p>
         
                 <p class="port">
                     Frais de port inclus
@@ -90,9 +90,9 @@
                 const price = document.getElementById('product-price');
                 function updatePrice() {
                     if (select.value === 'seule') {
-                    price.innerHTML = '279.00€';
-                    } else {
                     price.innerHTML = '299.00€';
+                    } else {
+                    price.innerHTML = '319.00€';
                     }
                 }
                 select.addEventListener('change', updatePrice);
@@ -130,11 +130,11 @@
                     function updatePurchaseLink() {
                         let url = '';
                         if (select.value === 'seule') {
-                            url = 'https://buy.stripe.com/4gM9AT9Bg2Zrd3t1XXgbm0X?locale=fr';
+                            url = 'https://buy.stripe.com/4gMeVd28O7fHaVl5a9gbm1L?locale=fr';
                         } else if (select.value === 'or') {
-                            url = 'https://buy.stripe.com/5kQ00jaFkgQh1kL7ihgbm10?locale=fr';
+                            url = 'https://buy.stripe.com/aFabJ18xc1VnbZpbyxgbm1I?locale=fr';
                         } else if (select.value === 'argent') {
-                            url = 'https://buy.stripe.com/aFa9ATdRw2Zr8NdgSRgbm11?locale=fr';
+                            url = 'https://buy.stripe.com/4gM7sL00GfMdaVlautgbm1K?locale=fr';
                         }
                         purchaseLink.href = url;
                     }
