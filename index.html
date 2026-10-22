@@ -4,6 +4,7 @@
     
 <!-- Gestion des cookies (tarteaucitron) -->
 <script src="/assets/tarteaucitron/tarteaucitron.js"></script>
+
 <script>
 tarteaucitron.init({
     "privacyUrl": "/pages/politique-de-confidentialité.html",
@@ -15,9 +16,11 @@ tarteaucitron.init({
     "showIcon": true,
     "DenyAllCta": true,
     "AcceptAllCta": true,
-    "highPrivacy": true
+    "highPrivacy": true,
+    "serviceDefaultState": "wait"
 });
 
+/* Google Tag Manager */
 tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
 (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');
 </script>
