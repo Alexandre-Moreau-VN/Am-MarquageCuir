@@ -931,7 +931,9 @@ span#tarteaucitronDisclaimerAlert {
  */
 .tarteaucitronIconBottomRight {
     bottom: 0;
-    right: 0;
+    left: 0;
+    right: auto;
+
 }
 .tarteaucitronIconBottomLeft {
     bottom: 0;
