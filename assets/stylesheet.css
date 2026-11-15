@@ -211,8 +211,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.1em auto ;
 }
 
-.shop-name a h1 {
+.shop-name a h1, .shop-name a .brand-title {
   max-width: 1000px;
+  font-family: Manrope-Bold, sans-serif;
+  color: var(--text);
   font-size: 1.5em;
   font-weight: bold;
   width: 100%;
@@ -220,7 +222,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.shop-name a:hover h1 {
+.shop-name a:hover h1, .shop-name a:hover .brand-title {
   color: var(--vert-grisé); /* or any color you prefer */
 }
 

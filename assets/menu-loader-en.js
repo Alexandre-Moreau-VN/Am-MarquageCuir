@@ -1,31 +1,5 @@
-const MENU_KEY = 'cachedMenu';
-
-function loadMenuFromCacheOrFetch() {
-  const container = document.getElementById('menu');
-  const cached = localStorage.getItem(MENU_KEY);
-
-  if (cached) {
-    container.innerHTML = cached;
-    initMenuBehavior();
-  }
-
-  fetch('/partials/menu-en.html')
-    .then(response => {
-      if (!response.ok) throw new Error('Menu not found');
-      return response.text();
-    })
-    .then(html => {
-      localStorage.setItem(MENU_KEY, html);
-
-      if (!cached) {
-        container.innerHTML = html;
-        initMenuBehavior();
-      }
-    })
-    .catch(error => {
-      console.error('Erreur lors du chargement du menu :', error);
-    });
-}
+// Le menu EN est désormais présent en dur dans le HTML (généré par build.py).
+// Ce fichier ne gère plus que le comportement d'ouverture/fermeture.
 
 function initMenuBehavior() {
   document.querySelectorAll('#menu details').forEach((detail) => {
@@ -82,7 +56,7 @@ function initMenuBehavior() {
 }
 
 // Lancement immédiat si le script est chargé avec "defer"
-loadMenuFromCacheOrFetch();
+initMenuBehavior();
 
 // Charger l'assistant FAQ interactif
 (function() {
