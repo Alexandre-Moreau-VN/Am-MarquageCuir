@@ -79,7 +79,7 @@
           id: "prices",
           title: "What are the prices of custom tools?",
           keywords: ["price", "cost", "how much", "rate", "grid", "expensive", "pay", "money", "euro", "brass", "acrylic", "rubber", "stamp", "quote"],
-          response: "Our rates depend on the material and dimensions of your custom tools:\n\n• 🟨 **Brass Stamp**:\n  - Up to 6.5 cm²: **49 €**\n  - 6.6 to 13 cm²: **59 €**\n  - 13.1 to 19.5 cm²: **69 €**\n  - 19.6 to 26 cm²: **79 €**\n  - *Option screw-on handle*: **+10 €**\n\n• ⬜ **Acrylic Stamp**:\n  - Up to 6.5 cm²: **30 €** (5mm thickness) / **35 €** (10mm)\n  - 6.6 to 13 cm²: **40 €** (5mm) / **45 €** (10mm)\n  - 13.1 to 19.5 cm²: **50 €** (5mm) / **55 €** (10mm)\n\n• 🔴 **Rubber Stamp**:\n  - Up to 6.5 cm²: **30 €**\n  - 6.6 to 13 cm²: **40 €**\n  - 13.1 to 19.5 cm²: **50 €**\n\n*(Note: +10 € per additional 6.4 cm² for all tools. Send us your logo to get a free, custom quote within 24 hours!)*"
+          response: "Our rates depend on the material and dimensions of your custom tools:\n\n• 🟨 **Brass Stamp**:\n  - Up to 6.5 cm²: **49 €**\n  - 6.6 to 13 cm²: **59 €**\n  - 13.1 to 19.5 cm²: **69 €**\n  - 19.6 to 26 cm²: **79 €**\n  - *Option screw-on handle*: **+10 €**\n\n• ⬜ **Acrylic Stamp**:\n  - Up to 6.5 cm²: **30 €** (5mm thickness) / **35 €** (10mm)\n  - 6.6 to 13 cm²: **40 €** (5mm) / **45 €** (10mm)\n  - 13.1 to 19.5 cm²: **50 €** (5mm) / **55 €** (10mm)\n\n• 🔴 **Rubber Stamp**:\n  - Up to 6.5 cm²: **30 €**\n  - 6.6 to 13 cm²: **40 €**\n  - 13.1 to 19.5 cm²: **50 €**\n\n*(Note: +10 € per additional 6.4 cm² for all tools. Send us your logo to get a free, custom quote within 24h!)*"
         },
         {
           id: "materials",
