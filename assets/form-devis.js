@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  var MAX_OCTETS = 8 * 1024 * 1024;
+  var MAX_OCTETS = 2 * 1024 * 1024;   // quota Netlify gratuit : 10 Mo/mois au total
 
   function init() {
     var params = new URLSearchParams(window.location.search);
@@ -67,15 +67,16 @@
       if (total > MAX_OCTETS) {
         if (note) {
           note.innerHTML = '<strong style="color:#c0392b">Fichiers trop volumineux : ' +
-            mo.toFixed(1).replace('.', ',') + ' Mo</strong> — la limite est de 8 Mo au total. ' +
-            'Envoyez-nous plutôt un lien WeTransfer ou SwissTransfer dans le message.';
+            mo.toFixed(1).replace('.', ',') + ' Mo</strong> — la limite est de 2 Mo au total. ' +
+            'Pour un fichier plus lourd, utilisez un lien SwissTransfer (gratuit, sans compte) ' +
+            'et collez-le dans le message.';
         }
         if (submit) { submit.disabled = true; submit.style.opacity = '0.5'; }
       } else {
         if (note) {
-          note.innerHTML = 'Formats : PNG, JPG, PDF, AI, PSD, SVG, CDR — <strong>8 Mo maximum au total</strong>.' +
+          note.innerHTML = 'Formats : PNG, JPG, PDF, AI, PSD, SVG, CDR — <strong>2 Mo maximum au total</strong>.' +
             (n ? ' (' + mo.toFixed(1).replace('.', ',') + ' Mo)' : '') +
-            ' Au-delà, envoyez-nous un lien WeTransfer dans le message.';
+            ' Fichier plus lourd ? Utilisez SwissTransfer et collez le lien dans le message.';
         }
         if (submit) { submit.disabled = false; submit.style.opacity = '1'; }
       }

@@ -847,3 +847,17 @@ div.product-container details[open] summary::after {
 .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(110, 140, 123, 0.35); }
 .submit-btn:disabled { cursor: not-allowed; transform: none; box-shadow: none; }
 .form-fallback-message { margin-top: 16px; font-size: 0.85em; color: #777; text-align: center; }
+
+/* Encart SwissTransfer (fichiers > 2 Mo) */
+.wetransfer-box {
+  background: #f4f8f5;
+  border: 1.5px solid #d8e4dc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 0 0 18px;
+  font-size: 0.86em;
+  color: #4a5a50;
+}
+.wetransfer-box strong { display: block; margin-bottom: 5px; color: #33513f; }
+.wetransfer-box p { margin: 0; line-height: 1.5; }
+.wetransfer-box a { color: #2f6b4a; font-weight: 600; }
