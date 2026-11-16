@@ -86,7 +86,7 @@
       detailEl.textContent = txt;
 
       if (mentionEl) {
-        mentionEl.textContent = (cfg.note || '') + (cfg.delai ? ' · Délai : ' + cfg.delai : '');
+        mentionEl.textContent = cfg.note || '';
         mentionEl.hidden = false;
       }
 

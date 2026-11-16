@@ -137,8 +137,9 @@ def bloc_origines(matiere_key: str) -> str:
     origines = m["origines"]
     if len(origines) < 2:
         seul = origines[list(origines.keys())[0]]
+        fin = "" if seul["label"] == "France" else " Fabrication française sur devis."
         return (f'  <p class="calc-origine-seule">{seul["drapeau"]} Fabrication {seul["label"]}'
-                f' — {seul["delai"]}. Fabrication française sur devis.</p>')
+                f' — {seul["delai"]}.{fin}</p>')
     items = []
     for k, o in origines.items():
         checked = " checked" if k == "vietnam" else ""

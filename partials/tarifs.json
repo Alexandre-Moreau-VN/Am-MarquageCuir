@@ -14,8 +14,8 @@
           "base_eur": 49,
           "pas_cm2": 6.5,
           "increment_eur": 10,
-          "delai": "environ 15 jours",
-          "note": "hors taxes, frais de douane possibles à réception"
+          "delai": "environ 3 semaines au total",
+          "note": "hors douane et taxes à l'importation (UE) ; express DHL possible en supplément"
         },
         "france": {
           "label": "France",
@@ -23,8 +23,8 @@
           "base_eur": 69,
           "pas_cm2": 6.5,
           "increment_eur": 20,
-          "delai": "3 à 5 jours",
-          "note": "TVA et frais de port inclus"
+          "delai": "5 à 7 jours ouvrés au total",
+          "note": "TVA et frais de port inclus, sans frais de douane"
         }
       }
     },
@@ -36,14 +36,14 @@
         { "label": "10 mm", "base_eur": 35 }
       ],
       "origines": {
-        "vietnam": {
-          "label": "Vietnam",
-          "drapeau": "🇻🇳",
+        "france": {
+          "label": "France",
+          "drapeau": "🇫🇷",
           "base_eur": 30,
           "pas_cm2": 6.5,
           "increment_eur": 10,
-          "delai": "environ 15 jours",
-          "note": "hors taxes, frais de douane possibles à réception"
+          "delai": "environ 1 semaine (2 à 4 j de fabrication + livraison)",
+          "note": "TVA et frais de port inclus"
         }
       }
     },
@@ -52,14 +52,14 @@
       "option_manche_eur": 0,
       "epaisseurs": null,
       "origines": {
-        "vietnam": {
-          "label": "Vietnam",
-          "drapeau": "🇻🇳",
+        "france": {
+          "label": "France",
+          "drapeau": "🇫🇷",
           "base_eur": 30,
           "pas_cm2": 6.5,
           "increment_eur": 10,
-          "delai": "environ 15 jours",
-          "note": "hors taxes, frais de douane possibles à réception"
+          "delai": "environ 1 semaine (2 à 4 j de fabrication + livraison)",
+          "note": "TVA et frais de port inclus"
         }
       }
     }
