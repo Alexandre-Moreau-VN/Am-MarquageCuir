@@ -25,8 +25,9 @@
     if (produit) {
       document.getElementById('f-produit').value = produit + (ep ? ' (' + ep + ')' : '');
       document.getElementById('f-dimensions').value = dimensions;
-      document.getElementById('f-quantite').value = qte;
-      document.getElementById('f-prix').value = prix || '';
+      var n = parseInt(qte, 10) || 1;
+      document.getElementById('f-quantite').value = n + (n > 1 ? ' pièces' : ' pièce');
+      document.getElementById('f-prix').value = prix ? prix + ' €' : '';
 
       if (recap && recapDetail) {
         recap.hidden = false;
@@ -34,7 +35,7 @@
           produit + (ep ? ' ' + ep : '') +
           (dimensions ? ' · ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ' · ' + qte + ' pièces' : '') +
-          (prix ? ' · ' + prix + ' € (indicatif)' : '');
+          (prix ? ' · ' + prix + ' € TTC (indicatif, port inclus)' : '');
       }
 
       if (msg && !msg.value) {
