@@ -24,7 +24,7 @@ MENU_EN = ROOT / "partials" / "menu-en.html"
 START = "<!-- MENU:START (genere par build.py depuis partials/, ne pas editer ici) -->"
 END = "<!-- MENU:END -->"
 
-PAGES_FR = ["index.html"]
+PAGES_FR = ["index.html"]  # rglob couvre aussi pages/machines/
 PAGES_EN = ["index-en.html"]
 
 
@@ -45,7 +45,8 @@ def indent_block(html: str, prefix: str = "                    ") -> str:
     return "\n".join(out)
 
 
-def inject(page: pathlib.Path, menu_html: str) -> bool:
+def inject(page: pathlib.Path, menu_html: str) -> str:
+    """Retourne 'updated', 'ok' (deja a jour) ou 'skip' (pas de div #menu)."""
     text = page.read_text(encoding="utf-8")
     block = f"{START}\n{indent_block(menu_html)}\n{END}"
 
@@ -53,19 +54,20 @@ def inject(page: pathlib.Path, menu_html: str) -> bool:
     pattern = re.compile(re.escape(START) + r".*?" + re.escape(END), re.DOTALL)
     if pattern.search(text):
         new_text = pattern.sub(lambda m: block, text, count=1)
-        changed = new_text != text
-        page.write_text(new_text, encoding="utf-8")
-        return changed
+        if new_text != text:
+            page.write_text(new_text, encoding="utf-8")
+            return "updated"
+        return "ok"
 
     # Cas 2 : premiere injection -> on remplace le div vide
     empty = re.compile(r'<div id="menu"\s*>\s*</div>', re.IGNORECASE)
     if not empty.search(text):
-        return False
+        return "skip"
     new_text = empty.sub(
         lambda m: '<div id="menu">\n' + block + "\n                </div>", text, count=1
     )
     page.write_text(new_text, encoding="utf-8")
-    return True
+    return "updated"
 
 
 def main() -> None:
@@ -77,23 +79,28 @@ def main() -> None:
         targets.append((ROOT / name, menu_fr))
     for name in PAGES_EN:
         targets.append((ROOT / name, menu_en))
-    for page in sorted((ROOT / "pages").glob("*.html")):
+    for page in sorted((ROOT / "pages").rglob("*.html")):
         # les pages anglaises utilisent le menu anglais
         if "menu-loader-en.js" in page.read_text(encoding="utf-8"):
             targets.append((page, menu_en))
         else:
             targets.append((page, menu_fr))
 
-    updated, skipped = [], []
+    updated, skipped, already = [], [], []
     for page, menu in targets:
-        if inject(page, menu):
+        status = inject(page, menu)
+        if status == "updated":
             updated.append(page)
-        else:
+        elif status == "skip":
             skipped.append(page)
+        else:
+            already.append(page)
 
     print(f"{len(updated)} page(s) mise(s) a jour :")
     for p in updated:
         print("  +", p.relative_to(ROOT))
+    if already:
+        print(f"\n{len(already)} page(s) deja a jour.")
     if skipped:
         print(f"\n{len(skipped)} page(s) sans div #menu (ignorees) :")
         for p in skipped:
