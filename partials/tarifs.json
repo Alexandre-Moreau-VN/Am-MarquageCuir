@@ -47,7 +47,7 @@
           "drapeau": "🇫🇷",
           "base_eur": 30,
           "pas_cm2": 6.5,
-          "increment_eur": 10,
+          "increment_eur": 5,
           "delai": "5 à 7 jours ouvrés au total",
           "note": "TVA et frais de port inclus, sans frais de douane"
         }
@@ -63,7 +63,7 @@
           "drapeau": "🇫🇷",
           "base_eur": 30,
           "pas_cm2": 6.5,
-          "increment_eur": 10,
+          "increment_eur": 5,
           "delai": "5 à 7 jours ouvrés au total",
           "note": "TVA et frais de port inclus, sans frais de douane"
         }
