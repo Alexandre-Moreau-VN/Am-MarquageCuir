@@ -261,22 +261,6 @@ def inject_calculateur() -> None:
 
 
 
-def ensure_ads_tracking() -> None:
-    """Ajoute le script de suivi Google Ads sur toutes les pages."""
-    pages = [ROOT / "index.html", ROOT / "index-en.html"]
-    pages += sorted((ROOT / "pages").rglob("*.html"))
-    count = 0
-    for page in pages:
-        text = page.read_text(encoding="utf-8")
-        if "ads-tracking.js" in text:
-            continue
-        rel = page.relative_to(ROOT)
-        depth = len(rel.parts) - 1          # pages/ = 1, pages/machines/ = 2
-        prefix = "../" * depth
-        tag = f'    <script src="{prefix}assets/ads-tracking.js" defer></script>\n</head>'
-        page.write_text(text.replace("</head>", tag, 1), encoding="utf-8")
-        count += 1
-    print(f"Suivi Ads : {count} page(s) instrumentee(s)")
 
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
@@ -293,8 +277,6 @@ def main() -> None:
             targets.append((page, menu_en))
         else:
             targets.append((page, menu_fr))
-
-    ensure_ads_tracking()
 
     print("Calculateur :")
     inject_calculateur()
