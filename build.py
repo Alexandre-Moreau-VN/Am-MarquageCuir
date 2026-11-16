@@ -262,6 +262,23 @@ def inject_calculateur() -> None:
 
 
 
+
+def ensure_analytics() -> None:
+    """Ajoute le bloc consentement + GTM sur les pages qui ne l'ont pas."""
+    block = (ROOT / "partials" / "analytics.html").read_text(encoding="utf-8")
+    pages = [ROOT / "index.html", ROOT / "index-en.html"]
+    pages += sorted((ROOT / "pages").rglob("*.html"))
+    count = 0
+    for page in pages:
+        text = page.read_text(encoding="utf-8")
+        if "GTM-M5853GF7" in text:
+            continue
+        if "</head>" not in text:
+            continue
+        page.write_text(text.replace("</head>", block + "</head>", 1), encoding="utf-8")
+        count += 1
+    print(f"GTM : {count} page(s) instrumentee(s)")
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -277,6 +294,8 @@ def main() -> None:
             targets.append((page, menu_en))
         else:
             targets.append((page, menu_fr))
+
+    ensure_analytics()
 
     print("Calculateur :")
     inject_calculateur()
