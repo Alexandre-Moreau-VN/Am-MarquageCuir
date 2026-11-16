@@ -204,6 +204,7 @@ def bloc_calculateur(matiere_key: str) -> str:
             .replace("{{ID}}", matiere_key)
             .replace("{{ORIGINE_DEFAUT}}", defaut)
             .replace("{{GRILLES}}", grilles_attr)
+            .replace("{{PRIX_DEFAUT}}", str(int(base)))
             .replace("{{ORIGINES}}", bloc_origines(matiere_key))
             .replace("{{EPAISSEUR}}", epaisseur)
             .replace("{{OPTION_MANCHE}}", option)
