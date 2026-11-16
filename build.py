@@ -201,6 +201,7 @@ def bloc_calculateur(matiere_key: str) -> str:
             .replace("{{INC}}", str(inc))
             .replace("{{MANCHE}}", str(m.get("option_manche_eur", 0)))
             .replace("{{LIBELLE}}", m["label"])
+            .replace("{{LIBELLE_TITRE}}", m["label"][0].lower() + m["label"][1:])
             .replace("{{ID}}", matiere_key)
             .replace("{{ORIGINE_DEFAUT}}", defaut)
             .replace("{{GRILLES}}", grilles_attr)
