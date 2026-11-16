@@ -905,3 +905,25 @@ div.product-container details[open] summary::after {
   margin: 8px 0 0;
   line-height: 1.4;
 }
+
+/* En-têtes de la grille tarifaire du calculateur */
+.calc-table table th {
+  text-align: left;
+  font-size: 0.86em;
+  padding: 6px 6px 6px 0;
+  border-bottom: 1.5px solid #e8e1d5;
+  color: #5a5a55;
+}
+.calc-table table th small {
+  display: block;
+  font-weight: 400;
+  color: #999;
+  font-size: 0.85em;
+  margin-top: 2px;
+}
+.calc-table table th:not(:first-child),
+.calc-table table td:not(:first-child) {
+  text-align: right;
+  padding-right: 4px;
+}
+.calc-table table td { padding: 6px 0; }
