@@ -171,7 +171,13 @@ def _media_parts(img_group: str):
     """Separe les enfants d'un .img-group en gardant l'ordre."""
     inner = re.sub(r'^\s*<div class="img-group">|</div>\s*$', '', img_group.strip())
     parts = re.findall(r'<video[^>]*>.*?</video>|<img[^>]*>', inner, re.DOTALL)
-    return parts
+    # lecture inline sur iOS (evite l'ouverture plein ecran automatique)
+    fixed = []
+    for part in parts:
+        if part.startswith("<video") and "playsinline" not in part:
+            part = re.sub(r"^<video", "<video playsinline", part, count=1)
+        fixed.append(part)
+    return fixed
 
 
 def inject_calculateur() -> None:
@@ -206,12 +212,16 @@ def inject_calculateur() -> None:
             photos = [x for x in parts if x.startswith("<img")]
             videos = [x for x in parts if x.startswith("<video")]
 
-            # grande image = premiere photo ; vignettes = 2 photos + la video
-            hero_parts = []
-            if photos:
-                hero_parts.append(photos[0])
-            thumbs = photos[1:3] + videos[:1]
-            leftovers = photos[3:] + videos[1:]
+            # la video en media principal si elle existe, sinon la 1re photo
+            if videos:
+                hero_parts = [videos[0]]
+                pool, rest_videos = photos, videos[1:]
+            else:
+                hero_parts = [photos[0]] if photos else []
+                pool, rest_videos = photos[1:], []
+            thumbs = pool[:3]
+            leftover_photos = pool[3:]
+            leftovers = leftover_photos + rest_videos
 
             hero_parts += thumbs
             gallery = ('            <div class="img-group">\n'
