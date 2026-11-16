@@ -148,8 +148,28 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
           <div class="calc-hero-buy">
 <!-- CALC:START (genere par build.py) -->
 <!-- Calculateur de prix — généré par build.py depuis partials/calculateur.html + partials/tarifs.json -->
-<div class="calc-box" data-base="49" data-step="6.5" data-inc="10" data-manche="10" data-libelle="Matoir laiton">
+<div class="calc-box"
+     data-base="49"
+     data-step="6.5"
+     data-inc="10"
+     data-manche="10"
+     data-libelle="Matoir laiton"
+     data-origine-defaut="vietnam"
+     data-grilles="{&quot;vietnam&quot;: {&quot;base&quot;: 49, &quot;pas&quot;: 6.5, &quot;inc&quot;: 10, &quot;label&quot;: &quot;Vietnam&quot;, &quot;delai&quot;: &quot;environ 15 jours&quot;, &quot;note&quot;: &quot;hors taxes, frais de douane possibles à réception&quot;, &quot;manche&quot;: 10}, &quot;france&quot;: {&quot;base&quot;: 69, &quot;pas&quot;: 6.5, &quot;inc&quot;: 20, &quot;label&quot;: &quot;France&quot;, &quot;delai&quot;: &quot;3 à 5 jours&quot;, &quot;note&quot;: &quot;TVA et frais de port inclus&quot;, &quot;manche&quot;: 10}}">
   <h3 class="calc-title">Calculez le prix de votre Matoir laiton</h3>
+
+    <div class="calc-origines">
+    <label class="calc-origine-option">
+      <input type="radio" name="calc-origine-laiton" value="vietnam" data-role="origine" checked>
+      <span class="calc-origine-titre">🇻🇳 Fabriqué en Vietnam</span>
+      <span class="calc-origine-meta">environ 15 jours · dès 49 €</span>
+    </label>
+    <label class="calc-origine-option">
+      <input type="radio" name="calc-origine-laiton" value="france" data-role="origine">
+      <span class="calc-origine-titre">🇫🇷 Fabriqué en France</span>
+      <span class="calc-origine-meta">3 à 5 jours · dès 69 €</span>
+    </label>
+  </div>
 
   
 
@@ -184,6 +204,8 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
     <div class="calc-price" data-role="price">49 €<small>TTC, port inclus</small></div>
   </div>
 
+  <p class="calc-mention" data-role="mention"></p>
+
   <div class="calc-actions">
     <a class="calc-btn-main" href="/pages/contact.html" data-role="cta">Demander mon devis</a>
     <a class="calc-btn-call" href="tel:+33780008855">
@@ -195,15 +217,14 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
 
   <details class="calc-table">
     <summary>Voir la grille complète des tarifs</summary>
-    <table>
-            <tr><td>Jusqu'à 6,5 cm²</td><td>49 €</td></tr>
-      <tr><td>6,5 à 13 cm²</td><td>59 €</td></tr>
-      <tr><td>13 à 19,5 cm²</td><td>69 €</td></tr>
-      <tr><td>19,5 à 26 cm²</td><td>79 €</td></tr>
-      <tr><td>26 à 32,5 cm²</td><td>89 €</td></tr>
-      <tr><td>32,5 à 39 cm²</td><td>99 €</td></tr>
-      <tr><td>Au-delà</td><td>+10 € par 6,5 cm²</td></tr>
-    </table>
+          <tr><th>Surface</th><th>🇻🇳 Vietnam<br><small>environ 15 jours</small></th><th>🇫🇷 France<br><small>3 à 5 jours</small></th></tr>
+      <tr><td>Jusqu'à 6,5 cm²</td><td>49 €</td><td>69 €</td></tr>
+      <tr><td>6,5 à 13 cm²</td><td>59 €</td><td>89 €</td></tr>
+      <tr><td>13 à 19,5 cm²</td><td>69 €</td><td>109 €</td></tr>
+      <tr><td>19,5 à 26 cm²</td><td>79 €</td><td>129 €</td></tr>
+      <tr><td>26 à 32,5 cm²</td><td>89 €</td><td>149 €</td></tr>
+      <tr><td>32,5 à 39 cm²</td><td>99 €</td><td>169 €</td></tr>
+      <tr><td>Au-delà</td><td>+10 € / 6,5 cm²</td><td>+20 € / 6,5 cm²</td></tr>
   </details>
 </div>
 

@@ -861,3 +861,47 @@ div.product-container details[open] summary::after {
 .wetransfer-box strong { display: block; margin-bottom: 5px; color: #33513f; }
 .wetransfer-box p { margin: 0; line-height: 1.5; }
 .wetransfer-box a { color: #2f6b4a; font-weight: 600; }
+
+/* Sélecteur d'origine de fabrication (France / Vietnam) */
+.calc-origines {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.calc-origine-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  align-items: center;
+  border: 1.5px solid #ddd6cb;
+  border-radius: 9px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color .15s ease, background .15s ease;
+}
+.calc-origine-option:hover { border-color: #c9c0b2; }
+.calc-origine-option input {
+  grid-row: 1 / span 2;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--am-orange);
+}
+.calc-origine-titre { font-weight: 700; font-size: .9em; }
+.calc-origine-meta { font-size: .78em; color: #888; }
+.calc-origine-option:has(input:checked) {
+  border-color: var(--am-orange);
+  background: #fff7f2;
+}
+.calc-origine-seule {
+  font-size: .8em;
+  color: #888;
+  margin: 0 0 14px;
+}
+.calc-mention {
+  font-size: .76em;
+  color: #8a8a86;
+  margin: 8px 0 0;
+  line-height: 1.4;
+}

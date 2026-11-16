@@ -96,42 +96,83 @@ def _fr(v) -> str:
     return s.replace(".", ",")
 
 
-def grille_html(matiere_key: str) -> str:
-    """Grille des paliers, generee depuis tarifs.json (2 colonnes si plusieurs epaisseurs)."""
-    m = TARIFS["matieres"][matiere_key]
-    pas = m.get("pas_cm2", TARIFS["pas_cm2"])
-    inc = m.get("increment_eur", TARIFS["increment_eur"])
-    epaisseurs = m.get("epaisseurs")
+def _origine(m, key):
+    return m["origines"].get(key)
 
-    rows = []
-    if epaisseurs:
-        head = "".join(f"<th>{e['label']}</th>" for e in epaisseurs)
-        rows.append(f"      <tr><th>Surface</th>{head}</tr>")
+
+def grille_html(matiere_key: str) -> str:
+    """Grille des paliers pour toutes les origines disponibles."""
+    m = TARIFS["matieres"][matiere_key]
+    origines = m["origines"]
+    keys = list(origines.keys())
+
+    head = "".join(
+        f"<th>{origines[k]['drapeau']} {origines[k]['label']}<br><small>{origines[k]['delai']}</small></th>"
+        for k in keys
+    )
+    rows = [f"      <tr><th>Surface</th>{head}</tr>"]
+
+    pas = origines[keys[0]].get("pas_cm2", TARIFS["pas_cm2"])
     for i in range(6):
         lo, hi = i * pas, (i + 1) * pas
         label = ("Jusqu'à " + _fr(hi) + " cm²") if i == 0 else (_fr(lo) + " à " + _fr(hi) + " cm²")
-        if epaisseurs:
-            cells = "".join(f"<td>{int(e['base_eur'] + inc * i)} €</td>" for e in epaisseurs)
-        else:
-            cells = f"<td>{int(m['base_eur'] + inc * i)} €</td>"
+        cells = "".join(
+            f"<td>{int(origines[k]['base_eur'] + origines[k].get('increment_eur', TARIFS['increment_eur']) * i)} €</td>"
+            for k in keys
+        )
         rows.append(f"      <tr><td>{label}</td>{cells}</tr>")
-    au_dela = f"+{int(inc)} € par {_fr(pas)} cm²"
-    span = f' colspan="{len(epaisseurs)}"' if epaisseurs else ""
-    rows.append(f"      <tr><td>Au-delà</td><td{span}>{au_dela}</td></tr>")
+
+    # ligne "au-delà" : une valeur par origine
+    cells = "".join(
+        f"<td>+{int(origines[k].get('increment_eur', TARIFS['increment_eur']))} € / {_fr(pas)} cm²</td>"
+        for k in keys
+    )
+    rows.append(f"      <tr><td>Au-delà</td>{cells}</tr>")
     return "\n".join(rows)
+
+
+def bloc_origines(matiere_key: str) -> str:
+    """Sélecteur France / Vietnam (uniquement si plusieurs origines)."""
+    m = TARIFS["matieres"][matiere_key]
+    origines = m["origines"]
+    if len(origines) < 2:
+        seul = origines[list(origines.keys())[0]]
+        return (f'  <p class="calc-origine-seule">{seul["drapeau"]} Fabrication {seul["label"]}'
+                f' — {seul["delai"]}. Fabrication française sur devis.</p>')
+    items = []
+    for k, o in origines.items():
+        checked = " checked" if k == "vietnam" else ""
+        items.append(
+            f'    <label class="calc-origine-option">\n'
+            f'      <input type="radio" name="calc-origine-{matiere_key}" value="{k}" data-role="origine"{checked}>\n'
+            f'      <span class="calc-origine-titre">{o["drapeau"]} Fabriqué en {o["label"]}</span>\n'
+            f'      <span class="calc-origine-meta">{o["delai"]} · dès {int(o["base_eur"])} €</span>\n'
+            f'    </label>'
+        )
+    return '  <div class="calc-origines">\n' + "\n".join(items) + '\n  </div>'
 
 
 def bloc_calculateur(matiere_key: str) -> str:
     m = TARIFS["matieres"][matiere_key]
-    pas = m.get("pas_cm2", TARIFS["pas_cm2"])
-    inc = m.get("increment_eur", TARIFS["increment_eur"])
+    origines = m["origines"]
+    defaut = "vietnam" if "vietnam" in origines else list(origines.keys())[0]
+    o = origines[defaut]
+    pas = o.get("pas_cm2", TARIFS["pas_cm2"])
+    inc = o.get("increment_eur", TARIFS["increment_eur"])
+
+    # grilles serialisees pour le JS
+    grilles = {k: {"base": v["base_eur"], "pas": v.get("pas_cm2", TARIFS["pas_cm2"]),
+                   "inc": v.get("increment_eur", TARIFS["increment_eur"]),
+                   "label": v["label"], "delai": v["delai"], "note": v.get("note", ""),
+                   "manche": m.get("option_manche_eur", 0)}
+               for k, v in origines.items()}
+    import json as _json
+    grilles_attr = _json.dumps(grilles, ensure_ascii=False).replace('"', "&quot;")
 
     epaisseur = ""
-    base = m["base_eur"]
+    base = o["base_eur"]
     if m.get("epaisseurs"):
-        opts = "".join(
-            f'<option value="{e["base_eur"]}">{e["label"]}</option>' for e in m["epaisseurs"]
-        )
+        opts = "".join(f'<option value="{e["base_eur"]}">{e["label"]}</option>' for e in m["epaisseurs"])
         epaisseur = (
             '  <div class="calc-row">\n'
             '    <label for="calc-e-' + matiere_key + '">Épaisseur</label>\n'
@@ -141,7 +182,6 @@ def bloc_calculateur(matiere_key: str) -> str:
             + opts + '</select>\n'
             '  </div>'
         )
-        base = m["epaisseurs"][0]["base_eur"]
 
     if m.get("option_manche_eur"):
         option = (
@@ -161,23 +201,13 @@ def bloc_calculateur(matiere_key: str) -> str:
             .replace("{{MANCHE}}", str(m.get("option_manche_eur", 0)))
             .replace("{{LIBELLE}}", m["label"])
             .replace("{{ID}}", matiere_key)
+            .replace("{{ORIGINE_DEFAUT}}", defaut)
+            .replace("{{GRILLES}}", grilles_attr)
+            .replace("{{ORIGINES}}", bloc_origines(matiere_key))
             .replace("{{EPAISSEUR}}", epaisseur)
             .replace("{{OPTION_MANCHE}}", option)
             .replace("{{GRILLE}}", grille_html(matiere_key)))
     return f"{CALC_START}\n{html}\n{CALC_END}"
-
-
-def _media_parts(img_group: str):
-    """Separe les enfants d'un .img-group en gardant l'ordre."""
-    inner = re.sub(r'^\s*<div class="img-group">|</div>\s*$', '', img_group.strip())
-    parts = re.findall(r'<video[^>]*>.*?</video>|<img[^>]*>', inner, re.DOTALL)
-    # lecture inline sur iOS (evite l'ouverture plein ecran automatique)
-    fixed = []
-    for part in parts:
-        if part.startswith("<video") and "playsinline" not in part:
-            part = re.sub(r"^<video", "<video playsinline", part, count=1)
-        fixed.append(part)
-    return fixed
 
 
 def inject_calculateur() -> None:

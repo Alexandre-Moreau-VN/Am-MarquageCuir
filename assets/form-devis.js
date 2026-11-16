@@ -15,6 +15,8 @@
     var h = params.get('h');
     var qte = params.get('qte') || '1';
     var prix = params.get('prix');
+    var origine = params.get('origine');
+    var mention = params.get('mention');
     var ep = params.get('ep');
 
     var recap = document.getElementById('recap');
@@ -24,6 +26,8 @@
 
     if (produit) {
       document.getElementById('f-produit').value = produit + (ep ? ' (' + ep + ')' : '');
+      var oEl = document.getElementById('f-origine');
+      if (oEl && origine) oEl.value = 'Fabriqué en ' + origine;
       document.getElementById('f-dimensions').value = dimensions;
       var n = parseInt(qte, 10) || 1;
       document.getElementById('f-quantite').value = n + (n > 1 ? ' pièces' : ' pièce');
@@ -33,14 +37,16 @@
         recap.hidden = false;
         recapDetail.textContent =
           produit + (ep ? ' ' + ep : '') +
+          (origine ? ' · fabriqué en ' + origine : '') +
           (dimensions ? ' · ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ' · ' + qte + ' pièces' : '') +
-          (prix ? ' · ' + prix + ' € TTC (indicatif, port inclus)' : '');
+          (prix ? ' · ' + prix + ' € (indicatif' + (mention ? ', ' + mention : '') + ')' : '');
       }
 
       if (msg && !msg.value) {
         msg.value = 'Bonjour,\n\nJe souhaite un devis pour : ' + produit +
           (ep ? ' ' + ep : '') +
+          (origine ? ' (fabrication ' + origine + ')' : '') +
           (dimensions ? ', dimensions ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ', quantité ' + qte : '') +
           (prix ? '.\nPrix indicatif affiché : ' + prix + ' €.' : '.') +

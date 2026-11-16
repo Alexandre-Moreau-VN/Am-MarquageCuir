@@ -146,8 +146,17 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
           <div class="calc-hero-buy">
 <!-- CALC:START (genere par build.py) -->
 <!-- Calculateur de prix — généré par build.py depuis partials/calculateur.html + partials/tarifs.json -->
-<div class="calc-box" data-base="30" data-step="6.5" data-inc="10" data-manche="0" data-libelle="Tampon acrylique">
+<div class="calc-box"
+     data-base="30"
+     data-step="6.5"
+     data-inc="10"
+     data-manche="0"
+     data-libelle="Tampon acrylique"
+     data-origine-defaut="vietnam"
+     data-grilles="{&quot;vietnam&quot;: {&quot;base&quot;: 30, &quot;pas&quot;: 6.5, &quot;inc&quot;: 10, &quot;label&quot;: &quot;Vietnam&quot;, &quot;delai&quot;: &quot;environ 15 jours&quot;, &quot;note&quot;: &quot;hors taxes, frais de douane possibles à réception&quot;, &quot;manche&quot;: 0}}">
   <h3 class="calc-title">Calculez le prix de votre Tampon acrylique</h3>
+
+    <p class="calc-origine-seule">🇻🇳 Fabrication Vietnam — environ 15 jours. Fabrication française sur devis.</p>
 
     <div class="calc-row">
     <label for="calc-e-acrylique">Épaisseur</label>
@@ -183,6 +192,8 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
     <div class="calc-price" data-role="price">49 €<small>TTC, port inclus</small></div>
   </div>
 
+  <p class="calc-mention" data-role="mention"></p>
+
   <div class="calc-actions">
     <a class="calc-btn-main" href="/pages/contact.html" data-role="cta">Demander mon devis</a>
     <a class="calc-btn-call" href="tel:+33780008855">
@@ -194,16 +205,14 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
 
   <details class="calc-table">
     <summary>Voir la grille complète des tarifs</summary>
-    <table>
-            <tr><th>Surface</th><th>5 mm</th><th>10 mm</th></tr>
-      <tr><td>Jusqu'à 6,5 cm²</td><td>30 €</td><td>35 €</td></tr>
-      <tr><td>6,5 à 13 cm²</td><td>40 €</td><td>45 €</td></tr>
-      <tr><td>13 à 19,5 cm²</td><td>50 €</td><td>55 €</td></tr>
-      <tr><td>19,5 à 26 cm²</td><td>60 €</td><td>65 €</td></tr>
-      <tr><td>26 à 32,5 cm²</td><td>70 €</td><td>75 €</td></tr>
-      <tr><td>32,5 à 39 cm²</td><td>80 €</td><td>85 €</td></tr>
-      <tr><td>Au-delà</td><td colspan="2">+10 € par 6,5 cm²</td></tr>
-    </table>
+          <tr><th>Surface</th><th>🇻🇳 Vietnam<br><small>environ 15 jours</small></th></tr>
+      <tr><td>Jusqu'à 6,5 cm²</td><td>30 €</td></tr>
+      <tr><td>6,5 à 13 cm²</td><td>40 €</td></tr>
+      <tr><td>13 à 19,5 cm²</td><td>50 €</td></tr>
+      <tr><td>19,5 à 26 cm²</td><td>60 €</td></tr>
+      <tr><td>26 à 32,5 cm²</td><td>70 €</td></tr>
+      <tr><td>32,5 à 39 cm²</td><td>80 €</td></tr>
+      <tr><td>Au-delà</td><td>+10 € / 6,5 cm²</td></tr>
   </details>
 </div>
 
