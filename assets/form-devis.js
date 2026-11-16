@@ -54,7 +54,7 @@
       }
     }
 
-    // Contrôle du poids total des fichiers (limite Netlify Forms : 8 Mo)
+    // Contrôle du poids total des fichiers (plafond maison 2 Mo (quota Netlify : 10 Mo/mois))
     var files = ['file1', 'file2', 'file3'].map(function (id) { return document.getElementById(id); });
     var note = document.getElementById('file-note');
     var submit = document.getElementById('submit-btn');
