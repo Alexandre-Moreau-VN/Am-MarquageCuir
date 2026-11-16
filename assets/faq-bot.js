@@ -112,6 +112,12 @@
     #chatbot-toggle-btn {
       width: 56px;
       height: 56px;
+      /* Neutralise les regles globales "button" de machines.css / product.css
+         (padding + width:50%), qui ecrasaient la taille de l'icone. */
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      flex-shrink: 0;
       border-radius: 50%;
       background: linear-gradient(135deg, #EE672F, #F89C66);
       box-shadow: 0 4px 16px rgba(238, 103, 47, 0.4);
