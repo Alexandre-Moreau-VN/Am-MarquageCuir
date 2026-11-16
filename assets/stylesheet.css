@@ -627,3 +627,22 @@ div.product-container details[open] summary::after {
   padding: 0.5em;
   text-align: left;
 }
+/* Bloc "Voir aussi" : maillage interne entre pages produits */
+.voir-aussi {
+  margin-top: 2.5em;
+  padding-top: 1.2em;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.voir-aussi h2 {
+  font-size: 1.15em;
+  margin: 0 0 0.6em;
+}
+.voir-aussi ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.voir-aussi li {
+  margin: 0.4em 0;
+  line-height: 1.5;
+}
