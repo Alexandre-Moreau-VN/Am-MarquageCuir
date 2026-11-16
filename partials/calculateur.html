@@ -1,0 +1,50 @@
+<!-- Calculateur de prix — généré par build.py depuis partials/calculateur.html + partials/tarifs.json -->
+<div class="calc-box" data-base="{{BASE}}" data-step="{{PAS}}" data-inc="{{INC}}" data-manche="{{MANCHE}}" data-libelle="{{LIBELLE}}">
+  <h3 class="calc-title">Calculez le prix de votre {{LIBELLE}}</h3>
+
+  {{EPAISSEUR}}
+
+  <div class="calc-row">
+    <label for="calc-l-{{ID}}">Largeur</label>
+    <input type="range" id="calc-l-{{ID}}" min="5" max="120" value="30" data-role="w-range">
+    <input type="number" min="5" max="120" value="30" data-role="w-num" aria-label="Largeur en millimètres"><span class="calc-unit">mm</span>
+  </div>
+
+  <div class="calc-row">
+    <label for="calc-h-{{ID}}">Hauteur</label>
+    <input type="range" id="calc-h-{{ID}}" min="5" max="120" value="18" data-role="h-range">
+    <input type="number" min="5" max="120" value="18" data-role="h-num" aria-label="Hauteur en millimètres"><span class="calc-unit">mm</span>
+  </div>
+
+  {{OPTION_MANCHE}}
+
+  <div class="calc-row">
+    <label for="calc-q-{{ID}}">Quantité</label>
+    <span></span>
+    <input type="number" id="calc-q-{{ID}}" min="1" max="50" step="1" value="1" data-role="qte"><span class="calc-unit">pcs</span>
+  </div>
+
+  <div class="calc-out">
+    <div>
+      <span class="calc-label">Votre prix</span>
+      <span class="calc-detail" data-role="detail"></span>
+    </div>
+    <div class="calc-price" data-role="price">49 €<small>TTC, port inclus</small></div>
+  </div>
+
+  <div class="calc-actions">
+    <a class="calc-btn-main" href="/pages/contact.html" data-role="cta">Demander mon devis</a>
+    <a class="calc-btn-call" href="tel:+33780008855">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.2 2.4 3.2 4.4 5.6 5.6l1.9-1.9c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V19c0 .6-.4 1-1 1C10.4 20 4 13.6 4 5.4c0-.6.4-1 1-1h3.1c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-1.9 1.9z"/></svg>
+      Appeler le 07 80 00 88 55
+    </a>
+  </div>
+  <p class="calc-hint">Plusieurs modèles différents ? Indiquez-le dans votre message.</p>
+
+  <details class="calc-table">
+    <summary>Voir la grille complète des tarifs</summary>
+    <table>
+      {{GRILLE}}
+    </table>
+  </details>
+</div>

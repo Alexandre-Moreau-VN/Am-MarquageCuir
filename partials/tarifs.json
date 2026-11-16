@@ -1,0 +1,30 @@
+{
+  "_comment": "Source unique des tarifs. Modifier ici : calculateur et grille se mettent a jour au prochain build.py",
+  "pas_cm2": 6.5,
+  "increment_eur": 10,
+  "matieres": {
+    "laiton": {
+      "label": "Matoir laiton",
+      "base_eur": 49,
+      "option_manche_eur": 10,
+      "epaisseurs": null
+    },
+    "acrylique": {
+      "label": "Tampon acrylique",
+      "base_eur": 30,
+      "pas_cm2": 6.4,
+      "increment_eur": 10,
+      "option_manche_eur": 0,
+      "epaisseurs": [
+        { "label": "5 mm", "base_eur": 30 },
+        { "label": "10 mm", "base_eur": 35 }
+      ]
+    },
+    "caoutchouc": {
+      "label": "Tampon caoutchouc",
+      "base_eur": 30,
+      "option_manche_eur": 0,
+      "epaisseurs": null
+    }
+  }
+}

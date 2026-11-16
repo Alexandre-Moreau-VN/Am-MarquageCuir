@@ -70,6 +70,173 @@ def inject(page: pathlib.Path, menu_html: str) -> str:
     return "updated"
 
 
+
+# ---------------------------------------------------------------------------
+# Calculateur de prix
+# ---------------------------------------------------------------------------
+
+import json
+
+TARIFS = json.loads((ROOT / "partials" / "tarifs.json").read_text(encoding="utf-8"))
+CALC_TPL = (ROOT / "partials" / "calculateur.html").read_text(encoding="utf-8")
+
+CALC_PAGES = {
+    "pages/marquage.html": "laiton",
+    "pages/tampons-acrylique.html": "acrylique",
+    "pages/tampons-caoutchouc.html": "caoutchouc",
+}
+
+CALC_START = "<!-- CALC:START (genere par build.py) -->"
+CALC_END = "<!-- CALC:END -->"
+
+
+def grille_html(matiere_key: str) -> str:
+    """Grille des paliers, generee depuis tarifs.json."""
+    m = TARIFS["matieres"][matiere_key]
+    pas = m.get("pas_cm2", TARIFS["pas_cm2"])
+    inc = m.get("increment_eur", TARIFS["increment_eur"])
+    base = m["base_eur"]
+    rows = []
+    for i in range(6):
+        lo = i * pas
+        hi = (i + 1) * pas
+        prix = base + inc * i
+        label = ("Jusqu'à " + str(hi).replace(".", ",") + " cm²") if i == 0 \
+            else (str(lo).replace(".", ",") + " à " + str(hi).replace(".", ",") + " cm²")
+        rows.append(f"      <tr><td>{label}</td><td>{prix} €</td></tr>")
+    rows.append(f"      <tr><td>Au-delà</td><td>+{inc} € par {str(pas).replace('.', ',')} cm²</td></tr>")
+    return "\n".join(rows)
+
+
+def bloc_calculateur(matiere_key: str) -> str:
+    m = TARIFS["matieres"][matiere_key]
+    pas = m.get("pas_cm2", TARIFS["pas_cm2"])
+    inc = m.get("increment_eur", TARIFS["increment_eur"])
+
+    epaisseur = ""
+    base = m["base_eur"]
+    if m.get("epaisseurs"):
+        opts = "".join(
+            f'<option value="{e["base_eur"]}">{e["label"]}</option>' for e in m["epaisseurs"]
+        )
+        epaisseur = (
+            '  <div class="calc-row">\n'
+            '    <label for="calc-e-' + matiere_key + '">Épaisseur</label>\n'
+            '    <span></span>\n'
+            '    <select id="calc-e-' + matiere_key + '" data-role="epaisseur" '
+            'style="grid-column:2/4;padding:7px 9px;border:1.5px solid #ddd6cb;border-radius:7px;font:inherit">'
+            + opts + '</select>\n'
+            '  </div>'
+        )
+        base = m["epaisseurs"][0]["base_eur"]
+
+    if m.get("option_manche_eur"):
+        option = (
+            '  <div class="calc-row calc-row-check">\n'
+            '    <label for="calc-m-' + matiere_key + '">Option manche vissable (+'
+            + str(m["option_manche_eur"]) + ' €)</label>\n'
+            '    <input type="checkbox" id="calc-m-' + matiere_key + '" data-role="manche">\n'
+            '  </div>'
+        )
+    else:
+        option = ""
+
+    html = (CALC_TPL
+            .replace("{{BASE}}", str(base))
+            .replace("{{PAS}}", str(pas))
+            .replace("{{INC}}", str(inc))
+            .replace("{{MANCHE}}", str(m.get("option_manche_eur", 0)))
+            .replace("{{LIBELLE}}", m["label"])
+            .replace("{{ID}}", matiere_key)
+            .replace("{{EPAISSEUR}}", epaisseur)
+            .replace("{{OPTION_MANCHE}}", option)
+            .replace("{{GRILLE}}", grille_html(matiere_key)))
+    return f"{CALC_START}\n{html}\n{CALC_END}"
+
+
+def _media_parts(img_group: str):
+    """Separe les enfants d'un .img-group en gardant l'ordre."""
+    inner = re.sub(r'^\s*<div class="img-group">|</div>\s*$', '', img_group.strip())
+    parts = re.findall(r'<video[^>]*>.*?</video>|<img[^>]*>', inner, re.DOTALL)
+    return parts
+
+
+def inject_calculateur() -> None:
+    """Photos sous le titre (grande image + 3 vignettes) et calculateur a droite."""
+    for rel, matiere in CALC_PAGES.items():
+        page = ROOT / rel
+        if not page.exists():
+            print("  ! page absente :", rel)
+            continue
+        text = page.read_text(encoding="utf-8")
+        calc = bloc_calculateur(matiere)
+
+        if "calculateur.js" not in text:
+            text = text.replace("</head>",
+                                '    <script src="../assets/calculateur.js" defer></script>\n</head>', 1)
+
+        pattern = re.compile(re.escape(CALC_START) + r".*?" + re.escape(CALC_END), re.DOTALL)
+        if pattern.search(text):
+            text = pattern.sub(lambda m: calc, text, count=1)
+            page.write_text(text, encoding="utf-8")
+            print("  ~", rel, "(mis a jour)")
+            continue
+
+        m = re.search(r'[ \t]*<div class="img-group">.*?</div>', text, re.DOTALL)
+        images = m.group(0) if m else ""
+        rest_html = ""
+        gallery = ""
+
+        if m:
+            text = text[:m.start()] + "<!-- GALERIE:RESTE -->" + text[m.end():]
+            parts = _media_parts(images)
+            photos = [x for x in parts if x.startswith("<img")]
+            videos = [x for x in parts if x.startswith("<video")]
+
+            # grande image = premiere photo ; vignettes = 2 photos + la video
+            hero_parts = []
+            if photos:
+                hero_parts.append(photos[0])
+            thumbs = photos[1:3] + videos[:1]
+            leftovers = photos[3:] + videos[1:]
+
+            hero_parts += thumbs
+            gallery = ('            <div class="img-group">\n'
+                       + "\n".join("                " + x for x in hero_parts)
+                       + '\n            </div>')
+            if leftovers:
+                rest_html = ('            <div class="img-group">\n'
+                             + "\n".join("                " + x for x in leftovers)
+                             + '\n            </div>')
+
+        hero = ('\n        <div class="calc-hero">\n'
+                '          <div class="calc-hero-media">\n'
+                + gallery + '\n'
+                '          </div>\n'
+                '          <div class="calc-hero-buy">\n'
+                + calc + '\n'
+                '          </div>\n'
+                '        </div>\n')
+
+        h1_end = text.find("</h1>")
+        if h1_end == -1:
+            print("  ! pas de <h1> :", rel)
+            continue
+        h1_end += len("</h1>")
+        # un sous-titre <h2> suit-il immediatement ? on insere apres lui
+        window = text[h1_end:h1_end + 600]
+        m2 = re.search(r"</h2>", window)
+        if m2 and window[:m2.start()].count("<p") == 0:
+            insert_at = h1_end + m2.end()
+        else:
+            insert_at = h1_end
+        text = text[:insert_at] + hero + text[insert_at:]
+        text = text.replace("<!-- GALERIE:RESTE -->", rest_html, 1)
+
+        page.write_text(text, encoding="utf-8")
+        print("  +", rel, f"({len(hero_parts)} medias en hero, {len(leftovers)} en galerie)")
+
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -85,6 +252,9 @@ def main() -> None:
             targets.append((page, menu_en))
         else:
             targets.append((page, menu_fr))
+
+    print("Calculateur :")
+    inject_calculateur()
 
     updated, skipped, already = [], [], []
     for page, menu in targets:
