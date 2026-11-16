@@ -12,7 +12,7 @@
     "acrylique": {
       "label": "Tampon acrylique",
       "base_eur": 30,
-      "pas_cm2": 6.4,
+      "pas_cm2": 6.5,
       "increment_eur": 10,
       "option_manche_eur": 0,
       "epaisseurs": [

@@ -90,21 +90,34 @@ CALC_START = "<!-- CALC:START (genere par build.py) -->"
 CALC_END = "<!-- CALC:END -->"
 
 
+def _fr(v) -> str:
+    """6.5 -> '6,5' ; 13.0 -> '13'"""
+    s = ("%.2f" % float(v)).rstrip("0").rstrip(".")
+    return s.replace(".", ",")
+
+
 def grille_html(matiere_key: str) -> str:
-    """Grille des paliers, generee depuis tarifs.json."""
+    """Grille des paliers, generee depuis tarifs.json (2 colonnes si plusieurs epaisseurs)."""
     m = TARIFS["matieres"][matiere_key]
     pas = m.get("pas_cm2", TARIFS["pas_cm2"])
     inc = m.get("increment_eur", TARIFS["increment_eur"])
-    base = m["base_eur"]
+    epaisseurs = m.get("epaisseurs")
+
     rows = []
+    if epaisseurs:
+        head = "".join(f"<th>{e['label']}</th>" for e in epaisseurs)
+        rows.append(f"      <tr><th>Surface</th>{head}</tr>")
     for i in range(6):
-        lo = i * pas
-        hi = (i + 1) * pas
-        prix = base + inc * i
-        label = ("Jusqu'à " + str(hi).replace(".", ",") + " cm²") if i == 0 \
-            else (str(lo).replace(".", ",") + " à " + str(hi).replace(".", ",") + " cm²")
-        rows.append(f"      <tr><td>{label}</td><td>{prix} €</td></tr>")
-    rows.append(f"      <tr><td>Au-delà</td><td>+{inc} € par {str(pas).replace('.', ',')} cm²</td></tr>")
+        lo, hi = i * pas, (i + 1) * pas
+        label = ("Jusqu'à " + _fr(hi) + " cm²") if i == 0 else (_fr(lo) + " à " + _fr(hi) + " cm²")
+        if epaisseurs:
+            cells = "".join(f"<td>{int(e['base_eur'] + inc * i)} €</td>" for e in epaisseurs)
+        else:
+            cells = f"<td>{int(m['base_eur'] + inc * i)} €</td>"
+        rows.append(f"      <tr><td>{label}</td>{cells}</tr>")
+    au_dela = f"+{int(inc)} € par {_fr(pas)} cm²"
+    span = f' colspan="{len(epaisseurs)}"' if epaisseurs else ""
+    rows.append(f"      <tr><td>Au-delà</td><td{span}>{au_dela}</td></tr>")
     return "\n".join(rows)
 
 
