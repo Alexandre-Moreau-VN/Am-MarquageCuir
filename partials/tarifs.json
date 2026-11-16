@@ -32,8 +32,14 @@
       "label": "Tampon acrylique",
       "option_manche_eur": 0,
       "epaisseurs": [
-        { "label": "5 mm", "base_eur": 30 },
-        { "label": "10 mm", "base_eur": 35 }
+        {
+          "label": "5 mm",
+          "base_eur": 30
+        },
+        {
+          "label": "10 mm",
+          "base_eur": 35
+        }
       ],
       "origines": {
         "france": {
@@ -42,8 +48,8 @@
           "base_eur": 30,
           "pas_cm2": 6.5,
           "increment_eur": 10,
-          "delai": "environ 1 semaine (2 à 4 j de fabrication + livraison)",
-          "note": "TVA et frais de port inclus"
+          "delai": "5 à 7 jours ouvrés au total",
+          "note": "TVA et frais de port inclus, sans frais de douane"
         }
       }
     },
@@ -58,8 +64,8 @@
           "base_eur": 30,
           "pas_cm2": 6.5,
           "increment_eur": 10,
-          "delai": "environ 1 semaine (2 à 4 j de fabrication + livraison)",
-          "note": "TVA et frais de port inclus"
+          "delai": "5 à 7 jours ouvrés au total",
+          "note": "TVA et frais de port inclus, sans frais de douane"
         }
       }
     }
