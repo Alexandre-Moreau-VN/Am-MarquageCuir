@@ -927,3 +927,25 @@ div.product-container details[open] summary::after {
   padding-right: 4px;
 }
 .calc-table table td { padding: 6px 0; }
+
+/* Bloc "Voir aussi" : autonome, quel que soit son parent */
+.voir-aussi {
+  background: var(--bg);
+  max-width: 1000px;
+  margin: 26px auto;
+  padding: 1.3em 1.6em;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.voir-aussi a { color: var(--vert-grisé); text-decoration: underline; }
+.voir-aussi a:hover { color: var(--am-orange); }
+
+/* Quand le bloc est deja dans la carte blanche, pas besoin de fond */
+.product-container .voir-aussi,
+.intro .voir-aussi {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
