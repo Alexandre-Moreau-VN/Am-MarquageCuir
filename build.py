@@ -209,7 +209,8 @@ def bloc_calculateur(matiere_key: str) -> str:
             .replace("{{ORIGINES}}", bloc_origines(matiere_key))
             .replace("{{EPAISSEUR}}", epaisseur)
             .replace("{{OPTION_MANCHE}}", option)
-            .replace("{{GRILLE}}", grille_html(matiere_key)))
+            .replace("{{GRILLE}}", grille_html(matiere_key))
+            .replace("{{AVIS_RESUME}}", resume_avis(matiere_key)))
     return f"{CALC_START}\n{html}\n{CALC_END}"
 
 
@@ -312,6 +313,88 @@ def ensure_analytics() -> None:
         count += 1
     print(f"GTM : {count} page(s) instrumentee(s)")
 
+
+# ---------------------------------------------------------------------------
+# Avis clients
+# ---------------------------------------------------------------------------
+
+AVIS = json.loads((ROOT / "partials" / "avis.json").read_text(encoding="utf-8"))
+AVIS_PAGES = {"pages/marquage.html": "laiton"}
+AVIS_START = "<!-- AVIS:START (genere par build.py) -->"
+AVIS_END = "<!-- AVIS:END -->"
+
+
+def resume_avis(matiere_key: str) -> str:
+    """Petite ligne de confiance affichee dans le calculateur."""
+    if matiere_key not in AVIS_PAGES.values():
+        return ""
+    avis = AVIS.get(matiere_key) or []
+    if not avis:
+        return ""
+    a = AVIS["agregat"]
+    n = a["nombre"]
+    return (
+        '<p class="calc-avis">'
+        '<span class="calc-avis-stars">★★★★★</span> '
+        f'<a href="{a["url"]}" target="_blank" rel="noopener">'
+        f'{n} avis · {a["recommandent"]} % recommandent sur {a["plateforme"]}</a>'
+        '</p>'
+    )
+
+
+def bloc_avis(matiere_key: str) -> str:
+    if matiere_key not in AVIS_PAGES.values():
+        return ""
+    avis = AVIS.get(matiere_key) or []
+    if not avis:
+        return ""
+    a = AVIS["agregat"]
+    items = []
+    for v in avis:
+        qui = v["auteur"] + ((" — " + v["contexte"]) if v.get("contexte") else "")
+        items.append(
+            '          <figure class="avis-item">\n'
+            f'            <blockquote>« {v["texte"]} »</blockquote>\n'
+            f'            <figcaption>{qui} · <span class="avis-date">{v["date"]}</span> · '
+            f'<a href="{v["url"]}" target="_blank" rel="noopener">original</a></figcaption>\n'
+            '          </figure>'
+        )
+    return (f'{AVIS_START}\n'
+            '        <section class="avis-bloc">\n'
+            '          <header class="avis-head">\n'
+            '            <h2>Ce qu\u2019en disent nos clients</h2>\n'
+            f'            <p><span class="avis-stars">★★★★★</span> {a["nombre"]} avis · '
+            f'{a["recommandent"]} % recommandent sur '
+            f'<a href="{a["url"]}" target="_blank" rel="noopener">{a["plateforme"]}</a></p>\n'
+            '          </header>\n'
+            + "\n".join(items) + '\n'
+            '        </section>\n'
+            f'{AVIS_END}')
+
+
+def inject_avis() -> None:
+    for rel, matiere in AVIS_PAGES.items():
+        page = ROOT / rel
+        if not page.exists():
+            continue
+        text = page.read_text(encoding="utf-8")
+        bloc = bloc_avis(matiere)
+        if not bloc:
+            continue
+        pattern = re.compile(re.escape(AVIS_START) + r".*?" + re.escape(AVIS_END), re.DOTALL)
+        if pattern.search(text):
+            text = pattern.sub(lambda m: bloc, text, count=1)
+        else:
+            hero_end = text.find('</div>', text.find('<div class="calc-hero">'))
+            # on cherche la fin du hero : derniere </div> avant <div class="product-container">
+            anchor = text.find('<div class="product-container">')
+            if anchor == -1:
+                continue
+            text = text[:anchor] + bloc + '\n\n        ' + text[anchor:]
+        page.write_text(text, encoding="utf-8")
+        print("  +", rel, "(avis)")
+
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -329,6 +412,9 @@ def main() -> None:
             targets.append((page, menu_fr))
 
     ensure_analytics()
+
+    print("Avis clients :")
+    inject_avis()
 
     print("Calculateur :")
     inject_calculateur()

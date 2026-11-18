@@ -1,0 +1,32 @@
+{
+  "_comment": "Avis clients. Ajouter un avis = ajouter un objet dans le tableau du produit, puis lancer python3 build.py",
+  "agregat": {
+    "plateforme": "Facebook",
+    "nombre": 20,
+    "recommandent": 100,
+    "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+  },
+  "laiton": [
+    {
+      "auteur": "Julie V.",
+      "contexte": "",
+      "texte": "Très satisfaite de ma commande ! Super finition !",
+      "date": "février 2019",
+      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+    },
+    {
+      "auteur": "Daniel B.",
+      "contexte": "",
+      "texte": "Très agréablement surpris par la qualité, la rapidité et le professionnalisme. Très beau résultat.",
+      "date": "janvier 2019",
+      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+    },
+    {
+      "auteur": "Sarah F.",
+      "contexte": "sellier-harnacheur",
+      "texte": "Création et envoi super rapide ! Merci !",
+      "date": "novembre 2018",
+      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+    }
+  ]
+}

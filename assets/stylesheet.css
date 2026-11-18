@@ -949,3 +949,55 @@ div.product-container details[open] summary::after {
   margin-left: 0;
   margin-right: 0;
 }
+
+/* ------------------------------------------------------------------
+   Avis clients
+   ------------------------------------------------------------------ */
+.calc-avis {
+  margin: 0 0 12px;
+  font-size: 0.82em;
+  color: #6b6b66;
+}
+.calc-avis-stars { color: #e8a33d; letter-spacing: 1px; }
+.calc-avis a { color: #5f7f6e; text-decoration: underline; }
+.calc-avis a:hover { color: var(--am-orange); }
+
+.avis-bloc {
+  max-width: 1000px;
+  margin: 26px auto;
+  padding: 1.4em 1.6em;
+  background: var(--bg);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.avis-head { margin-bottom: 1em; }
+.avis-head h2 {
+  margin: 0 0 4px;
+  font-size: 1.15em;
+}
+.avis-head p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #6b6b66;
+}
+.avis-head a { color: #5f7f6e; }
+.avis-stars { color: #e8a33d; letter-spacing: 1px; }
+
+.avis-item {
+  margin: 0 0 1.1em;
+  padding-left: 14px;
+  border-left: 3px solid #dcd6ca;
+}
+.avis-item:last-child { margin-bottom: 0; }
+.avis-item blockquote {
+  margin: 0 0 6px;
+  font-size: 0.95em;
+  line-height: 1.55;
+  color: var(--text);
+}
+.avis-item figcaption {
+  font-size: 0.8em;
+  color: #7a7a74;
+}
+.avis-date { color: #9a9a93; }
+.avis-item a { color: #5f7f6e; }
