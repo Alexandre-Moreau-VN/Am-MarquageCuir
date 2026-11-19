@@ -503,6 +503,143 @@ def inject_calculateur_plaques() -> None:
     print("  +", PLAQUES_PAGE, "(calculateur plaques)")
 
 
+
+# ---------------------------------------------------------------------------
+# Donnees structurees Product (AggregateOffer) pour les pages produit
+# ---------------------------------------------------------------------------
+
+JSONLD_START = "<!-- JSONLD-PRODUIT:START -->"
+JSONLD_END = "<!-- JSONLD-PRODUIT:END -->"
+
+JSONLD_PAGES = {
+    "pages/marquage.html": {
+        "matiere": "laiton",
+        "materiau": "Laiton",
+        "nom": "Matoir et tampon de marquage en laiton gravé sur mesure",
+        "image": "assets/img-stamps/Matoir_01.webp",
+        "desc": "Matoir en laiton massif gravé sur mesure : logo, nom de marque ou motif. "
+                "Marquage à chaud ou à froid sur cuir et bois. Fabrication France ou Vietnam.",
+    },
+    "pages/tampons-acrylique.html": {
+        "matiere": "acrylique",
+        "materiau": "Acrylique",
+        "nom": "Tampon de marquage en acrylique gravé sur mesure",
+        "image": "assets/img-tamponsacrylique/tamponsAcrylique_1.JPG",
+        "desc": "Tampon en acrylique gravé au laser, pour le marquage à froid sur cuir tanné végétal, "
+                "savon, cire ou poterie. Épaisseur 5 ou 10 mm. Fabrication française.",
+    },
+    "pages/tampons-caoutchouc.html": {
+        "matiere": "caoutchouc",
+        "materiau": "Caoutchouc",
+        "nom": "Tampon en caoutchouc gravé sur mesure",
+        "image": "assets/img-tamponscaoutchouc/tampons-caoutchouc4.jpeg",
+        "desc": "Tampon en caoutchouc gravé sur mesure pour marquer papier, carton et bois à l'encre. "
+                "Fabrication française.",
+    },
+}
+
+# dimensions maximales prises en compte par les calculateurs (mm)
+TAILLE_MAX_MM = {"marquage": 120, "tampons-acrylique": 120, "tampons-caoutchouc": 120}
+
+
+def _bornes_prix_stamp(matiere_key: str):
+    """Prix mini et maxi reels d'une gamme de tampons, d'apres tarifs.json."""
+    m = TARIFS["matieres"][matiere_key]
+    pas = m.get("pas_cm2", TARIFS["pas_cm2"])
+    inc = m.get("increment_eur", TARIFS["increment_eur"])
+    # 144 cm2 = 120 x 120 mm, la limite des curseurs
+    paliers_max = max(1, __import__("math").ceil((120 * 120 / 100) / pas))
+    bas, haut = None, None
+    for o in m["origines"].values():
+        o_pas = o.get("pas_cm2", pas)
+        o_inc = o.get("increment_eur", inc)
+        paliers = max(1, __import__("math").ceil((120 * 120 / 100) / o_pas))
+        mini = o["base_eur"]
+        maxi = o["base_eur"] + o_inc * (paliers - 1)
+        for e in (m.get("epaisseurs") or []):
+            mini = min(mini, e["base_eur"])
+            maxi = max(maxi, e["base_eur"] + o_inc * (paliers - 1))
+        bas = mini if bas is None else min(bas, mini)
+        haut = maxi if haut is None else max(haut, maxi)
+    return bas, haut
+
+
+def _bornes_prix_plaques():
+    ep = PLAQUES["epaisseurs"]
+    pas = PLAQUES["pas_cm2"]
+    a_max = (PLAQUES["dimensions"]["max_mm"] / 10) ** 2
+    paliers = max(1, __import__("math").ceil(a_max / pas))
+    bas = min(v["base"] for v in ep.values())
+    haut = max(v["base"] + v["increment"] * (paliers - 1) for v in ep.values())
+    return bas, haut
+
+
+def _jsonld_offre(low, high, url, materiau="Laiton"):
+    import math
+    return {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": None,          # complete par l'appelant
+        "image": None,
+        "description": None,
+        "brand": {"@type": "Brand", "name": "AM Marquage"},
+        "material": materiau,
+        "offers": {
+            "@type": "AggregateOffer",
+            "url": url,
+            "priceCurrency": "EUR",
+            "lowPrice": f"{low:.2f}",
+            "highPrice": f"{high:.2f}",
+            "offerCount": 2,
+            "availability": "https://schema.org/InStock",
+            "seller": {"@type": "Organization", "name": "AM Marquage"},
+        },
+    }
+
+
+def inject_jsonld_produit() -> None:
+    for rel, meta in JSONLD_PAGES.items():
+        page = ROOT / rel
+        if not page.exists():
+            continue
+        bas, haut = _bornes_prix_stamp(meta["matiere"])
+        d = _jsonld_offre(bas, haut, "https://am-outilscuir.com/" + rel, meta.get("materiau", "Laiton"))
+        d["name"] = meta["nom"]
+        d["image"] = "https://am-outilscuir.com/" + meta["image"]
+        d["description"] = meta["desc"]
+        _write_jsonld(page, d)
+
+    # plaques
+    page = ROOT / "pages/plaques-laiton.html"
+    if page.exists():
+        bas, haut = _bornes_prix_plaques()
+        d = _jsonld_offre(bas, haut, "https://am-outilscuir.com/pages/plaques-laiton.html")
+        d["name"] = "Plaque gravée sur mesure en laiton"
+        d["image"] = "https://am-outilscuir.com/assets/img-plaques/plaques2.webp"
+        d["description"] = ("Plaque en laiton massif gravée sur mesure : branding, plaque professionnelle, "
+                            "plaque de porte, boîte aux lettres. Épaisseur 3 ou 2 mm, toutes formes sur mesure.")
+        _write_jsonld(page, d)
+
+
+def _write_jsonld(page: pathlib.Path, data: dict) -> None:
+    import json as _json
+    text = page.read_text(encoding="utf-8")
+    body = _json.dumps(data, ensure_ascii=False, indent=2)
+    body = "\n".join("    " + l for l in body.splitlines())
+    bloc = (f"{JSONLD_START}\n"
+            '    <script type="application/ld+json">\n'
+            f"{body}\n"
+            '    </script>\n'
+            f"{JSONLD_END}")
+    pattern = re.compile(re.escape(JSONLD_START) + r".*?" + re.escape(JSONLD_END), re.DOTALL)
+    if pattern.search(text):
+        text = pattern.sub(lambda m: bloc, text, count=1)
+    else:
+        text = text.replace("</head>", bloc + "\n</head>", 1)
+    page.write_text(text, encoding="utf-8")
+    print("  +", page.relative_to(ROOT), "(Product JSON-LD)")
+
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -520,6 +657,9 @@ def main() -> None:
             targets.append((page, menu_fr))
 
     ensure_analytics()
+
+    print("Donnees structurees produit :")
+    inject_jsonld_produit()
 
     print("Calculateur plaques :")
     inject_calculateur_plaques()
