@@ -332,12 +332,10 @@ def resume_avis(matiere_key: str) -> str:
     if not avis:
         return ""
     a = AVIS["agregat"]
-    n = a["nombre"]
     return (
         '<p class="calc-avis">'
-        '<span class="calc-avis-stars">★★★★★</span> '
         f'<a href="{a["url"]}" target="_blank" rel="noopener">'
-        f'{n} avis · {a["recommandent"]} % recommandent sur {a["plateforme"]}</a>'
+        f'Avis clients — voir sur {a["plateforme"]}</a>'
         '</p>'
     )
 
@@ -363,8 +361,7 @@ def bloc_avis(matiere_key: str) -> str:
             '        <section class="avis-bloc">\n'
             '          <header class="avis-head">\n'
             '            <h2>Ce qu\u2019en disent nos clients</h2>\n'
-            f'            <p><span class="avis-stars">★★★★★</span> {a["nombre"]} avis · '
-            f'{a["recommandent"]} % recommandent sur '
+            f'            <p>Avis publiés publiquement sur '
             f'<a href="{a["url"]}" target="_blank" rel="noopener">{a["plateforme"]}</a></p>\n'
             '          </header>\n'
             + "\n".join(items) + '\n'
