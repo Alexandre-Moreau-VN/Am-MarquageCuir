@@ -671,6 +671,52 @@
       .replace(/[^a-z0-9 ]/g, " "); // Supprime la ponctuation
   }
 
+  // Distance d'edition : tolere les fautes de frappe (mattoir / matoir).
+  function levenshtein(a, b) {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    var prev = [], cur = [], i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur[0] = i;
+      for (j = 1; j <= b.length; j++) {
+        var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+      }
+      prev = cur.slice();
+    }
+    return prev[b.length];
+  }
+
+  // Tolerance selon la longueur du mot
+  function isCloseEnough(word, keyword) {
+    var d = levenshtein(word, keyword);
+    if (keyword.length >= 7) return d <= 2;
+    if (keyword.length >= 4) return d <= 1;
+    return d === 0;
+  }
+
+  // Synonymes : ce que les gens tapent -> vocabulaire des mots-cles
+  var SYNONYMES = {
+    "fdp": "livraison", "port": "livraison", "envoi": "livraison", "expedition": "livraison",
+    "delais": "delai", "delais": "delai", "rapidite": "delai",
+    "cout": "prix", "coute": "prix", "tarifs": "tarif", "budget": "prix",
+    "mattoir": "matoir", "mattoirs": "matoir", "tampons": "tampon",
+    "logo": "fichier", "visuel": "fichier", "vectorise": "vectoriel",
+    "telephone": "telephone", "tel": "telephone", "mail": "email",
+    "acheter": "commander", "commande": "commander"
+  };
+
+  function expandSynonyms(words) {
+    var out = [];
+    words.forEach(function (w) {
+      out.push(w);
+      if (SYNONYMES[w] && out.indexOf(SYNONYMES[w]) === -1) out.push(SYNONYMES[w]);
+    });
+    return out;
+  }
+
   function handleUserInput() {
     const query = input.value.trim();
     if (!query) return;
@@ -682,7 +728,7 @@
 
     // Recherche de correspondance dans la FAQ
     const normalizedQuery = normalizeText(query);
-    const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 1);
+    const queryWords = expandSynonyms(normalizedQuery.split(/\s+/).filter(w => w.length > 1));
 
     // Si c'est un salut simple
     const greetings = isEnglish ? ["hello", "hi", "hey", "morning", "welcome"] : ["salut", "bonjour", "hey", "bonsoir", "coucou", "slt"];
@@ -701,7 +747,11 @@
       item.keywords.forEach(keyword => {
         // Normalise le mot-clé
         const normalizedKeyword = normalizeText(keyword);
-        if (normalizedQuery.includes(normalizedKeyword)) {
+        // Un mot-cle court ("ai", "pdf") ne doit pas matcher n'importe quelle
+        // sous-chaine ("faites" contient "ai") : inclusion reservee aux mots-cles
+        // de 4 caracteres et plus ; les autres doivent etre un mot entier.
+        const isWholeWord = queryWords.indexOf(normalizedKeyword) !== -1;
+        if ((normalizedKeyword.length >= 4 && normalizedQuery.includes(normalizedKeyword)) || isWholeWord) {
           matches += 2; // Poids plus fort si le mot-clé exact est dans la requête
         } else {
           // Sinon on vérifie l'inclusion de mots individuels
@@ -709,6 +759,8 @@
           keywordWords.forEach(kw => {
             if (queryWords.includes(kw)) {
               matches += 1;
+            } else if (kw.length >= 4 && queryWords.some(w => isCloseEnough(w, kw))) {
+              matches += 1;   // faute de frappe toleree
             }
           });
         }
@@ -720,8 +772,10 @@
       }
     });
 
-    // Seuil de pertinence minimum
-    if (bestMatch && maxMatches >= 2) {
+    // Seuil de pertinence : 2 points, ou 1 si la question est tres courte
+    // (un seul mot, eventuellement mal orthographie : "mattoir")
+    var seuil = queryWords.length <= 2 ? 1 : 2;
+    if (bestMatch && maxMatches >= seuil) {
       triggerBotResponse(bestMatch.response);
     } else {
       // Pas de correspondance claire
