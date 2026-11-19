@@ -1001,3 +1001,17 @@ div.product-container details[open] summary::after {
 }
 .avis-date { color: #9a9a93; }
 .avis-item a { color: #5f7f6e; }
+
+/* Rappels de remise et notes du calculateur plaques */
+.calc-remise-hint {
+  margin: -2px 0 12px;
+  font-size: 0.78em;
+  color: #5f7f6e;
+  font-weight: 600;
+}
+.calc-hint-line {
+  margin: -4px 0 12px;
+  font-size: 0.76em;
+  color: #8a8a84;
+  line-height: 1.4;
+}

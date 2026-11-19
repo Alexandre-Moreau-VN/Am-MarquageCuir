@@ -435,13 +435,14 @@ def bloc_calculateur_plaques() -> str:
     # options
     options = (
         '  <div class="calc-row calc-row-check">\n'
-        '    <label for="pl-trous">Trous de fixation (4 coins)</label>\n'
+        '    <label for="pl-trous">Trous de fixation</label>\n'
         '    <input type="checkbox" id="pl-trous" data-role="option" data-label="avec trous">\n'
         '  </div>\n'
         '  <div class="calc-row calc-row-check">\n'
         '    <label for="pl-chanfrein">Chanfrein</label>\n'
         '    <input type="checkbox" id="pl-chanfrein" data-role="option" data-label="avec chanfrein">\n'
-        '  </div>'
+        '  </div>\n'
+        '  <p class="calc-hint-line">Nombre, position des trous et chanfrein : à définir ensemble lors du devis.</p>'
     )
 
     # grille
@@ -458,6 +459,16 @@ def bloc_calculateur_plaques() -> str:
     rows.append(f'      <tr><td>Au-delà</td>{cells}</tr>')
     grille = ('    <table>\n' + "\n".join(rows) + '\n    </table>')
 
+    rem = sorted(PLAQUES.get("remises", []), key=lambda r: r["a_partir_de"])
+    hint = []
+    for i, r in enumerate(rem):
+        pct = int(round(r["taux"] * 100))
+        if i == 0:
+            hint.append(f'−{pct} % dès {r["a_partir_de"]} plaques')
+        else:
+            hint.append(f'−{pct} % au-delà de {r["a_partir_de"] - 1}')
+    remise_hint = " · ".join(hint)
+
     data = json.dumps(PLAQUES, ensure_ascii=False).replace('"', "&quot;")
 
     html = (PLAQUES_TPL
@@ -466,6 +477,7 @@ def bloc_calculateur_plaques() -> str:
             .replace("{{FINITIONS}}", finitions)
             .replace("{{OPTIONS}}", options)
             .replace("{{PRIX_DEFAUT}}", _fr_plaques(first["base"]))
+            .replace("{{REMISE_HINT}}", remise_hint)
             .replace("{{GRILLE}}", grille))
     return f"{CALC_PLAQUES_START}\n{html}\n{CALC_PLAQUES_END}"
 
