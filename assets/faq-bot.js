@@ -47,15 +47,38 @@
         },
         {
           id: "garantie",
+          boost: ["garantie", "remboursement", "conformite", "defaut", "retour"],
           title: "Et si l'outil ne correspond pas à ce que j'attendais ?",
           keywords: ["garantie", "retour", "remboursement", "rembourse", "conformite", "conforme", "defaut", "abime", "casse", "erreur", "difference", "litige", "reclamation", "sav", "bat", "bon a tirer", "maquette"],
           response: "Avant toute fabrication, vous recevez un **devis accompagné d'un bon à tirer (BAT)** : visuel, dimensions, matière. C'est ce document qui fait foi.\n\n• **Écart entre le BAT validé et l'outil livré** : c'est ma responsabilité. Je refabrique l'outil à mes frais, ou je vous rembourse.\n• **Outil conforme au BAT validé** : aucun remboursement n'est possible. Les dimensions et le visuel ont été validés avant fabrication, et la matière, la main-d'œuvre et l'expédition ont été engagées.\n\nLes produits personnalisés ne bénéficient pas du droit de rétractation de 14 jours (art. L221-28 du Code de la consommation). Les garanties légales de conformité et des vices cachés restent applicables.\n\nUn doute sur votre fichier ou vos dimensions ? Parlons-en **avant** de valider le BAT."
         },
         {
           id: "douane",
+          boost: ["douane", "douanes", "tva", "importation", "dedouanement"],
           title: "Y a-t-il des frais de douane ou des taxes ?",
           keywords: ["douane", "douanes", "taxe", "taxes", "tva", "importation", "frais", "dedouanement", "transporteur", "hors taxes"],
           response: "Cela dépend de l'origine choisie dans le calculateur :\n\n• 🇫🇷 **Fabrication en France** : prix TTC, frais de port inclus, **aucun frais de douane**.\n• 🇻🇳 **Fabrication au Vietnam** : prix **hors taxes**. Pour une livraison dans l'Union européenne, d'éventuels droits de douane et taxes à l'importation peuvent être demandés par le transporteur **à la réception du colis**.\n\nL'envoi express via DHL est possible en supplément (2 à 3 jours ouvrés).\n\nPour éviter toute surprise, la fabrication française est la solution la plus simple si vous êtes dans l'UE."
+        },
+        {
+          id: "plaques-prix",
+          title: "Combien coûte une plaque gravée ?",
+          boost: ["plaque", "plaques"],
+          keywords: ["plaque", "boite aux lettres", "enseigne", "prix", "tarif"],
+          response: "Le prix d'une plaque dépend de sa **surface**, de l'**épaisseur** (2 ou 3 mm) et de la **finition**.\n\nLe calcul est automatique : indiquez vos dimensions en millimètres dans le calculateur de la page [Plaques gravées](/pages/plaques-laiton.html).\n\n• **À partir de 8 €** pour une petite plaque en 2 mm (10 € en 3 mm)\n• Le prix augmente par paliers de 6,5 cm²\n• **−10 % dès 10 plaques**, −20 % au-delà de 30\n• Frais de port inclus en France métropolitaine\n\nDimensions : de 5 × 5 mm à 250 × 250 mm."
+        },
+        {
+          id: "plaques-finitions",
+          title: "Quelles finitions, quelles options pour une plaque ?",
+          boost: ["plaque", "plaques"],
+          keywords: ["finition", "finition plaque", "poli", "brosse", "antique", "brass", "trous", "chanfrein", "epaisseur", "forme sur mesure"],
+          response: "**Trois finitions** : brossé (standard, inclus), poli (brillant, effet miroir) et antique brass (aspect vieilli). Les deux dernières ajoutent +1 € par palier.\n\n**Deux épaisseurs** : 3 mm (standard) ou 2 mm.\n\n**Options incluses, sans supplément** : trous de fixation et chanfrein. Leur nombre et leur position se définissent ensemble lors du devis.\n\n**Formes** : toutes les formes sont réalisées sur mesure — rectangulaire, angles chanfreinés, découpe libre. Pour une forme particulière, indiquez-le dans votre message."
+        },
+        {
+          id: "plaques-commande",
+          title: "Comment commander une plaque et en combien de temps ?",
+          boost: ["plaque", "plaques"],
+          keywords: ["delai", "delai plaque", "commander une plaque", "comment commander", "bon a tirer", "bat", "fichier", "degressif", "quantite"],
+          response: "**Comment commander :**\n\n1. Indiquez vos dimensions dans le [calculateur](/pages/plaques-laiton.html) : le prix s'affiche immédiatement.\n2. Envoyez-nous votre texte ou votre fichier (AI, SVG, PDF, CDR, ou JPG/PNG haute résolution).\n3. Vous recevez **sous 24 h un bon à tirer et un devis**.\n4. La fabrication démarre après votre validation du BAT.\n\n**Délais** : 2 à 4 jours ouvrés de fabrication, soit 5 à 7 jours ouvrés au total. Pour une série importante, le délai est ajusté selon notre planning.\n\nLes plaques sont **fabriquées en France**."
         },
         {
           id: "contact",
@@ -101,15 +124,38 @@
         },
         {
           id: "warranty",
+          boost: ["warranty", "guarantee", "refund", "defect", "return"],
           title: "What if the tool doesn't match what I expected?",
           keywords: ["warranty", "guarantee", "return", "refund", "conformity", "defect", "damaged", "broken", "mistake", "difference", "dispute", "claim", "approval", "mockup", "proof"],
           response: "Before any production, you receive a **quote with a proof to approve**: artwork, dimensions, material. That approved proof is the reference.\n\n• **Difference between the approved proof and the delivered tool**: that is my responsibility. I remake the tool at my cost, or refund you.\n• **Tool matching the approved proof**: no refund is possible. Dimensions and artwork were approved before production, and material, labour and shipping were committed.\n\nCustom-made products are excluded from the 14-day withdrawal right (art. L221-28 French Consumer Code). Legal conformity and hidden-defect guarantees still apply.\n\nUnsure about your file or dimensions? Let's talk **before** approving the proof."
         },
         {
           id: "customs",
+          boost: ["customs", "duty", "duties", "vat", "import"],
           title: "Are there customs fees or taxes?",
           keywords: ["customs", "duty", "duties", "tax", "taxes", "vat", "import", "fees", "carrier", "exempt"],
           response: "It depends on the origin selected in the calculator:\n\n• 🇫🇷 **Made in France**: VAT and shipping included, **no customs fees**.\n• 🇻🇳 **Made in Vietnam**: prices **exclude tax**. For delivery in the European Union, customs duties and import taxes may be requested by the carrier **on delivery**.\n\nExpress DHL shipping is available at extra cost (2–3 business days).\n\nIf you are in the EU, French production is the simplest option."
+        },
+        {
+          id: "plates-price",
+          title: "How much does an engraved plate cost?",
+          boost: ["plate", "plates"],
+          keywords: ["plate", "door plate", "letterbox", "price", "quote"],
+          response: "The price of a plate depends on its **surface area**, its **thickness** (2 or 3 mm) and the **finish**.\n\nThe calculator does the maths: enter your dimensions in millimetres on the [Engraved plates](/pages/plaques-laiton.html) page.\n\n• **From €8** for a small 2 mm plate (€10 in 3 mm)\n• The price rises in steps of 6.5 cm²\n• **−10 % from 10 plates**, −20 % above 30\n• Shipping included within mainland France\n\nSizes: from 5 × 5 mm to 250 × 250 mm."
+        },
+        {
+          id: "plates-finish",
+          title: "Which finishes and options are available?",
+          boost: ["plate", "plates"],
+          keywords: ["finish", "polished", "brushed", "antique", "holes", "chamfer", "thickness", "shape"],
+          response: "**Three finishes**: brushed (standard, included), polished (mirror-like) and antique brass (aged patina). The last two add +1 € per price step.\n\n**Two thicknesses**: 3 mm (standard) or 2 mm.\n\n**Included at no extra cost**: fixing holes and chamfer. Their number and position are agreed together at the quote stage.\n\n**Shapes**: every shape is made to measure — rectangular, chamfered corners, free form. Just tell us in your message."
+        },
+        {
+          id: "plates-order",
+          title: "How do I order a plate and how long does it take?",
+          boost: ["plate", "plates"],
+          keywords: ["lead time", "how to order", "order a plate", "proof", "approval", "file", "discount", "quantity"],
+          response: "**How to order:**\n\n1. Enter your dimensions in the [calculator](/pages/plaques-laiton.html).\n2. Send us your text or file (AI, SVG, PDF, CDR, or high-resolution JPG/PNG).\n3. You receive **a proof and a quote within 24 hours**.\n4. Production starts once you approve the proof.\n\n**Lead times**: 2 to 4 working days of production, 5 to 7 working days in total. Larger runs are scheduled according to our production plan.\n\nAll plates are **made in France**."
         },
         {
           id: "contact",
@@ -789,6 +835,12 @@
           });
         }
       });
+
+      // Un sujet peut declarer des mots-cles decisifs : "plaque" doit
+      // l'emporter sur le sujet generique des tarifs.
+      if (item.boost && item.boost.some(function (b) { return normalizedQuery.indexOf(normalizeText(b)) !== -1; })) {
+        matches += 5;
+      }
 
       if (matches > maxMatches) {
         maxMatches = matches;
