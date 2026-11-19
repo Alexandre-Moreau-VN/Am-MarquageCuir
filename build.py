@@ -393,6 +393,104 @@ def inject_avis() -> None:
         print("  +", rel, "(avis)")
 
 
+
+# ---------------------------------------------------------------------------
+# Plaques gravees (calculateur dedie)
+# ---------------------------------------------------------------------------
+
+PLAQUES = json.loads((ROOT / "partials" / "plaques.json").read_text(encoding="utf-8"))
+PLAQUES_TPL = (ROOT / "partials" / "calculateur-plaques.html").read_text(encoding="utf-8")
+PLAQUES_PAGE = "pages/plaques-laiton.html"
+CALC_PLAQUES_START = "<!-- CALC-PLAQUES:START -->"
+CALC_PLAQUES_END = "<!-- CALC-PLAQUES:END -->"
+
+
+def _fr_plaques(v) -> str:
+    s = ("%.2f" % float(v)).rstrip("0").rstrip(".")
+    return s.replace(".", ",")
+
+
+def bloc_calculateur_plaques() -> str:
+    ep = PLAQUES["epaisseurs"]
+    pas = PLAQUES["pas_cm2"]
+
+    # radios d'epaisseur
+    radios = []
+    for i, (k, v) in enumerate(ep.items()):
+        checked = " checked" if i == 0 else ""
+        radios.append(
+            '    <label class="calc-origine-option">\n'
+            f'      <input type="radio" name="pl-epaisseur" value="{k}" data-role="epaisseur"{checked}>\n'
+            f'      <span class="calc-origine-titre">Épaisseur {v["label"]}</span>\n'
+            f'      <span class="calc-origine-meta">dès {_fr_plaques(v["base"])} € · +{_fr_plaques(v["increment"])} € par palier</span>\n'
+            '    </label>'
+        )
+    epaisseurs = '  <div class="calc-origines">\n' + "\n".join(radios) + '\n  </div>'
+
+    # finitions
+    finitions = "\n".join(
+        f'      <option value="{f["id"]}">{f["label"]}</option>' for f in PLAQUES["finitions"]
+    )
+
+    # options
+    options = (
+        '  <div class="calc-row calc-row-check">\n'
+        '    <label for="pl-trous">Trous de fixation (4 coins)</label>\n'
+        '    <input type="checkbox" id="pl-trous" data-role="option" data-label="avec trous">\n'
+        '  </div>\n'
+        '  <div class="calc-row calc-row-check">\n'
+        '    <label for="pl-chanfrein">Chanfrein</label>\n'
+        '    <input type="checkbox" id="pl-chanfrein" data-role="option" data-label="avec chanfrein">\n'
+        '  </div>'
+    )
+
+    # grille
+    first = ep[list(ep.keys())[0]]
+    rows = ['      <tr><th>Surface</th><th>3 mm</th><th>2 mm</th></tr>']
+    for i in range(8):
+        lo, hi = i * pas, (i + 1) * pas
+        label = ("Jusqu'à " + _fr_plaques(hi) + " cm²") if i == 0 else (_fr_plaques(lo) + " à " + _fr_plaques(hi) + " cm²")
+        cells = "".join(
+            f'<td>{_fr_plaques(ep[k]["base"] + ep[k]["increment"] * i)} €</td>' for k in ep
+        )
+        rows.append(f'      <tr><td>{label}</td>{cells}</tr>')
+    cells = "".join(f'<td>+{_fr_plaques(ep[k]["increment"])} € / {_fr_plaques(pas)} cm²</td>' for k in ep)
+    rows.append(f'      <tr><td>Au-delà</td>{cells}</tr>')
+    grille = ('    <table>\n' + "\n".join(rows) + '\n    </table>')
+
+    data = json.dumps(PLAQUES, ensure_ascii=False).replace('"', "&quot;")
+
+    html = (PLAQUES_TPL
+            .replace("{{DATA}}", data)
+            .replace("{{EPAISSEURS}}", epaisseurs)
+            .replace("{{FINITIONS}}", finitions)
+            .replace("{{OPTIONS}}", options)
+            .replace("{{PRIX_DEFAUT}}", _fr_plaques(first["base"]))
+            .replace("{{GRILLE}}", grille))
+    return f"{CALC_PLAQUES_START}\n{html}\n{CALC_PLAQUES_END}"
+
+
+def inject_calculateur_plaques() -> None:
+    page = ROOT / PLAQUES_PAGE
+    if not page.exists():
+        print("  ! page plaques absente")
+        return
+    text = page.read_text(encoding="utf-8")
+    bloc = bloc_calculateur_plaques()
+    pattern = re.compile(re.escape(CALC_PLAQUES_START) + r".*?" + re.escape(CALC_PLAQUES_END), re.DOTALL)
+    if pattern.search(text):
+        text = pattern.sub(lambda m: bloc, text, count=1)
+    else:
+        anchor = text.find('<div class="calc-hero-buy">')
+        if anchor == -1:
+            print("  ! ancre calculee introuvable")
+            return
+        end = text.find('>', anchor) + 1
+        text = text[:end] + "\n" + bloc + text[end:]
+    page.write_text(text, encoding="utf-8")
+    print("  +", PLAQUES_PAGE, "(calculateur plaques)")
+
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -410,6 +508,9 @@ def main() -> None:
             targets.append((page, menu_fr))
 
     ensure_analytics()
+
+    print("Calculateur plaques :")
+    inject_calculateur_plaques()
 
     print("Avis clients :")
     inject_avis()

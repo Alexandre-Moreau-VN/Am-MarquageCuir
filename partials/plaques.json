@@ -1,0 +1,19 @@
+{
+  "_comment": "Tarifs des plaques graves en laiton. Source unique : modifier ici, puis python3 build.py",
+  "pas_cm2": 6.5,
+  "dimensions": { "min_mm": 5, "max_mm": 250 },
+  "quantite_max": 250,
+  "epaisseurs": {
+    "3mm": { "label": "3 mm", "base": 10, "increment": 3 },
+    "2mm": { "label": "2 mm", "base": 8, "increment": 1.5 }
+  },
+  "finitions": [
+    { "id": "brosse", "label": "Brossé (standard)", "supplement_palier": 0 },
+    { "id": "poli", "label": "Poli", "supplement_palier": 1 },
+    { "id": "antique", "label": "Antique brass", "supplement_palier": 1 }
+  ],
+  "remises": [
+    { "a_partir_de": 10, "taux": 0.1 },
+    { "a_partir_de": 31, "taux": 0.2 }
+  ]
+}

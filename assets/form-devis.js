@@ -17,6 +17,8 @@
     var prix = params.get('prix');
     var origine = params.get('origine');
     var mention = params.get('mention');
+    var fin = params.get('fin');
+    var opt = params.get('opt');
     var ep = params.get('ep');
 
     var recap = document.getElementById('recap');
@@ -38,6 +40,8 @@
         recapDetail.textContent =
           produit + (ep ? ' ' + ep : '') +
           (origine ? ' · fabriqué en ' + origine : '') +
+          (fin ? ' · ' + fin : '') +
+          (opt ? ' · ' + opt : '') +
           (dimensions ? ' · ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ' · ' + qte + ' pièces' : '') +
           (prix ? ' · ' + prix + ' € (indicatif' + (mention ? ', ' + mention : '') + ')' : '');
@@ -47,6 +51,8 @@
         msg.value = 'Bonjour,\n\nJe souhaite un devis pour : ' + produit +
           (ep ? ' ' + ep : '') +
           (origine ? ' (fabrication ' + origine + ')' : '') +
+          (fin ? ', ' + fin : '') +
+          (opt ? ', ' + opt : '') +
           (dimensions ? ', dimensions ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ', quantité ' + qte : '') +
           (prix ? '.\nPrix indicatif affiché : ' + prix + ' €.' : '.') +
