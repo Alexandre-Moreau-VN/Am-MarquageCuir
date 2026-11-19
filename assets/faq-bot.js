@@ -46,6 +46,18 @@
           response: "Le choix dépend de votre usage et de votre budget :\n\n• 🟨 **Matoir Laiton (Pro)** :\n  - *Usage* : À froid (cuir tannage végétal humide) ou à chaud (tous cuirs, bois, carton, pain, etc.).\n  - *Avantages* : Indestructible, gravure très profonde, compatible avec fers à marquer et presses thermiques.\n• ⬜ **Tampon Acrylique (Éco)** :\n  - *Usage* : **À froid uniquement** sur cuir tannage végétal humide.\n  - *Méthode* : Utiliser exclusivement avec une presse (arbor press) ou un serre-joint.\n  - *Attention* : Ne jamais chauffer, et ne jamais frapper dessus avec un marteau au risque de le briser."
         },
         {
+          id: "garantie",
+          title: "Et si l'outil ne correspond pas à ce que j'attendais ?",
+          keywords: ["garantie", "retour", "remboursement", "rembourse", "conformite", "conforme", "defaut", "abime", "casse", "erreur", "difference", "litige", "reclamation", "sav", "bat", "bon a tirer", "maquette"],
+          response: "Avant toute fabrication, vous recevez un **devis accompagné d'un bon à tirer (BAT)** : visuel, dimensions, matière. C'est ce document qui fait foi.\n\n• **Écart entre le BAT validé et l'outil livré** : c'est ma responsabilité. Je refabrique l'outil à mes frais, ou je vous rembourse.\n• **Outil conforme au BAT validé** : aucun remboursement n'est possible. Les dimensions et le visuel ont été validés avant fabrication, et la matière, la main-d'œuvre et l'expédition ont été engagées.\n\nLes produits personnalisés ne bénéficient pas du droit de rétractation de 14 jours (art. L221-28 du Code de la consommation). Les garanties légales de conformité et des vices cachés restent applicables.\n\nUn doute sur votre fichier ou vos dimensions ? Parlons-en **avant** de valider le BAT."
+        },
+        {
+          id: "douane",
+          title: "Y a-t-il des frais de douane ou des taxes ?",
+          keywords: ["douane", "douanes", "taxe", "taxes", "tva", "importation", "frais", "dedouanement", "transporteur", "hors taxes"],
+          response: "Cela dépend de l'origine choisie dans le calculateur :\n\n• 🇫🇷 **Fabrication en France** : prix TTC, frais de port inclus, **aucun frais de douane**.\n• 🇻🇳 **Fabrication au Vietnam** : prix **hors taxes**. Pour une livraison dans l'Union européenne, d'éventuels droits de douane et taxes à l'importation peuvent être demandés par le transporteur **à la réception du colis**.\n\nL'envoi express via DHL est possible en supplément (2 à 3 jours ouvrés).\n\nPour éviter toute surprise, la fabrication française est la solution la plus simple si vous êtes dans l'UE."
+        },
+        {
           id: "contact",
           title: "Comment vous contacter ou obtenir un devis ?",
           keywords: ["contact", "contacter", "telephone", "mail", "email", "adresse", "coordonnees", "alexandre", "moreau", "boutique", "atelier", "tel"],
@@ -86,6 +98,18 @@
           title: "Brass vs Acrylic: how to choose?",
           keywords: ["brass", "acrylic", "material", "difference", "stamp", "engraving", "leather", "tanning", "veg-tan", "hot", "cold", "iron", "mark", "press"],
           response: "It depends on your application and budget:\n\n• 🟨 **Brass Stamp (Pro)**:\n  - *Usage* : Cold stamping (damp veg-tan leather) or hot embossing (all leathers, wood, paper, bread, etc.).\n  - *Advantages* : Indestructible, deep engraving, compatible with branding irons and heat presses.\n• ⬜ **Acrylic Stamp (Eco)**:\n  - *Usage* : **Cold stamping only** on damp veg-tan leather.\n  - *Method* : Always use with a clamp or arbor press.\n  - *Warning* : Never heat, and never strike with a hammer, as it will break the acrylic."
+        },
+        {
+          id: "warranty",
+          title: "What if the tool doesn't match what I expected?",
+          keywords: ["warranty", "guarantee", "return", "refund", "conformity", "defect", "damaged", "broken", "mistake", "difference", "dispute", "claim", "approval", "mockup", "proof"],
+          response: "Before any production, you receive a **quote with a proof to approve**: artwork, dimensions, material. That approved proof is the reference.\n\n• **Difference between the approved proof and the delivered tool**: that is my responsibility. I remake the tool at my cost, or refund you.\n• **Tool matching the approved proof**: no refund is possible. Dimensions and artwork were approved before production, and material, labour and shipping were committed.\n\nCustom-made products are excluded from the 14-day withdrawal right (art. L221-28 French Consumer Code). Legal conformity and hidden-defect guarantees still apply.\n\nUnsure about your file or dimensions? Let's talk **before** approving the proof."
+        },
+        {
+          id: "customs",
+          title: "Are there customs fees or taxes?",
+          keywords: ["customs", "duty", "duties", "tax", "taxes", "vat", "import", "fees", "carrier", "exempt"],
+          response: "It depends on the origin selected in the calculator:\n\n• 🇫🇷 **Made in France**: VAT and shipping included, **no customs fees**.\n• 🇻🇳 **Made in Vietnam**: prices **exclude tax**. For delivery in the European Union, customs duties and import taxes may be requested by the carrier **on delivery**.\n\nExpress DHL shipping is available at extra cost (2–3 business days).\n\nIf you are in the EU, French production is the simplest option."
         },
         {
           id: "contact",
