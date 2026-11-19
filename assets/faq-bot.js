@@ -560,11 +560,22 @@
   const sendBtn = chatWindow.querySelector('#chatbot-send-btn');
   const closeBtn = chatWindow.querySelector('#chatbot-close-btn');
 
+  // 6. Mesure d'usage (Umami, sans cookie)
+  //    Trois evenements : ouverture, question posee, question sans reponse.
+  function track(name, data) {
+    try {
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track(name, data || {});
+      }
+    } catch (e) { /* la mesure ne doit jamais casser le chat */ }
+  }
+
   // 5. Fonctions d'interaction
   function toggleChat() {
     const isOpen = chatWindow.classList.toggle('open');
     toggleBtn.classList.toggle('open');
     if (isOpen) {
+      track('chatbot_ouvert');
       input.focus();
       // Si la conversation est vide, on injecte le message d'accueil
       if (body.children.length === 0) {
@@ -601,6 +612,7 @@
       chip.className = 'chatbot-chip';
       chip.textContent = item.title;
       chip.addEventListener('click', () => {
+        track('chatbot_sujet', { sujet: item.title.slice(0, 80) });
         // Envoie la question comme un message de l'utilisateur
         appendMsg(item.title, 'user');
         // Supprime les quick replies après le clic pour ne pas encombrer
@@ -664,6 +676,7 @@
     if (!query) return;
 
     // Affiche le message de l'utilisateur
+    track('chatbot_question', { question: query.slice(0, 120) });
     appendMsg(query, 'user');
     input.value = '';
 
@@ -712,6 +725,7 @@
       triggerBotResponse(bestMatch.response);
     } else {
       // Pas de correspondance claire
+      track('chatbot_sans_reponse', { question: query.slice(0, 120) });
       triggerBotResponse(currentDb.fallback, true);
     }
   }
