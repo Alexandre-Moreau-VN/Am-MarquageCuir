@@ -190,5 +190,17 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
         </div>
     </footer>
 
+    <script>
+      /* Mesure d'usage : un devis a bien ete envoye (Umami, sans cookie) */
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          try {
+            if (window.umami && typeof window.umami.track === 'function') {
+              window.umami.track('devis_envoye');
+            }
+          } catch (e) { /* la mesure ne doit rien casser */ }
+        }, 400);
+      });
+    </script>
 </body>
 </html>

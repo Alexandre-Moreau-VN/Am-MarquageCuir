@@ -94,9 +94,12 @@
       detailEl.textContent = txt;
 
       if (mentionEl) {
+        // le rappel des remises figure deja sous le champ Quantite :
+        // ici on n'affiche que la remise reellement appliquee
         mentionEl.textContent = remiseAppliquee
-          ? 'Remise de ' + Math.round(remiseAppliquee * 100) + ' % appliquée par palier de quantité.'
-          : 'Remise de 10 % à partir de 10 plaques, 20 % au-delà de 30.';
+          ? 'Remise de ' + Math.round(remiseAppliquee * 100) + ' % appliquée.'
+          : '';
+        mentionEl.hidden = !remiseAppliquee;
       }
 
       var params = '?produit=' + encodeURIComponent('Plaque laiton ' + ep.label) +
