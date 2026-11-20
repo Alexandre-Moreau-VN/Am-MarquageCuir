@@ -69,28 +69,49 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Tampon en caoutchouc gravé sur mesure",
-      "image": "https://am-outilscuir.com/assets/img-tamponscaoutchouc/tampons-caoutchouc4.jpeg",
-      "description": "Tampon en caoutchouc gravé sur mesure pour marquer papier, carton et bois à l'encre. Fabrication française.",
-      "brand": {
-        "@type": "Brand",
-        "name": "AM Marquage"
-      },
-      "material": "Caoutchouc",
-      "offers": {
-        "@type": "AggregateOffer",
-        "url": "https://am-outilscuir.com/pages/tampons-caoutchouc.html",
-        "priceCurrency": "EUR",
-        "lowPrice": "30.00",
-        "highPrice": "140.00",
-        "offerCount": 2,
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@type": "Organization",
-          "name": "AM Marquage"
+      "@graph": [
+        {
+          "@type": "Product",
+          "name": "Tampon en caoutchouc gravé sur mesure",
+          "image": "https://am-outilscuir.com/assets/img-tamponscaoutchouc/tampons-caoutchouc4.jpeg",
+          "description": "Tampon en caoutchouc gravé sur mesure pour marquer papier, carton et bois à l'encre. Fabrication française.",
+          "brand": {
+            "@type": "Brand",
+            "name": "AM Marquage"
+          },
+          "material": "Caoutchouc",
+          "offers": {
+            "@type": "AggregateOffer",
+            "url": "https://am-outilscuir.com/pages/tampons-caoutchouc.html",
+            "priceCurrency": "EUR",
+            "lowPrice": "30.00",
+            "highPrice": "140.00",
+            "offerCount": 2,
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "AM Marquage"
+            }
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "AM Marquage",
+              "item": "https://am-outilscuir.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Tampons en caoutchouc",
+              "item": "https://am-outilscuir.com/pages/tampons-caoutchouc.html"
+            }
+          ]
         }
-      }
+      ]
     }
     </script>
 <!-- JSONLD-PRODUIT:END -->

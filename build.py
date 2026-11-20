@@ -509,6 +509,13 @@ def inject_calculateur_plaques() -> None:
 # Donnees structurees Product (AggregateOffer) pour les pages produit
 # ---------------------------------------------------------------------------
 
+FIL_ARIANE = {
+    "pages/marquage.html": "Matoirs et tampons en laiton",
+    "pages/tampons-acrylique.html": "Tampons en acrylique",
+    "pages/tampons-caoutchouc.html": "Tampons en caoutchouc",
+    "pages/plaques-laiton.html": "Plaques gravées en laiton",
+}
+
 JSONLD_START = "<!-- JSONLD-PRODUIT:START -->"
 JSONLD_END = "<!-- JSONLD-PRODUIT:END -->"
 
@@ -608,7 +615,7 @@ def inject_jsonld_produit() -> None:
         d["name"] = meta["nom"]
         d["image"] = "https://am-outilscuir.com/" + meta["image"]
         d["description"] = meta["desc"]
-        _write_jsonld(page, d)
+        _write_jsonld(page, d, FIL_ARIANE.get(rel))
 
     # plaques
     page = ROOT / "pages/plaques-laiton.html"
@@ -619,12 +626,27 @@ def inject_jsonld_produit() -> None:
         d["image"] = "https://am-outilscuir.com/assets/img-plaques/plaques2.webp"
         d["description"] = ("Plaque en laiton massif gravée sur mesure : branding, plaque professionnelle, "
                             "plaque de porte, boîte aux lettres. Épaisseur 3 ou 2 mm, toutes formes sur mesure.")
-        _write_jsonld(page, d)
+        _write_jsonld(page, d, FIL_ARIANE["pages/plaques-laiton.html"])
 
 
-def _write_jsonld(page: pathlib.Path, data: dict) -> None:
+def _fil_ariane(nom: str, url: str) -> dict:
+    return {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "AM Marquage",
+             "item": "https://am-outilscuir.com/"},
+            {"@type": "ListItem", "position": 2, "name": nom, "item": url},
+        ],
+    }
+
+
+def _write_jsonld(page: pathlib.Path, data: dict, nom_ariane: str = None) -> None:
     import json as _json
     text = page.read_text(encoding="utf-8")
+    if nom_ariane:
+        data = {"@context": "https://schema.org",
+                "@graph": [data, _fil_ariane(nom_ariane, data["offers"]["url"])]}
+        data["@graph"][0].pop("@context", None)
     body = _json.dumps(data, ensure_ascii=False, indent=2)
     body = "\n".join("    " + l for l in body.splitlines())
     bloc = (f"{JSONLD_START}\n"
