@@ -447,7 +447,8 @@ def bloc_calculateur_plaques() -> str:
 
     # grille
     first = ep[list(ep.keys())[0]]
-    rows = ['      <tr><th>Surface</th><th>3 mm</th><th>2 mm</th></tr>']
+    entetes = "".join(f'<th>{ep[k]["label"]}</th>' for k in ep)
+    rows = [f'      <tr><th>Surface</th>{entetes}</tr>']
     for i in range(8):
         lo, hi = i * pas, (i + 1) * pas
         label = ("Jusqu'à " + _fr_plaques(hi) + " cm²") if i == 0 else (_fr_plaques(lo) + " à " + _fr_plaques(hi) + " cm²")

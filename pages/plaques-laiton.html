@@ -183,32 +183,32 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
           <div class="calc-hero-buy">
             <!-- CALC-PLAQUES:START -->
 <!-- Calculateur plaques — genere par build.py depuis partials/calculateur-plaques.html + partials/plaques.json -->
-<div class="calc-box calc-plaques" data-plaques="{&quot;_comment&quot;: &quot;Tarifs des plaques graves en laiton. Source unique : modifier ici, puis python3 build.py&quot;, &quot;pas_cm2&quot;: 6.5, &quot;dimensions&quot;: {&quot;min_mm&quot;: 5, &quot;max_mm&quot;: 250}, &quot;quantite_max&quot;: 250, &quot;epaisseurs&quot;: {&quot;3mm&quot;: {&quot;label&quot;: &quot;3 mm&quot;, &quot;base&quot;: 10, &quot;increment&quot;: 3}, &quot;2mm&quot;: {&quot;label&quot;: &quot;2 mm&quot;, &quot;base&quot;: 8, &quot;increment&quot;: 1.5}}, &quot;finitions&quot;: [{&quot;id&quot;: &quot;brosse&quot;, &quot;label&quot;: &quot;Brossé (standard)&quot;, &quot;supplement_palier&quot;: 0}, {&quot;id&quot;: &quot;poli&quot;, &quot;label&quot;: &quot;Poli&quot;, &quot;supplement_palier&quot;: 1}, {&quot;id&quot;: &quot;antique&quot;, &quot;label&quot;: &quot;Antique brass&quot;, &quot;supplement_palier&quot;: 1}], &quot;remises&quot;: [{&quot;a_partir_de&quot;: 10, &quot;taux&quot;: 0.1}, {&quot;a_partir_de&quot;: 31, &quot;taux&quot;: 0.2}]}">
+<div class="calc-box calc-plaques" data-plaques="{&quot;_comment&quot;: &quot;Tarifs des plaques graves en laiton. Source unique : modifier ici, puis python3 build.py&quot;, &quot;pas_cm2&quot;: 6.5, &quot;dimensions&quot;: {&quot;min_mm&quot;: 5, &quot;max_mm&quot;: 250}, &quot;quantite_max&quot;: 250, &quot;epaisseurs&quot;: {&quot;2mm&quot;: {&quot;label&quot;: &quot;2 mm&quot;, &quot;base&quot;: 8, &quot;increment&quot;: 1.5}, &quot;3mm&quot;: {&quot;label&quot;: &quot;3 mm&quot;, &quot;base&quot;: 10, &quot;increment&quot;: 3}}, &quot;finitions&quot;: [{&quot;id&quot;: &quot;brosse&quot;, &quot;label&quot;: &quot;Brossé (standard)&quot;, &quot;supplement_palier&quot;: 0}, {&quot;id&quot;: &quot;poli&quot;, &quot;label&quot;: &quot;Poli&quot;, &quot;supplement_palier&quot;: 1}, {&quot;id&quot;: &quot;antique&quot;, &quot;label&quot;: &quot;Antique brass&quot;, &quot;supplement_palier&quot;: 1}], &quot;remises&quot;: [{&quot;a_partir_de&quot;: 10, &quot;taux&quot;: 0.1}, {&quot;a_partir_de&quot;: 31, &quot;taux&quot;: 0.2}]}">
   <h3 class="calc-title">Calculez le prix de votre plaque</h3>
 
     <div class="calc-origines">
     <label class="calc-origine-option">
-      <input type="radio" name="pl-epaisseur" value="3mm" data-role="epaisseur" checked>
-      <span class="calc-origine-titre">Épaisseur 3 mm</span>
-      <span class="calc-origine-meta">dès 10 € · +3 € par palier</span>
-    </label>
-    <label class="calc-origine-option">
-      <input type="radio" name="pl-epaisseur" value="2mm" data-role="epaisseur">
+      <input type="radio" name="pl-epaisseur" value="2mm" data-role="epaisseur" checked>
       <span class="calc-origine-titre">Épaisseur 2 mm</span>
       <span class="calc-origine-meta">dès 8 € · +1,5 € par palier</span>
+    </label>
+    <label class="calc-origine-option">
+      <input type="radio" name="pl-epaisseur" value="3mm" data-role="epaisseur">
+      <span class="calc-origine-titre">Épaisseur 3 mm</span>
+      <span class="calc-origine-meta">dès 10 € · +3 € par palier</span>
     </label>
   </div>
 
   <div class="calc-row">
     <label for="pl-l">Largeur</label>
-    <input type="range" id="pl-l" min="5" max="250" value="100" data-role="w-range">
-    <input type="number" min="5" max="250" value="100" data-role="w-num" aria-label="Largeur en millimètres"><span class="calc-unit">mm</span>
+    <input type="range" id="pl-l" min="5" max="250" value="40" data-role="w-range">
+    <input type="number" min="5" max="250" value="40" data-role="w-num" aria-label="Largeur en millimètres"><span class="calc-unit">mm</span>
   </div>
 
   <div class="calc-row">
     <label for="pl-h">Hauteur</label>
-    <input type="range" id="pl-h" min="5" max="250" value="80" data-role="h-range">
-    <input type="number" min="5" max="250" value="80" data-role="h-num" aria-label="Hauteur en millimètres"><span class="calc-unit">mm</span>
+    <input type="range" id="pl-h" min="5" max="250" value="10" data-role="h-range">
+    <input type="number" min="5" max="250" value="10" data-role="h-num" aria-label="Hauteur en millimètres"><span class="calc-unit">mm</span>
   </div>
 
   <div class="calc-row">
@@ -243,7 +243,7 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
       <span class="calc-label">Votre prix</span>
       <span class="calc-detail" data-role="detail"></span>
     </div>
-    <div class="calc-price" data-role="price">10 €</div>
+    <div class="calc-price" data-role="price">8 €</div>
   </div>
 
   <p class="calc-mention" data-role="mention"></p>
@@ -261,16 +261,16 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
     <summary>Voir la grille complète des tarifs</summary>
     <table>
     <table>
-      <tr><th>Surface</th><th>3 mm</th><th>2 mm</th></tr>
-      <tr><td>Jusqu'à 6,5 cm²</td><td>10 €</td><td>8 €</td></tr>
-      <tr><td>6,5 à 13 cm²</td><td>13 €</td><td>9,5 €</td></tr>
-      <tr><td>13 à 19,5 cm²</td><td>16 €</td><td>11 €</td></tr>
-      <tr><td>19,5 à 26 cm²</td><td>19 €</td><td>12,5 €</td></tr>
-      <tr><td>26 à 32,5 cm²</td><td>22 €</td><td>14 €</td></tr>
-      <tr><td>32,5 à 39 cm²</td><td>25 €</td><td>15,5 €</td></tr>
-      <tr><td>39 à 45,5 cm²</td><td>28 €</td><td>17 €</td></tr>
-      <tr><td>45,5 à 52 cm²</td><td>31 €</td><td>18,5 €</td></tr>
-      <tr><td>Au-delà</td><td>+3 € / 6,5 cm²</td><td>+1,5 € / 6,5 cm²</td></tr>
+      <tr><th>Surface</th><th>2 mm</th><th>3 mm</th></tr>
+      <tr><td>Jusqu'à 6,5 cm²</td><td>8 €</td><td>10 €</td></tr>
+      <tr><td>6,5 à 13 cm²</td><td>9,5 €</td><td>13 €</td></tr>
+      <tr><td>13 à 19,5 cm²</td><td>11 €</td><td>16 €</td></tr>
+      <tr><td>19,5 à 26 cm²</td><td>12,5 €</td><td>19 €</td></tr>
+      <tr><td>26 à 32,5 cm²</td><td>14 €</td><td>22 €</td></tr>
+      <tr><td>32,5 à 39 cm²</td><td>15,5 €</td><td>25 €</td></tr>
+      <tr><td>39 à 45,5 cm²</td><td>17 €</td><td>28 €</td></tr>
+      <tr><td>45,5 à 52 cm²</td><td>18,5 €</td><td>31 €</td></tr>
+      <tr><td>Au-delà</td><td>+1,5 € / 6,5 cm²</td><td>+3 € / 6,5 cm²</td></tr>
     </table>
     </table>
   </details>
