@@ -1,0 +1,7 @@
+# Redirections permanentes de l'ancien domaine vers le domaine actuel.
+# Netlify ne redirige pas automatiquement un alias de domaine : ces règles
+# forcent un 301 pour chaque URL, en conservant le chemin.
+# Le "!" force la redirection même si un fichier existe à cet emplacement.
+
+https://am-marquagecuir.com/*      https://am-outilscuir.com/:splat  301!
+https://www.am-marquagecuir.com/*  https://am-outilscuir.com/:splat  301!
