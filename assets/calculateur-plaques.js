@@ -102,8 +102,10 @@
         mentionEl.hidden = !remiseAppliquee;
       }
 
-      var params = '?produit=' + encodeURIComponent('Plaque laiton ' + ep.label) +
-        '&origine=' + encodeURIComponent('France') +
+      // Pas d'origine : les plaques ne sont fabriquees qu'en France.
+      // L'epaisseur est portee par le parametre 'ep' : on ne la repete pas
+      // dans le nom du produit, sinon le devis affiche « 2 mm 2 mm ».
+      var params = '?produit=' + encodeURIComponent('Plaque laiton gravée') +
         '&l=' + W + '&h=' + H + '&qte=' + n + '&prix=' + Math.round(total) +
         '&ep=' + encodeURIComponent(ep.label) +
         (finition && finition.selectedIndex > 0 ? '&fin=' + encodeURIComponent(finition.options[finition.selectedIndex].text) : '') +
