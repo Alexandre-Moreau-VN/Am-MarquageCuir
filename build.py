@@ -410,6 +410,13 @@ def _fr_plaques(v) -> str:
     return s.replace(".", ",")
 
 
+def _port_txt() -> str:
+    liv = PLAQUES.get("livraison") or {}
+    return ("<strong>%s €</strong> pour toute commande inférieure à %s €, "
+            "<strong>offerts à partir de %s €</strong>") % (
+        _fr_plaques(liv.get("frais_eur", 10)), liv.get("seuil_eur", 80), liv.get("seuil_eur", 80))
+
+
 def bloc_calculateur_plaques() -> str:
     ep = PLAQUES["epaisseurs"]
     pas = PLAQUES["pas_cm2"]
@@ -470,6 +477,8 @@ def bloc_calculateur_plaques() -> str:
             hint.append(f'−{pct} % au-delà de {r["a_partir_de"] - 1}')
     remise_hint = " · ".join(hint)
 
+    port_txt = _port_txt()
+
     data = json.dumps(PLAQUES, ensure_ascii=False).replace('"', "&quot;")
 
     html = (PLAQUES_TPL
@@ -479,7 +488,8 @@ def bloc_calculateur_plaques() -> str:
             .replace("{{OPTIONS}}", options)
             .replace("{{PRIX_DEFAUT}}", _fr_plaques(first["base"]))
             .replace("{{REMISE_HINT}}", remise_hint)
-            .replace("{{GRILLE}}", grille))
+            .replace("{{GRILLE}}", grille)
+            .replace("{{PORT_TXT}}", port_txt))
     return f"{CALC_PLAQUES_START}\n{html}\n{CALC_PLAQUES_END}"
 
 
@@ -500,6 +510,7 @@ def inject_calculateur_plaques() -> None:
             return
         end = text.find('>', anchor) + 1
         text = text[:end] + "\n" + bloc + text[end:]
+    text = text.replace("{{PORT_TXT}}", _port_txt())
     page.write_text(text, encoding="utf-8")
     print("  +", PLAQUES_PAGE, "(calculateur plaques)")
 

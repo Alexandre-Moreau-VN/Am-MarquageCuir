@@ -81,9 +81,13 @@
       if (pleinTarif > 0) total += unit * pleinTarif;
 
       // frais de port : offerts a partir du seuil, sinon forfaitaires
-      var liv = cfg.livraison || { seuil_eur: 56, frais_eur: 8 };
+      var liv = cfg.livraison || { seuil_eur: 80, frais_eur: 10 };
       var produit = total;
-      var frais = produit < liv.seuil_eur ? liv.frais_eur : 0;
+      // Le seuil est evalue sur le montant AVANT remise : sinon 10 plaques
+      // a 8 EUR font 79,20 EUR apres -10 %, passent sous le seuil et
+      // coutent 89 EUR, alors que 11 plaques coutent 86 EUR.
+      var produitAvantRemise = unit * n;
+      var frais = produitAvantRemise < liv.seuil_eur ? liv.frais_eur : 0;
       var totalFinal = produit + frais;
 
       priceEl.innerHTML = Math.round(totalFinal) + ' €<small>' +
