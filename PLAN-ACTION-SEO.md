@@ -167,3 +167,105 @@ Aujourd'hui : Ads = 2 demandes, organique = 3 demandes sur 8 jours. **On n'y est
 - Ne pas toucher à la page plaques : elle convertit à 14 %, on la laisse travailler
 - Ne pas relancer une refonte du site : la technique est propre, tout le potentiel est dans le contenu
 - Ne pas parier sur ChatGPT seul : canal naissant, règles changeantes
+
+
+---
+
+## 7. Annexe — Audit Google Ads, octobre 2026
+
+Données : export du compte (1er → 31 octobre 2026).
+
+### Les chiffres
+
+| | Valeur |
+|---|---|
+| Coût | **304,31 €** |
+| Clics | 390 |
+| Impressions | 2 930 |
+| CTR | **13,29 %** (très bon) |
+| CPC moyen | **0,78 €** |
+| Campagnes | **1 seule** (Stamps Francophonie) |
+| Score d'optimisation | 72,4 % |
+
+### Répartition par mot-clé
+
+| Mot-clé | Correspondance | Coût | Clics | CPC |
+|---|---|---|---|---|
+| matoir sur mesure | large | **161,67 €** | 224 | 0,72 € |
+| tampon pour le cuir | expression | 46,88 € | 53 | 0,88 € |
+| matoir cuir personnalisé | expression | 34,11 € | 27 | 1,26 € |
+| matoir cuir | expression | 12,87 € | 21 | 0,61 € |
+| marquage cuir à chaud personnalisé | large | 12,77 € | 14 | 0,91 € |
+| marquage cuir à chaud | expression | 9,30 € | 10 | 0,93 € |
+| matoir pour cuir | large | 3,36 € | 9 | 0,37 € |
+
+**Un mot-clé large absorbe 53 % du budget.**
+
+### Appareils
+
+| Appareil | Coût | Clics | CPC |
+|---|---|---|---|
+| Mobile | 163,53 € | 240 | **0,68 €** |
+| Ordinateur | 135,50 € | 142 | 0,95 € |
+| Tablette | 5,28 € | 8 | 0,66 € |
+
+62 % des clics pour 54 % du coût : le mobile est moins cher.
+
+### Horaires
+
+Aucun clic entre minuit et 6 h. Pic entre 9 h et 16 h, second pic à 18 h.
+
+### Constats
+
+1. **Les emporte-pièces font 38 % du CA et reçoivent ~10 € de budget**, uniquement
+   par dérive du mot-clé large. Aucune campagne dédiée.
+2. Le mot-clé large « matoir sur mesure » attire des requêtes hors sujet :
+   *kit outils travail du cuir*, *fournisseur matériel maroquinerie*,
+   *outils maroquinerie*, *la boutique du marquage* (concurrent), *pyrograveur*.
+3. Aucune conversion enregistrée en octobre : le suivi n'existait pas encore.
+   Impossible de calculer un coût par demande sur ce mois.
+4. Estimation avec le taux observé en novembre (2,5 %) : 390 clics ≈ **10 demandes
+   par mois**, soit **30 € la demande**.
+5. CTR de 13,29 % et CPC de 0,78 € : les annonces et la qualité de compte sont bonnes.
+   Le problème n'est pas la performance, c'est la **couverture des gammes**.
+
+### Actions
+
+**A. Mots-clés négatifs** (à ajouter immédiatement)
+
+```
+gratuit, comment, tuto, tutoriel, diy, faire soi-même, occasion,
+kit, fournisseur, matériel, outils maroquinerie, boutique du marquage,
+pyrograveur, paris, tampon encreur, tampon auto-encreur, tampon administratif
+```
+
+**B. Nouvelle campagne — emporte-pièces** (budget 20 %)
+
+Mots-clés en expression exacte, priorité aux requêtes déjà vues :
+```
+"emporte pièce cuir sur mesure"
+"emporte pièce cuir à frapper"
+"fabricant emporte pièce cuir"
+"emporte pièce maroquinerie"
+```
+Page d'arrivée : `pages/emporte-pièces.html` (à enrichir d'abord).
+
+**C. Répartition du budget (10 €/jour)**
+
+| Poste | Part | Montant |
+|---|---|---|
+| Marquage (campagne actuelle) | 70 % | 7 €/jour |
+| Emporte-pièces (nouvelle) | 20 % | 2 €/jour |
+| Test plaques ou machines | 10 % | 1 €/jour |
+
+**D. Optimisation**
+
+- Splitter le mot-clé large « matoir sur mesure » : garder un large à budget
+  plafonné, ajouter des expressions exactes pour contrôler
+- Ajouter des liens annexes (sitelinks) vers plaques, emporte-pièces, presse
+- Journée : concentrer les enchères entre 8 h et 20 h
+
+**E. À mesurer dans 2 semaines**
+
+Le suivi `devis_envoye` est actif depuis le 21 novembre. Le premier vrai coût par
+demande sera disponible début décembre.
