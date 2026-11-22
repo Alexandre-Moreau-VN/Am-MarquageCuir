@@ -269,3 +269,62 @@ Page d'arrivée : `pages/emporte-pièces.html` (à enrichir d'abord).
 
 Le suivi `devis_envoye` est actif depuis le 21 novembre. Le premier vrai coût par
 demande sera disponible début décembre.
+
+
+---
+
+## 8. Croisement Google Ads × Umami — octobre 2026
+
+Umami fonctionne sans cookie : il voit donc aussi les visiteurs qui refusent le bandeau.
+
+### Clics Ads → sessions réellement suivies
+
+| | Valeur |
+|---|---|
+| Clics Google Ads | 390 |
+| Sessions Umami avec `gclid` | **355** |
+| Taux de capture | **91 %** |
+| Coût par session | **0,86 €** |
+| Sessions ayant vu la page contact | 18 (**5,1 %**) |
+| Coût par vue de contact | **16,91 €** |
+| Envois de formulaire suivis | 0 (le suivi n'existait pas) |
+
+91 % de capture, c'est bon : seuls 9 % des clics sont perdus (bloqueurs, rebonds avant
+chargement du script). Le budget publicitaire est donc bien dépensé en visites.
+
+### Le trafic d'octobre par source (1 084 sessions)
+
+| Source | Sessions | Part | Vues/session | 1 seule page |
+|---|---|---|---|---|
+| Google Ads | 355 | 33 % | 1,8 | **66 %** |
+| Facebook / Instagram | 272 | 25 % | 1,6 | **78 %** |
+| Direct | 229 | 21 % | **3,7** | 66 % |
+| Google organique | 167 | 15 % | 2,0 | 61 % |
+| ChatGPT | 40 | 4 % | 2,6 | **42 %** |
+| Autres | 21 | 2 % | — | — |
+
+### La découverte : la page d'entrée n°1 est la plus faible
+
+| Page d'entrée | Sessions | Part |
+|---|---|---|
+| **`emporte-pièces.html`** | **378** | **35 %** |
+| `marquage` | 339 | 31 % |
+| accueil | 175 | 16 % |
+
+- **93 % du trafic Facebook/Instagram** atterrit sur la page emporte-pièces
+- **32 % du trafic organique Google** aussi
+- cette page fait **425 mots, sans prix, sans calculateur**
+- elle représente **38 % du chiffre d'affaires**
+
+À l'inverse, la page marquage doit **65 % de ses vues à Google Ads**.
+
+### Conséquences pour le plan
+
+1. **La page emporte-pièces passe en priorité absolue**, avant la page Conseils :
+   grille de prix « à partir de », cas d'usage, FAQ, liens contextuels.
+2. **Meta / Instagram : 78 % de visites sur une seule page.** Le trafic social ne
+   rebondit pas parce que la page d'arrivée ne propose rien d'autre à voir.
+3. **Créer la campagne Ads emporte-pièces** est cohérent : c'est la page que les
+   visiteurs cherchent déjà, en organique et en social, mais elle n'est pas financée.
+4. **ChatGPT était déjà présent en octobre** (4 %), avant la page plaques : le canal
+   n'est pas un accident lié à la nouvelle page.
