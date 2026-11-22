@@ -21,23 +21,48 @@ Deux sessions de test exclues (178 et 77 pages vues).
 
 ---
 
-## 2. Le calcul Google Ads — le point à trancher
+## 2. Le mois d'octobre 2026 — la référence
+
+Relevé sur les 44 commandes d'octobre :
+
+| | Valeur |
+|---|---|
+| Commandes | **44** |
+| Chiffre d'affaires | **6 603 €** |
+| Panier moyen | **150 €** |
+| Panier médian | **94,50 €** |
+| Plus petite commande | 20 € |
+| Plus grosse commande | 1 087 € |
+
+Répartition par famille :
+
+| Famille | CA | Part |
+|---|---|---|
+| Outils de marquage | 3 125 € | **47 %** |
+| Emporte-pièces et patrons | 2 502 € | **38 %** |
+| Machines | 737 € | 11 % |
+| Prestation de marquage | 120 € | 2 % |
+| Autres (manches, sets) | 118 € | 2 % |
+
+**Enseignement majeur : les emporte-pièces pèsent 38 % du chiffre d'affaires**
+alors que leur page ne fait que 425 mots et n'a **aucun calculateur**.
+C'est la première anomalie à corriger.
+
+## 2 bis. Le calcul Google Ads
 
 Budget : 10 €/jour = 300 €/mois.
 
-- 300 visites payantes par mois → **1 € la visite**
-- 7,5 demandes par mois → **40 € la demande**
-- Selon le taux de transformation des devis :
-
-| Devis qui deviennent des ventes | Ventes/mois | Coût par vente |
+| Si Ads génère… | Commandes/mois | Coût par commande |
 |---|---|---|
-| 20 % | 1,5 | **200 €** |
-| 30 % | 2,2 | **133 €** |
-| 50 % | 3,8 | **80 €** |
+| 20 % des commandes | 9 | **34 €** |
+| 28 % (sa part du trafic) | 12 | **24 €** |
+| 35 % | 15 | **19 €** |
 
-**À toi de dire :** combien de devis deviennent des commandes, et quel est le panier moyen ?
-Si le panier moyen est de 120 € et le taux de 30 %, Ads coûte 133 € pour vendre 120 €. Ce serait à perte.
-Si le panier moyen est de 300 €, Ads est rentable.
+À comparer au panier médian de 94,50 € : **Ads est rentable** tant que le coût
+par commande reste sous 30 % du panier. Marge de sécurité confortable.
+
+Décision : **garder Ads**, resserrer les campagnes avec les termes de recherche
+d'octobre (mots-clés négatifs) plutôt que réduire le budget.
 
 **Données nécessaires :** export du compte Google Ads (termes de recherche, coût par conversion, conversions par campagne) sur les 30 derniers jours.
 
@@ -72,6 +97,13 @@ C'est le levier principal. Objectif : capter les recherches « comment… » qui
 **Ce qu'il me faut de toi :** les trois méthodes de ta vidéo, la cause n°1 d'un marquage raté, le comportement du cuir tanné au chrome et du cuir verni.
 
 ### Phase 3 — Renforcer ce qui existe (5 au 31 janvier)
+
+**Priorité n°1 : la page emporte-pièces.** 38 % du chiffre d'affaires, 425 mots,
+pas de calculateur. Deux actions :
+
+- Un calculateur de prix, sur le modèle des plaques (paliers, options, quantité)
+- Enrichir la page : cas d'usage, épaisseurs de cuir, entretien, questions fréquentes
+
 
 Huit pages sont sous 450 mots : Google n'a presque rien pour les comprendre.
 
