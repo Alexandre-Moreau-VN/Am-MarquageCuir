@@ -81,7 +81,7 @@
       if (pleinTarif > 0) total += unit * pleinTarif;
 
       // frais de port : offerts a partir du seuil, sinon forfaitaires
-      var liv = cfg.livraison || { seuil_eur: 50, frais_eur: 8 };
+      var liv = cfg.livraison || { seuil_eur: 56, frais_eur: 8 };
       var produit = total;
       var frais = produit < liv.seuil_eur ? liv.frais_eur : 0;
       var totalFinal = produit + frais;

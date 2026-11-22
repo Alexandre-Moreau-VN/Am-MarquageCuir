@@ -46,7 +46,7 @@
     }
   ],
   "livraison": {
-    "seuil_eur": 50,
+    "seuil_eur": 56,
     "frais_eur": 8,
     "libelle": "frais de port et d'emballage"
   }
