@@ -80,7 +80,14 @@
       var pleinTarif = n - couvert;
       if (pleinTarif > 0) total += unit * pleinTarif;
 
-      priceEl.innerHTML = Math.round(total) + ' €<small>port inclus</small>';
+      // frais de port : offerts a partir du seuil, sinon forfaitaires
+      var liv = cfg.livraison || { seuil_eur: 50, frais_eur: 8 };
+      var produit = total;
+      var frais = produit < liv.seuil_eur ? liv.frais_eur : 0;
+      var totalFinal = produit + frais;
+
+      priceEl.innerHTML = Math.round(totalFinal) + ' €<small>' +
+        (frais ? 'dont ' + frais + ' € de port' : 'port inclus') + '</small>';
 
       var txt = 'Surface : ' + fr(area, 1) + ' cm² · ' + paliers + ' palier' + (paliers > 1 ? 's' : '') +
                 ' · épaisseur ' + ep.label;
@@ -91,6 +98,11 @@
       });
       if (opts.length) txt += ' · ' + opts.join(', ');
       if (n > 1) txt += ' · ' + n + ' plaques (' + Math.round(unit) + ' €/u)';
+      if (frais) {
+        txt += ' · +' + frais + ' € de port et d\'emballage (offerts dès ' + liv.seuil_eur + ' €)';
+      } else if (n > 0) {
+        txt += ' · port et emballage offerts';
+      }
       detailEl.textContent = txt;
 
       if (mentionEl) {
@@ -106,10 +118,11 @@
       // L'epaisseur est portee par le parametre 'ep' : on ne la repete pas
       // dans le nom du produit, sinon le devis affiche « 2 mm 2 mm ».
       var params = '?produit=' + encodeURIComponent('Plaque laiton gravée') +
-        '&l=' + W + '&h=' + H + '&qte=' + n + '&prix=' + Math.round(total) +
+        '&l=' + W + '&h=' + H + '&qte=' + n + '&prix=' + Math.round(totalFinal) +
         '&ep=' + encodeURIComponent(ep.label) +
         (finition && finition.selectedIndex > 0 ? '&fin=' + encodeURIComponent(finition.options[finition.selectedIndex].text) : '') +
-        (opts.length ? '&opt=' + encodeURIComponent(opts.join(', ')) : '');
+        (opts.length ? '&opt=' + encodeURIComponent(opts.join(', ')) : '') +
+        (frais ? '&port=' + frais : '');
       cta.href = '/pages/contact.html' + params;
     }
 

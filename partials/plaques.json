@@ -44,5 +44,10 @@
       "a_partir_de": 31,
       "taux": 0.2
     }
-  ]
+  ],
+  "livraison": {
+    "seuil_eur": 50,
+    "frais_eur": 8,
+    "libelle": "frais de port et d'emballage"
+  }
 }

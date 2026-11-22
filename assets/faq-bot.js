@@ -64,7 +64,7 @@
           title: "Combien coûte une plaque gravée ?",
           boost: ["plaque", "plaques"],
           keywords: ["plaque", "boite aux lettres", "enseigne", "prix", "tarif"],
-          response: "Le prix d'une plaque dépend de sa **surface**, de l'**épaisseur** (2 ou 3 mm) et de la **finition**.\n\nLe calcul est automatique : indiquez vos dimensions en millimètres dans le calculateur de la page [Plaques gravées](/pages/plaques-laiton.html).\n\n• **À partir de 8 €** pour une petite plaque en 2 mm (10 € en 3 mm)\n• Le prix augmente par paliers de 6,5 cm²\n• **−10 % dès 10 plaques**, −20 % au-delà de 30\n• Frais de port inclus en France métropolitaine\n\nDimensions : de 5 × 5 mm à 250 × 250 mm."
+          response: "Le prix d'une plaque dépend de sa **surface**, de l'**épaisseur** (2 ou 3 mm) et de la **finition**.\n\nLe calcul est automatique : indiquez vos dimensions en millimètres dans le calculateur de la page [Plaques gravées](/pages/plaques-laiton.html).\n\n• **À partir de 8 €** pour une petite plaque en 2 mm (10 € en 3 mm)\n• Le prix augmente par paliers de 6,5 cm²\n• **−10 % dès 10 plaques**, −20 % au-delà de 30\n• Frais de port et d'emballage : 8 € sous 50 € de plaques, offerts à partir de 50 €\n\nDimensions : de 5 × 5 mm à 250 × 250 mm."
         },
         {
           id: "plaques-finitions",
@@ -141,7 +141,7 @@
           title: "How much does an engraved plate cost?",
           boost: ["plate", "plates"],
           keywords: ["plate", "door plate", "letterbox", "price", "quote"],
-          response: "The price of a plate depends on its **surface area**, its **thickness** (2 or 3 mm) and the **finish**.\n\nThe calculator does the maths: enter your dimensions in millimetres on the [Engraved plates](/pages/plaques-laiton.html) page.\n\n• **From €8** for a small 2 mm plate (€10 in 3 mm)\n• The price rises in steps of 6.5 cm²\n• **−10 % from 10 plates**, −20 % above 30\n• Shipping included within mainland France\n\nSizes: from 5 × 5 mm to 250 × 250 mm."
+          response: "The price of a plate depends on its **surface area**, its **thickness** (2 or 3 mm) and the **finish**.\n\nThe calculator does the maths: enter your dimensions in millimetres on the [Engraved plates](/pages/plaques-laiton.html) page.\n\n• **From €8** for a small 2 mm plate (€10 in 3 mm)\n• The price rises in steps of 6.5 cm²\n• **−10 % from 10 plates**, −20 % above 30\n• Shipping and packaging: €8 below €50 of plates, free from €50\n\nSizes: from 5 × 5 mm to 250 × 250 mm."
         },
         {
           id: "plates-finish",

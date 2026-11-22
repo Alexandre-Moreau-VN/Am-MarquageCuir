@@ -19,6 +19,7 @@
     var mention = params.get('mention');
     var fin = params.get('fin');
     var opt = params.get('opt');
+    var port = params.get('port');
     var ep = params.get('ep');
 
     var recap = document.getElementById('recap');
@@ -55,7 +56,8 @@
           (opt ? ', ' + opt : '') +
           (dimensions ? ', dimensions ' + dimensions : '') +
           (parseInt(qte, 10) > 1 ? ', quantité ' + qte : '') +
-          (prix ? '.\nPrix indicatif affiché : ' + prix + ' €.' : '.') +
+          (prix ? '.\nPrix indicatif affiché : ' + prix + ' €' +
+            (port ? ' (dont ' + port + ' € de frais de port et d\'emballage)' : '') + '.' : '.') +
           '\n\nMerci d\'avance,';
       }
     }
