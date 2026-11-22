@@ -17,6 +17,7 @@
     var hRange = q('h-range'), hNum = q('h-num');
     var finition = q('finition'), qte = q('qte');
     var priceEl = q('price'), detailEl = q('detail'), mentionEl = q('mention'), cta = q('cta');
+    var portEl = q('port-seuil');
 
     var epaisseur = Object.keys(cfg.epaisseurs)[0];
     var PAS = cfg.pas_cm2 || 6.5;
@@ -108,6 +109,19 @@
         txt += ' · port et emballage offerts';
       }
       detailEl.textContent = txt;
+
+      // rappel du seuil de port offert, avec le montant restant
+      if (portEl) {
+        if (frais) {
+          var manque = Math.ceil(liv.seuil_eur - produitAvantRemise);
+          // n'affiche l'ecart que s'il est a portee : au-dela, c'est decourageant
+          portEl.textContent = 'Port et emballage offerts dès ' + liv.seuil_eur + ' € de plaques' +
+            (manque <= 25 ? ' — il vous manque ' + manque + ' €.' : '.');
+        } else {
+          portEl.textContent = 'Port et emballage offerts.';
+        }
+        portEl.hidden = false;
+      }
 
       if (mentionEl) {
         // le rappel des remises figure deja sous le champ Quantite :
