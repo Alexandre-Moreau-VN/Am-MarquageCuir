@@ -667,7 +667,7 @@ div.product-container details[open] summary::after {
   gap: 8px;
   justify-content: stretch;
 }
-/* vignettes : cadrage carre, zoom doux au survol */
+/* vignettes : cadrage carre */
 .calc-hero-media .img-cell {
   margin: 0;
   overflow: hidden;
