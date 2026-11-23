@@ -677,11 +677,6 @@ div.product-container details[open] summary::after {
 .calc-hero-media .img-cell img {
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  transition: transform .45s ease;
-  cursor: zoom-in;
-}
-.calc-hero-media .img-cell:hover img {
-  transform: scale(1.07);
 }
 .calc-hero-media .img-group > *:first-child { grid-column: 1 / -1; }
 .calc-hero-media .img-group img,
