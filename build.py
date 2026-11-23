@@ -334,12 +334,21 @@ def resume_avis(matiere_key: str) -> str:
     a = AVIS["agregat"]
     return (
         '<p class="calc-avis">'
-        '<span class="calc-avis-stars" aria-hidden="true">★★★★★</span> '
-        f'<a href="{a["url"]}" target="_blank" rel="noopener">'
-        f'Avis clients — voir sur {a["plateforme"]}</a>'
+        '<a href="#avis">Avis clients — lire les retours</a>'
         '</p>'
     )
 
+
+
+def _provenance(v: dict) -> str:
+    """Mention de source sous un avis : lien si verifiable, sinon provenance."""
+    src = v.get("source", "")
+    if v.get("url"):
+        return (f'            <figcaption>{v["auteur"]} · {v["date"]} · '
+                f'<a href="{v["url"]}" target="_blank" rel="noopener">{src or "avis d\u2019origine"}</a></figcaption>')
+    suffixe = (" · " + src) if src else ""
+    return (f'            <figcaption>{v["auteur"]} · <span class="avis-date">{v["date"]}</span>'
+            f'{suffixe}</figcaption>')
 
 def bloc_avis(matiere_key: str) -> str:
     if matiere_key not in AVIS_PAGES.values():
@@ -354,16 +363,15 @@ def bloc_avis(matiere_key: str) -> str:
         items.append(
             '          <figure class="avis-item">\n'
             f'            <blockquote>« {v["texte"]} »</blockquote>\n'
-            f'            <figcaption>{qui} · '
-            f'<a href="{v["url"]}" target="_blank" rel="noopener">avis d\u2019origine</a></figcaption>\n'
+            + _provenance(v) + '\n'
             '          </figure>'
         )
     return (f'{AVIS_START}\n'
-            '        <section class="avis-bloc">\n'
+            '        <section class="avis-bloc" id="avis">\n'
             '          <header class="avis-head">\n'
             '            <h2>Ce qu\u2019en disent nos clients</h2>\n'
-            f'            <p><span class="avis-stars" aria-hidden="true">★★★★★</span> Avis publiés publiquement sur '
-            f'<a href="{a["url"]}" target="_blank" rel="noopener">{a["plateforme"]}</a></p>\n'
+            '            <p>Retours reçus après livraison · '
+            f'<a href="{a["url"]}" target="_blank" rel="noopener">d\u2019autres avis sur {a["plateforme"]}</a></p>\n'
             '          </header>\n'
             + "\n".join(items) + '\n'
             '        </section>\n'

@@ -1,5 +1,5 @@
 {
-  "_comment": "Avis clients. Ajouter un avis = ajouter un objet dans le tableau du produit, puis lancer python3 build.py",
+  "_comment": "Retours clients. 'source' = provenance affichee. 'url' vide = pas de lien de verification. Conserver les dates : elles servent a trier et a prouver la fraicheur.",
   "agregat": {
     "plateforme": "Facebook",
     "nombre": 20,
@@ -8,25 +8,36 @@
   },
   "laiton": [
     {
-      "auteur": "Julie V.",
+      "auteur": "A. G.",
       "contexte": "",
-      "texte": "Très satisfaite de ma commande ! Super finition !",
-      "date": "février 2019",
-      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+      "source": "Retour reçu après livraison",
+      "texte": "Colis reçu cet après-midi ! J'ai fait les essais, c'est top !",
+      "date": "17 novembre 2026",
+      "url": ""
     },
     {
-      "auteur": "Daniel B.",
+      "auteur": "C. R.",
       "contexte": "",
-      "texte": "Très agréablement surpris par la qualité, la rapidité et le professionnalisme. Très beau résultat.",
-      "date": "janvier 2019",
-      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+      "source": "Retour reçu après livraison",
+      "texte": "J'ai enfin réussi sur mon cuir le plus malléable ! Ça rend trop bien.",
+      "date": "2 novembre 2026",
+      "url": ""
     },
     {
-      "auteur": "Sarah F.",
-      "contexte": "sellier-harnacheur",
-      "texte": "Création et envoi super rapide ! Merci !",
-      "date": "novembre 2018",
-      "url": "https://www.facebook.com/AlexMarquageCuir/reviews/"
+      "auteur": "M. R.",
+      "contexte": "",
+      "source": "Retour reçu après livraison",
+      "texte": "Merci pour votre rapidité, le rendu est vraiment super !",
+      "date": "31 octobre 2026",
+      "url": ""
+    },
+    {
+      "auteur": "T. L.",
+      "contexte": "",
+      "source": "Retour reçu après livraison",
+      "texte": "Magnifique ! Un très grand merci pour votre patience et la qualité de votre travail !",
+      "date": "29 juillet 2026",
+      "url": ""
     }
   ]
 }
