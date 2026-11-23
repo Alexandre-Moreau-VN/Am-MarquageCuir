@@ -1145,3 +1145,36 @@ div.product-container details[open] summary::after {
   font-size: 0.9em;
   line-height: 1.5;
 }
+
+/* Selecteur de langue FR / EN */
+.lang-switch {
+  margin: 0 0 6px;
+  padding: 0;
+  text-align: right;
+  font-size: 0.72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.lang-switch .lang-current {
+  color: #9a9a93;
+  font-weight: 700;
+  margin-right: 2px;
+}
+.lang-switch a {
+  color: #5f7f6e;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.lang-switch a:hover,
+.lang-switch a:focus-visible {
+  background: var(--bg);
+  color: var(--am-orange, #c8551a);
+  text-decoration: underline;
+}
+.lang-switch span.lang-current::after {
+  content: " ·";
+  color: #cfcabf;
+}

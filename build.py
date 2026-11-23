@@ -682,6 +682,75 @@ def _write_jsonld(page: pathlib.Path, data: dict, nom_ariane: str = None) -> Non
     print("  +", page.relative_to(ROOT), "(Product JSON-LD)")
 
 
+
+# ---------------------------------------------------------------------------
+# Selecteur de langue FR / EN
+# ---------------------------------------------------------------------------
+
+LANG_START = "<!-- LANG-SWITCH:START -->"
+LANG_END = "<!-- LANG-SWITCH:END -->"
+
+# page -> (page equivalente, langue de la page, langue cible, libelle du lien)
+LANG_PAIRS = {
+    "index.html": ("/index-en.html", "FR", "EN", "English version"),
+    "index-en.html": ("/", "EN", "FR", "Version française"),
+    "pages/marquage.html": ("/pages/leather-stamps-en.html", "FR", "EN", "English version"),
+    "pages/leather-stamps-en.html": ("/pages/marquage.html", "EN", "FR", "Version française"),
+    "pages/alphabets.html": ("/pages/alphabets-en.html", "FR", "EN", "English version"),
+    "pages/alphabets-en.html": ("/pages/alphabets.html", "EN", "FR", "Version française"),
+    "pages/contact.html": ("/pages/contact-en.html", "FR", "EN", "English version"),
+    "pages/contact-en.html": ("/pages/contact.html", "EN", "FR", "Version française"),
+    "pages/emporte-pièces.html": ("/pages/cutting-tools.html", "FR", "EN", "English version"),
+    "pages/cutting-tools.html": ("/pages/emporte-pièces.html", "EN", "FR", "Version française"),
+    "pages/moules-cuir.html": ("/pages/leather-molds.html", "FR", "EN", "English version"),
+    "pages/leather-molds.html": ("/pages/moules-cuir.html", "EN", "FR", "Version française"),
+    "pages/conditions.html": ("/pages/terms-conditions-en.html", "FR", "EN", "English version"),
+    "pages/terms-conditions-en.html": ("/pages/conditions.html", "EN", "FR", "Version française"),
+    "pages/mentions-légales.html": ("/pages/legal-informations-en.html", "FR", "EN", "English version"),
+    "pages/legal-informations-en.html": ("/pages/mentions-légales.html", "EN", "FR", "Version française"),
+    "pages/politique-de-confidentialité.html": ("/pages/privacy-policy-en.html", "FR", "EN", "English version"),
+    "pages/privacy-policy-en.html": ("/pages/politique-de-confidentialité.html", "EN", "FR", "Version française"),
+}
+
+
+def menu_avec_langue(menu_html: str, rel: str) -> str:
+    """Insere le selecteur de langue dans le menu, quand la page a une paire."""
+    if rel not in LANG_PAIRS:
+        return menu_html
+    cible, langue, autre, titre = LANG_PAIRS[rel]
+    bloc = ('<div class="lang-switch">\n'
+            f'  <span class="lang-current">{langue}</span>'
+            f'<a href="{cible}" hreflang="{autre.lower()}" lang="{autre.lower()}" title="{titre}">{autre}</a>\n'
+            '</div>\n')
+    return menu_html.replace('<div class="menu-bg">', '<div class="menu-bg">\n' + bloc, 1)
+
+
+def inject_lang_switch() -> None:
+    for rel, (cible, langue, autre, titre) in LANG_PAIRS.items():
+        page = ROOT / rel
+        if not page.exists():
+            print("  ! page absente :", rel)
+            continue
+        text = page.read_text(encoding="utf-8")
+        bloc = (f"{LANG_START}\n"
+                '    <div class="lang-switch">\n'
+                f'      <span class="lang-current">{langue}</span>'
+                f'<a href="{cible}" hreflang="{autre.lower()}" lang="{autre.lower()}" title="{titre}">{autre}</a>\n'
+                '    </div>\n'
+                f"    {LANG_END}")
+        pattern = re.compile(re.escape(LANG_START) + r".*?" + re.escape(LANG_END), re.DOTALL)
+        if pattern.search(text):
+            text = pattern.sub(lambda m: bloc, text, count=1)
+        else:
+            m = re.search(r'([ \t]*)<div id="menu">', text)
+            if not m:
+                print("  ! ancre menu absente :", rel)
+                continue
+            text = text[:m.start()] + bloc + "\n" + text[m.start():]
+        page.write_text(text, encoding="utf-8")
+        print("  +", rel, "(selecteur de langue)")
+
+
 def main() -> None:
     menu_fr = body_inner(MENU_FR)
     menu_en = body_inner(MENU_EN)
@@ -692,11 +761,11 @@ def main() -> None:
     for name in PAGES_EN:
         targets.append((ROOT / name, menu_en))
     for page in sorted((ROOT / "pages").rglob("*.html")):
-        # les pages anglaises utilisent le menu anglais
-        if "menu-loader-en.js" in page.read_text(encoding="utf-8"):
-            targets.append((page, menu_en))
-        else:
-            targets.append((page, menu_fr))
+        base = menu_en if "menu-loader-en.js" in page.read_text(encoding="utf-8") else menu_fr
+        targets.append((page, base))
+
+    # selecteur de langue applique une seule fois, sur toutes les pages
+    targets = [(page, menu_avec_langue(m, page.relative_to(ROOT).as_posix())) for page, m in targets]
 
     ensure_analytics()
 
