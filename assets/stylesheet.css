@@ -663,9 +663,25 @@ div.product-container details[open] summary::after {
 .calc-hero-media { position: sticky; top: 20px; }
 .calc-hero-media .img-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   justify-content: stretch;
+}
+/* vignettes : cadrage carre, zoom doux au survol */
+.calc-hero-media .img-cell {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  line-height: 0;
+}
+.calc-hero-media .img-cell img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform .45s ease;
+  cursor: zoom-in;
+}
+.calc-hero-media .img-cell:hover img {
+  transform: scale(1.07);
 }
 .calc-hero-media .img-group > *:first-child { grid-column: 1 / -1; }
 .calc-hero-media .img-group img,
