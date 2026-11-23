@@ -15,7 +15,9 @@
           "pas_cm2": 6.5,
           "increment_eur": 10,
           "delai": "environ 3 semaines au total",
-          "note": "hors douane et taxes à l'importation (UE) ; express DHL possible en supplément"
+          "note": "hors douane et taxes à l'importation (UE) ; express DHL possible en supplément",
+          "delai_en": "about 3 weeks in total",
+          "note_en": "customs duties and import taxes (EU) not included; DHL express available at extra cost"
         },
         "france": {
           "label": "France",
@@ -24,9 +26,13 @@
           "pas_cm2": 6.5,
           "increment_eur": 10,
           "delai": "5 à 7 jours ouvrés au total",
-          "note": "prix Vietnam + 20 €, TVA et frais de port inclus, sans frais de douane"
+          "note": "prix Vietnam + 20 €, TVA et frais de port inclus, sans frais de douane",
+          "delai_en": "5 to 7 working days in total",
+          "note_en": "Vietnam price + €20, VAT and shipping included, no customs fees"
         }
-      }
+      },
+      "label_en": "Brass matoir",
+      "option_manche_label_en": "Screw-on handle option"
     },
     "acrylique": {
       "label": "Tampon acrylique",
@@ -49,9 +55,13 @@
           "pas_cm2": 6.5,
           "increment_eur": 5,
           "delai": "5 à 7 jours ouvrés au total",
-          "note": "TVA et frais de port inclus, sans frais de douane"
+          "note": "TVA et frais de port inclus, sans frais de douane",
+          "delai_en": "5 to 7 working days in total",
+          "note_en": "Vietnam price + €20, VAT and shipping included, no customs fees"
         }
-      }
+      },
+      "label_en": "Acrylic stamp",
+      "option_manche_label_en": "Screw-on handle option"
     },
     "caoutchouc": {
       "label": "Tampon caoutchouc",
@@ -65,9 +75,13 @@
           "pas_cm2": 6.5,
           "increment_eur": 5,
           "delai": "5 à 7 jours ouvrés au total",
-          "note": "TVA et frais de port inclus, sans frais de douane"
+          "note": "TVA et frais de port inclus, sans frais de douane",
+          "delai_en": "5 to 7 working days in total",
+          "note_en": "Vietnam price + €20, VAT and shipping included, no customs fees"
         }
-      }
+      },
+      "label_en": "Rubber stamp",
+      "option_manche_label_en": "Screw-on handle option"
     }
   }
 }

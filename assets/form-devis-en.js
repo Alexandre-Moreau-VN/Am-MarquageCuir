@@ -1,0 +1,109 @@
+/* Quote form (EN) — prefill from the calculator.
+   Le calculateur envoie : ?produit=…&l=…&h=…&qte=…&prix=…&ep=…
+   Ce script remplit les champs cachés, affiche un récapitulatif
+   et bloque l'envoi si les fichiers dépassent la limite Netlify (8 Mo). */
+
+(function () {
+  'use strict';
+
+  var MAX_OCTETS = 2 * 1024 * 1024;   // quota Netlify gratuit : 10 Mo/mois au total
+
+  function init() {
+    var params = new URLSearchParams(window.location.search);
+    var produit = params.get('produit');
+    var l = params.get('l');
+    var h = params.get('h');
+    var qte = params.get('qte') || '1';
+    var prix = params.get('prix');
+    var origine = params.get('origine');
+    var mention = params.get('mention');
+    var fin = params.get('fin');
+    var opt = params.get('opt');
+    var port = params.get('port');
+    var ep = params.get('ep');
+
+    var recap = document.getElementById('recap');
+    var recapDetail = document.getElementById('recap-detail');
+    var msg = document.getElementById('f-message');
+    var dimensions = l && h ? l + ' × ' + h + ' mm' : '';
+
+    if (produit) {
+      document.getElementById('f-produit').value = produit + (ep ? ' (' + ep + ')' : '');
+      var oEl = document.getElementById('f-origine');
+      if (oEl && origine) oEl.value = 'Made in ' + origine;
+      document.getElementById('f-dimensions').value = dimensions;
+      var n = parseInt(qte, 10) || 1;
+      document.getElementById('f-quantite').value = n + (n > 1 ? ' pcs' : ' pc');
+      document.getElementById('f-prix').value = prix ? prix + ' €' : '';
+
+      if (recap && recapDetail) {
+        recap.hidden = false;
+        recapDetail.textContent =
+          produit + (ep ? ' ' + ep : '') +
+          (origine ? ' · fabriqué en ' + origine : '') +
+          (fin ? ' · ' + fin : '') +
+          (opt ? ' · ' + opt : '') +
+          (dimensions ? ' · ' + dimensions : '') +
+          (parseInt(qte, 10) > 1 ? ' · ' + qte + ' pièces' : '') +
+          (prix ? ' · ' + prix + ' € (indicatif' + (mention ? ', ' + mention : '') + ')' : '');
+      }
+
+      if (msg && !msg.value) {
+        msg.value = 'Hello,\n\nI would like a quote for: ' + produit +
+          (ep ? ' ' + ep : '') +
+          (origine ? ' (made in ' + origine + ')' : '') +
+          (fin ? ', ' + fin : '') +
+          (opt ? ', ' + opt : '') +
+          (dimensions ? ', dimensions ' + dimensions : '') +
+          (parseInt(qte, 10) > 1 ? ', quantity ' + qte : '') +
+          (prix ? '.\nIndicative price: ' + prix + ' €' +
+            (port ? ' (including €' + port + ' shipping and packaging)' : '') + '.' : '.') +
+          '\n\nThank you,';
+      }
+    }
+
+    // Contrôle du poids total des fichiers (plafond maison 2 Mo (quota Netlify : 10 Mo/mois))
+    var files = ['file1', 'file2', 'file3'].map(function (id) { return document.getElementById(id); });
+    var note = document.getElementById('file-note');
+    var submit = document.getElementById('submit-btn');
+
+    function checkSize() {
+      var total = 0;
+      var n = 0;
+      files.forEach(function (input) {
+        if (input && input.files && input.files[0]) {
+          total += input.files[0].size;
+          n++;
+        }
+      });
+      var mo = (total / (1024 * 1024));
+
+      if (total > MAX_OCTETS) {
+        if (note) {
+          note.innerHTML = '<strong style="color:#c0392b">Files too large: ' +
+            mo.toFixed(1) + ' MB</strong> — the limit is 2 MB in total. ' +
+            'For a larger file, use a SwissTransfer link (free, no account) ' +
+            'and paste it in your message.';
+        }
+        if (submit) { submit.disabled = true; submit.style.opacity = '0.5'; }
+      } else {
+        if (note) {
+          note.innerHTML = 'Formats : PNG, JPG, PDF, AI, PSD, SVG, CDR — <strong>2 Mo maximum au total</strong>.' +
+            (n ? ' (' + mo.toFixed(1) + ' Mo)' : '') +
+            ' Fichier plus lourd ? Utilisez SwissTransfer et collez le lien dans le message.';
+        }
+        if (submit) { submit.disabled = false; submit.style.opacity = '1'; }
+      }
+    }
+
+    files.forEach(function (input) {
+      if (input) input.addEventListener('change', checkSize);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

@@ -118,7 +118,7 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
     <main>
 
         <div class="product-container">
-            <h2>Quotation and Inquiries</h2>
+            <h1>Quotes and information</h1>
                 <div class="tip-box">
                 <p>
                             <svg style="height: 12px" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new -66.4 79.408 50.216 33.489" viewBox="-66.4 79.408 50.216 33.489">
@@ -130,43 +130,81 @@ tarteaucitron.user.googletagmanagerId = 'GTM-M5853GF7';
                             </p>
 
         </div>
-           <!-- <div class="form-container" id="contact">
-                    
-                    <h1>Formulaire de contact</h1>
-                        <form action="https://formsubmit.co/a60d46e0667b3edba561db6bfedd2831" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_next" value="https://am-outilscuir.com/pages/thanks.html">
-                            <input type="hidden" name="_subject" value="Info | formulaire contact">
-                            
-                            
-                            <input type="text" name="name" required placeholder="Nom"  id="input-name" >
-                            <input type="email" name="email" required placeholder="Email" >
-                            <textarea name="message" required rows="12" placeholder="Message"></textarea>
-                            
-                            <span>
-                                <label for="file1"><small>Fichier 1 :</small></label>
-                                <input type="file" id="file1" name="attachment1" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                            </span>
-                            <span>
-                                <label for="file2"><small>Fichier 2 :</small></label>
-                                <input type="file" id="file2" name="attachment2" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                            </span>
-                            <span>
-                                <small><label for="file3">Fichier 3 :</label></small>
-                                <input type="file" id="file3" name="attachment3" accept=".png, .jpg, .jpeg, .pdf, .ai, .psd, .svg, .cdr">
-                            </span>
-                           
-                        
-                            <div class="file-info">Jusqu'à 3 fichiers, taille max 20MB. <br>
-                                Formats acceptés: PNG, JPG, PDF, AI, PSD, SVG, CDR</div>
-                        
-                                <button type="submit" class="submit-btn">Envoyer</button>
-                                <p class="form-fallback-message">
-                            Si le formulaire ne fonctionne pas, vous pouvez nous contacter directement par email en cliquant&nbsp;
-                            <a href="mailto:contact@am-leathercraft.com" target="_blank" rel="noopener noreferrer">ici</a>.
-                            </p>                                         
-                            </form>
-                            
-                    </div> -->
+           <div class="form-container" id="contact">
+                <h2>Request a quote</h2>
+                <form name="devis-en" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                      enctype="multipart/form-data" action="/pages/thanks-en.html">
+                    <input type="hidden" name="form-name" value="devis-en" />
+                    <p class="hidden-field"><label>Do not fill <input name="bot-field" /></label></p>
+
+                    <input type="hidden" name="produit" id="f-produit" />
+                    <input type="hidden" name="origine" id="f-origine" />
+                    <input type="hidden" name="dimensions" id="f-dimensions" />
+                    <input type="hidden" name="quantite" id="f-quantite" />
+                    <input type="hidden" name="prix_indicatif" id="f-prix" />
+
+                    <div id="recap" class="recap" hidden>
+                        <strong>Your configuration</strong>
+                        <span id="recap-detail"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="f-nom">Name *</label>
+                        <input type="text" id="f-nom" name="nom" required autocomplete="name" />
+                    </div>
+                    <div class="form-row">
+                        <label for="f-email">Email *</label>
+                        <input type="email" id="f-email" name="email" required autocomplete="email" />
+                    </div>
+                    <div class="form-row">
+                        <label for="f-tel">Phone</label>
+                        <input type="tel" id="f-tel" name="telephone" autocomplete="tel" />
+                    </div>
+                    <div class="form-row">
+                        <label for="f-entreprise">Company / workshop</label>
+                        <input type="text" id="f-entreprise" name="entreprise" autocomplete="organization" />
+                    </div>
+                    <div class="form-row">
+                        <label for="f-message">Your project *</label>
+                        <textarea id="f-message" name="message" rows="6" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <label for="file1">File 1 (logo, artwork)</label>
+                        <input type="file" id="file1" name="fichier1" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,.svg,.cdr" />
+                    </div>
+                    <div class="form-row">
+                        <label for="file2">File 2</label>
+                        <input type="file" id="file2" name="fichier2" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,.svg,.cdr" />
+                    </div>
+                    <div class="form-row">
+                        <label for="file3">File 3</label>
+                        <input type="file" id="file3" name="fichier3" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,.svg,.cdr" />
+                    </div>
+
+                    <p class="file-note" id="file-note">
+                        Formats: PNG, JPG, PDF, AI, PSD, SVG, CDR — <strong>2 MB maximum in total</strong>.
+                        Larger file? Use SwissTransfer and paste the link in your message.
+                    </p>
+
+                    <div class="wetransfer-box">
+                        <strong>Your file is over 2 MB?</strong>
+                        <p>
+                            Use <a href="https://www.swisstransfer.com/en" target="_blank" rel="noopener">SwissTransfer</a>
+                            (free, no account, up to 50 GB): upload your file, copy the generated link,
+                            then paste it in the "Your project" field above.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">Send my request</button>
+
+                    <p class="form-fallback-message">
+                        A question before sending? Call
+                        <a href="tel:+33780008855"><strong>+33 7 80 00 88 55</strong></a>
+                        or write to <a href="mailto:contact@am-leathercraft.com">contact@am-leathercraft.com</a>.
+                    </p>
+                </form>
+            </div>
+            <script src="../assets/form-devis-en.js" defer></script>
     </main>
 <footer>  
         <div class="bottom-menu">

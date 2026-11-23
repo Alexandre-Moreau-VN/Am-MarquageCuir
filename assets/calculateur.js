@@ -56,7 +56,18 @@
     function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
     function update() {
-      var cfg = g();
+      // libelles selon la langue declaree sur le bloc
+    var L = box.dataset.lang === 'en' ? {
+      upTo: 'up to ', between: ' to ', surface: 'Area: ',
+      madeIn: ' · made in ', handle: ' · handle included',
+      pieces: ' pcs (', ttcp: '', request: 'Request a quote'
+    } : {
+      upTo: 'jusqu\u2019à ', between: ' à ', surface: 'Surface : ',
+      madeIn: ' · fabriqué en ', handle: ' · manche inclus',
+      pieces: ' pièces (', ttcp: 'TTC, port inclus', request: 'Demander mon devis'
+    };
+
+    var cfg = g();
       var W = clamp(parseFloat(wNum.value) || 5, 5, 120);
       var H = clamp(parseFloat(hNum.value) || 5, 5, 120);
       var area = (W / 10) * (H / 10);
@@ -74,15 +85,15 @@
       var from = (tier - 1) * cfg.pas;
       var to = tier * cfg.pas;
       var palier = (tier === 1)
-        ? 'jusqu\u2019à ' + fmt(cfg.pas) + ' cm²'
-        : fmt(from) + ' à ' + fmt(to) + ' cm²';
+        ? L.upTo + fmt(cfg.pas) + ' cm²'
+        : fmt(from) + L.between + fmt(to) + ' cm²';
 
-      priceEl.innerHTML = total + ' €<small>' + (cfg.note ? '' : 'TTC, port inclus') + '</small>';
+      priceEl.innerHTML = total + ' €<small>' + (cfg.note ? '' : L.ttcp) + '</small>';
 
-      var txt = 'Surface : ' + fmt(area, 1) + ' cm² · ' + palier +
-                ' · fabriqué en ' + cfg.label;
-      if (manche && manche.checked) txt += ' · manche inclus';
-      if (n > 1) txt += ' · ' + n + ' pièces (' + unit + ' €/u)';
+      var txt = L.surface + fmt(area, 1) + ' cm² · ' + palier +
+                L.madeIn + cfg.label;
+      if (manche && manche.checked) txt += L.handle;
+      if (n > 1) txt += ' · ' + n + L.pieces + unit + ' €/u)';
       detailEl.textContent = txt;
 
       if (mentionEl) {
@@ -94,7 +105,7 @@
         '&origine=' + encodeURIComponent(cfg.label) +
         '&l=' + W + '&h=' + H + '&qte=' + n + '&prix=' + total + '&mention=' + encodeURIComponent(cfg.note || '') +
         (epaisseur ? '&ep=' + encodeURIComponent(epaisseur.options[epaisseur.selectedIndex].text) : '');
-      cta.href = '/pages/contact.html' + params;
+      cta.href = (box.dataset.lang === 'en' ? '/pages/contact-en.html' : '/pages/contact.html') + params;
     }
 
     function fmt(v, dec) {

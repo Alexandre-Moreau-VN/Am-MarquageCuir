@@ -79,6 +79,7 @@ import json
 
 TARIFS = json.loads((ROOT / "partials" / "tarifs.json").read_text(encoding="utf-8"))
 CALC_TPL = (ROOT / "partials" / "calculateur.html").read_text(encoding="utf-8")
+CALC_TPL_EN = (ROOT / "partials" / "calculateur-en.html").read_text(encoding="utf-8")
 
 CALC_PAGES = {
     "pages/marquage.html": "laiton",
@@ -100,22 +101,32 @@ def _origine(m, key):
     return m["origines"].get(key)
 
 
-def grille_html(matiere_key: str) -> str:
+def grille_html(matiere_key: str, lang: str = "fr") -> str:
     """Grille des paliers pour toutes les origines disponibles."""
     m = TARIFS["matieres"][matiere_key]
     origines = m["origines"]
     keys = list(origines.keys())
 
-    head = "".join(
-        f"<th>{origines[k]['drapeau']} {origines[k]['label']}<br><small>{origines[k]['delai']}</small></th>"
-        for k in keys
-    )
-    rows = [f"      <tr><th>Surface</th>{head}</tr>"]
+    if lang == "en":
+        head = "".join(
+            f"<th>{origines[k]['drapeau']} {origines[k]['label']}<br><small>{origines[k].get('delai_en', origines[k]['delai'])}</small></th>"
+            for k in keys
+        )
+        rows = [f"      <tr><th>Area</th>{head}</tr>"]
+    else:
+        head = "".join(
+            f"<th>{origines[k]['drapeau']} {origines[k]['label']}<br><small>{origines[k]['delai']}</small></th>"
+            for k in keys
+        )
+        rows = [f"      <tr><th>Surface</th>{head}</tr>"]
 
     pas = origines[keys[0]].get("pas_cm2", TARIFS["pas_cm2"])
     for i in range(6):
         lo, hi = i * pas, (i + 1) * pas
-        label = ("Jusqu'à " + _fr(hi) + " cm²") if i == 0 else (_fr(lo) + " à " + _fr(hi) + " cm²")
+        if lang == "en":
+            label = ("Up to " + _fr(hi) + " cm²") if i == 0 else (_fr(lo) + " to " + _fr(hi) + " cm²")
+        else:
+            label = ("Jusqu'à " + _fr(hi) + " cm²") if i == 0 else (_fr(lo) + " à " + _fr(hi) + " cm²")
         cells = "".join(
             f"<td>{int(origines[k]['base_eur'] + origines[k].get('increment_eur', TARIFS['increment_eur']) * i)} €</td>"
             for k in keys
@@ -127,33 +138,47 @@ def grille_html(matiere_key: str) -> str:
         f"<td>+{int(origines[k].get('increment_eur', TARIFS['increment_eur']))} € / {_fr(pas)} cm²</td>"
         for k in keys
     )
-    rows.append(f"      <tr><td>Au-delà</td>{cells}</tr>")
+    rows.append(f"      <tr><td>{'Beyond' if lang == 'en' else 'Au-delà'}</td>{cells}</tr>")
     return "\n".join(rows)
 
 
-def bloc_origines(matiere_key: str) -> str:
+def bloc_origines(matiere_key: str, lang: str = "fr") -> str:
     """Sélecteur France / Vietnam (uniquement si plusieurs origines)."""
     m = TARIFS["matieres"][matiere_key]
     origines = m["origines"]
     if len(origines) < 2:
         seul = origines[list(origines.keys())[0]]
+        if lang == "en":
+            delai = seul.get("delai_en", seul["delai"])
+            made = "Made in" if seul["label"] == "France" else "Made in"
+            return (f'  <p class="calc-origine-seule">{seul["drapeau"]} {made} {seul["label"]}'
+                    f' — {delai}.</p>')
         fin = "" if seul["label"] == "France" else " Fabrication française sur devis."
         return (f'  <p class="calc-origine-seule">{seul["drapeau"]} Fabrication {seul["label"]}'
                 f' — {seul["delai"]}.{fin}</p>')
     items = []
     for k, o in origines.items():
         checked = " checked" if k == "vietnam" else ""
-        items.append(
-            f'    <label class="calc-origine-option">\n'
-            f'      <input type="radio" name="calc-origine-{matiere_key}" value="{k}" data-role="origine"{checked}>\n'
-            f'      <span class="calc-origine-titre">{o["drapeau"]} Fabriqué en {o["label"]}</span>\n'
-            f'      <span class="calc-origine-meta">{o["delai"]} · dès {int(o["base_eur"])} €</span>\n'
-            f'    </label>'
-        )
+        if lang == "en":
+            items.append(
+                f'    <label class="calc-origine-option">\n'
+                f'      <input type="radio" name="calc-origine-{matiere_key}" value="{k}" data-role="origine"{checked}>\n'
+                f'      <span class="calc-origine-titre">{o["drapeau"]} Made in {o["label"]}</span>\n'
+                f'      <span class="calc-origine-meta">{o.get("delai_en", o["delai"])} · from €{int(o["base_eur"])}</span>\n'
+                f'    </label>'
+            )
+        else:
+            items.append(
+                f'    <label class="calc-origine-option">\n'
+                f'      <input type="radio" name="calc-origine-{matiere_key}" value="{k}" data-role="origine"{checked}>\n'
+                f'      <span class="calc-origine-titre">{o["drapeau"]} Fabriqué en {o["label"]}</span>\n'
+                f'      <span class="calc-origine-meta">{o["delai"]} · dès {int(o["base_eur"])} €</span>\n'
+                f'    </label>'
+            )
     return '  <div class="calc-origines">\n' + "\n".join(items) + '\n  </div>'
 
 
-def bloc_calculateur(matiere_key: str) -> str:
+def bloc_calculateur(matiere_key: str, lang: str = "fr") -> str:
     m = TARIFS["matieres"][matiere_key]
     origines = m["origines"]
     defaut = "vietnam" if "vietnam" in origines else list(origines.keys())[0]
@@ -187,31 +212,70 @@ def bloc_calculateur(matiere_key: str) -> str:
     if m.get("option_manche_eur"):
         option = (
             '  <div class="calc-row calc-row-check">\n'
-            '    <label for="calc-m-' + matiere_key + '">Option manche vissable (+'
-            + str(m["option_manche_eur"]) + ' €)</label>\n'
+            '    <label for="calc-m-' + matiere_key + '">'
+            + (('Screw-on handle option (+\u20ac' + str(m["option_manche_eur"]) + ')')
+               if lang == "en"
+               else ('Option manche vissable (+' + str(m["option_manche_eur"]) + ' \u20ac)'))
+            + '</label>\n'
             '    <input type="checkbox" id="calc-m-' + matiere_key + '" data-role="manche">\n'
             '  </div>'
         )
     else:
         option = ""
 
-    html = (CALC_TPL
+    tpl = CALC_TPL_EN if lang == "en" else CALC_TPL
+
+    # libelles de la grille JS
+    if lang == "en":
+        grilles = {k: {"base": v["base_eur"], "pas": v.get("pas_cm2", TARIFS["pas_cm2"]),
+                       "inc": v.get("increment_eur", TARIFS["increment_eur"]),
+                       "label": v["label"], "delai": v.get("delai_en", v["delai"]),
+                       "note": v.get("note_en", v.get("note", "")),
+                       "manche": m.get("option_manche_eur", 0)}
+                   for k, v in origines.items()}
+        grilles_attr = _json.dumps(grilles, ensure_ascii=False).replace('"', "&quot;")
+        libelle = m.get("label_en", m["label"])
+    else:
+        libelle = m["label"]
+
+    html = (tpl
             .replace("{{BASE}}", str(base))
             .replace("{{PAS}}", str(pas))
             .replace("{{INC}}", str(inc))
             .replace("{{MANCHE}}", str(m.get("option_manche_eur", 0)))
-            .replace("{{LIBELLE}}", m["label"])
-            .replace("{{LIBELLE_TITRE}}", m["label"][0].lower() + m["label"][1:])
+            .replace("{{LIBELLE}}", libelle)
+            .replace("{{LIBELLE_TITRE}}", libelle[0].lower() + libelle[1:])
             .replace("{{ID}}", matiere_key)
             .replace("{{ORIGINE_DEFAUT}}", defaut)
             .replace("{{GRILLES}}", grilles_attr)
             .replace("{{PRIX_DEFAUT}}", str(int(base)))
-            .replace("{{ORIGINES}}", bloc_origines(matiere_key))
+            .replace("{{ORIGINES}}", bloc_origines(matiere_key, lang))
             .replace("{{EPAISSEUR}}", epaisseur)
             .replace("{{OPTION_MANCHE}}", option)
-            .replace("{{GRILLE}}", grille_html(matiere_key))
-            .replace("{{AVIS_RESUME}}", resume_avis(matiere_key)))
+            .replace("{{GRILLE}}", grille_html(matiere_key, lang))
+            .replace("{{AVIS_RESUME}}", resume_avis(matiere_key) if lang == "fr" else ""))
     return f"{CALC_START}\n{html}\n{CALC_END}"
+
+
+CALC_PAGES_EN = {"pages/leather-stamps-en.html": "laiton"}
+
+
+def inject_calculateur_en() -> None:
+    """Calculateur en anglais, meme grille de prix que le francais."""
+    for rel, matiere in CALC_PAGES_EN.items():
+        page = ROOT / rel
+        if not page.exists():
+            print("  ! page absente :", rel)
+            continue
+        text = page.read_text(encoding="utf-8")
+        calc = bloc_calculateur(matiere, "en")
+        pattern = re.compile(re.escape(CALC_START) + r".*?" + re.escape(CALC_END), re.DOTALL)
+        if not pattern.search(text):
+            print("  ! marqueurs absents :", rel)
+            continue
+        text = pattern.sub(lambda m: calc, text, count=1)
+        page.write_text(text, encoding="utf-8")
+        print("  +", rel, "(calculateur EN)")
 
 
 def inject_calculateur() -> None:
@@ -780,6 +844,9 @@ def main() -> None:
 
     print("Calculateur :")
     inject_calculateur()
+
+    print("Calculateur EN :")
+    inject_calculateur_en()
 
     updated, skipped, already = [], [], []
     for page, menu in targets:
