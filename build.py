@@ -354,8 +354,8 @@ def bloc_avis(matiere_key: str) -> str:
         items.append(
             '          <figure class="avis-item">\n'
             f'            <blockquote>« {v["texte"]} »</blockquote>\n'
-            f'            <figcaption>{qui} · <span class="avis-date">{v["date"]}</span> · '
-            f'<a href="{v["url"]}" target="_blank" rel="noopener">original</a></figcaption>\n'
+            f'            <figcaption>{qui} · '
+            f'<a href="{v["url"]}" target="_blank" rel="noopener">avis d\u2019origine</a></figcaption>\n'
             '          </figure>'
         )
     return (f'{AVIS_START}\n'
