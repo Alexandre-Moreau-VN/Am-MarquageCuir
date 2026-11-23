@@ -6,3 +6,5 @@ PLAN-ACTION-SEO.md
 plan-action-seo.md
 rapport-seo-*
 *.pdf
+__pycache__/
+*.pyc
