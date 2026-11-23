@@ -1051,3 +1051,51 @@ div.product-container details[open] summary::after {
   line-height: 1.35;
 }
 .product-container > hr + .conseils-titre { margin-top: 22px; }
+
+/* Page Conseils : sous-titres, tableaux et illustrations */
+.conseils-sous-titre {
+  margin: 20px 0 6px;
+  font-size: 1em;
+  font-weight: 700;
+  color: #2f4a3d;
+}
+.conseils-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 6px;
+  font-size: 0.9em;
+}
+.conseils-table th, .conseils-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #e6e1d7;
+  text-align: left;
+  vertical-align: top;
+}
+.conseils-table th {
+  background: var(--bg);
+  font-size: 0.88em;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #6b6b66;
+}
+.conseils-figure {
+  margin: 20px 0;
+  text-align: center;
+}
+.conseils-figure img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+.conseils-figure figcaption {
+  margin-top: 8px;
+  font-size: 0.82em;
+  color: #7a7a74;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.45;
+}
