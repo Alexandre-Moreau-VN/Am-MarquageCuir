@@ -1053,6 +1053,26 @@ div.product-container details[open] summary::after {
 .product-container > hr + .conseils-titre { margin-top: 22px; }
 
 /* Page Conseils : sous-titres, tableaux et illustrations */
+@media (min-width: 900px) {
+  /* photos sur le cote, le texte coule a gauche : page plus courte */
+  .product-container .conseils-figure {
+    float: right;
+    width: 36%;
+    max-width: 340px;
+    margin: 4px 0 16px 26px;
+    text-align: left;
+  }
+  .product-container .conseils-figure figcaption {
+    text-align: left;
+    max-width: none;
+  }
+  .conseils-titre,
+  .conseils-table,
+  .product-container hr {
+    clear: both;
+  }
+}
+
 .conseils-sous-titre {
   margin: 20px 0 6px;
   font-size: 1em;
