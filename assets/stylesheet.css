@@ -1062,6 +1062,11 @@ div.product-container details[open] summary::after {
     margin: 4px 0 16px 26px;
     text-align: left;
   }
+  /* hauteur calee sur celle du texte : evite le vide sous le paragraphe */
+  .product-container .conseils-figure img {
+    height: 330px;
+    object-fit: cover;
+  }
   .product-container .conseils-figure figcaption {
     text-align: left;
     max-width: none;
