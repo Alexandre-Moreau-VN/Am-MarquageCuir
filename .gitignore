@@ -1,2 +1,8 @@
 .DS_Store
 sauvegarde.zip
+
+# Documents internes — ne jamais publier
+PLAN-ACTION-SEO.md
+plan-action-seo.md
+rapport-seo-*
+*.pdf
