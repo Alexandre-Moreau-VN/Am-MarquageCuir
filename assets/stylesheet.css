@@ -1034,3 +1034,20 @@ div.product-container details[open] summary::after {
   border-radius: 6px;
   line-height: 1.35;
 }
+
+/* Titres de sections dans les blocs depliables (page Conseils) */
+.summary-content h2 {
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+  font-weight: 700;
+  color: inherit;
+}
+
+/* Page Conseils : titres de section hors accordeon */
+.conseils-titre {
+  margin: 26px 0 10px;
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+.product-container > hr + .conseils-titre { margin-top: 22px; }
