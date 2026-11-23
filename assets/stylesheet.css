@@ -1119,3 +1119,13 @@ div.product-container details[open] summary::after {
   margin-right: auto;
   line-height: 1.45;
 }
+
+/* Lien contextuel vers la page Conseils */
+.lien-conseils {
+  margin: 22px 0 4px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
