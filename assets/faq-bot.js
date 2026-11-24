@@ -71,7 +71,7 @@
           title: "Quelles finitions, quelles options pour une plaque ?",
           boost: ["plaque", "plaques"],
           keywords: ["finition", "finition plaque", "poli", "brosse", "antique", "brass", "trous", "chanfrein", "epaisseur", "forme sur mesure"],
-          response: "**Trois finitions** : brossé (standard, inclus), poli (brillant, effet miroir) et antique brass (aspect vieilli). Les deux dernières ajoutent +1 € par palier.\n\n**Deux épaisseurs** : 3 mm (standard) ou 2 mm.\n\n**Options incluses, sans supplément** : trous de fixation et chanfrein. Leur nombre et leur position se définissent ensemble lors du devis.\n\n**Formes** : toutes les formes sont réalisées sur mesure — rectangulaire, angles chanfreinés, découpe libre. Pour une forme particulière, indiquez-le dans votre message."
+          response: "**Trois finitions** : brossé (standard, inclus), poli (brillant, effet miroir) et antique brass (aspect vieilli). Les deux dernières ajoutent +1 € par palier.\n\n**Deux épaisseurs** : 3 mm (standard) ou 2 mm.\n\n**Options incluses, sans supplément** : trous de fixation, chanfrein et **adhésif double face** (pour fixer sans perçage). L'adhésif convient aux supports lisses et propres ; sur un mur irrégulier ou en extérieur, les trous restent plus sûrs.\n\n**Formes** : toutes les formes sont réalisées sur mesure — rectangulaire, angles chanfreinés, découpe libre. Pour une forme particulière, indiquez-le dans votre message."
         },
         {
           id: "plaques-commande",

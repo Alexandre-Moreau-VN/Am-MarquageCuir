@@ -521,6 +521,10 @@ def bloc_calculateur_plaques() -> str:
         '    <label for="pl-chanfrein">Chanfrein</label>\n'
         '    <input type="checkbox" id="pl-chanfrein" data-role="option" data-label="avec chanfrein">\n'
         '  </div>\n'
+        '  <div class="calc-row calc-row-check">\n'
+        '    <label for="pl-adhesif">Adhésif double face (sans perçage)</label>\n'
+        '    <input type="checkbox" id="pl-adhesif" data-role="option" data-label="avec adhésif double face">\n'
+        '  </div>\n'
         '  <p class="calc-hint-line">Nombre, position des trous et chanfrein : à définir ensemble lors du devis.</p>'
     )
 
